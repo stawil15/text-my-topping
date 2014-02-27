@@ -1,7 +1,21 @@
+import processing.core.PApplet;
 
-public class HelloWorld {
+
+@SuppressWarnings("serial")
+public class HelloWorld extends PApplet{
 	public static void main(String args[])
 	{
-		System.out.println("Hello World!");
+		PApplet.main("HelloWorld");
+	}
+	
+	
+	public void setup()
+	{
+		
+	}
+	
+	public void draw()
+	{
+		text("Hello World!",20,20);
 	}
 }
