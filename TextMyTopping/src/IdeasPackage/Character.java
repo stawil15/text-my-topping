@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import processing.core.*;
 
-public class Character
+public class Character implements Collidable
 {
 	private PImage[] charLeftImages;
 	private PImage[] charRightImages;
@@ -29,31 +29,34 @@ public class Character
 	public final static int DIRECTION_LEFT = 3;
 
 	private ArrayList<InventoryItem> items;
+	private CollisionGrid collisionGrid;
+
 	public Character(int gridX, int gridY, int initialDirection,
-			int animationFrames, String name, PApplet parent)
+			int animationFrames, String imageName, CollisionGrid c, PApplet parent)
 	{
 		charRightImages = new PImage[animationFrames];
 		charLeftImages = new PImage[animationFrames];
 		charUpImages = new PImage[animationFrames];
 		charDownImages = new PImage[animationFrames];
-		
-		
+
 		for (int index = 0; index < charRightImages.length; index++)
 		{
-			charRightImages[index] = parent.loadImage("sprites\\character\\"
-					+ name + "\\right" + index + ".png");
+			charRightImages[index] = parent
+					.loadImage("data\\sprites\\character\\" + imageName + "\\right"
+							+ index + ".png");
 		}
-		
+
 		for (int index = 0; index < charRightImages.length; index++)
 		{
-			charUpImages[index] = parent.loadImage("sprites\\character\\"
-					+ name + "\\up" + index + ".png");
+			charUpImages[index] = parent.loadImage("data\\sprites\\character\\"
+					+ imageName + "\\up" + index + ".png");
 		}
-		
+
 		for (int index = 0; index < charRightImages.length; index++)
 		{
-			charDownImages[index] = parent.loadImage("sprites\\character\\"
-					+ name + "\\down" + index + ".png");
+			charDownImages[index] = parent
+					.loadImage("data\\sprites\\character\\" + imageName + "\\down"
+							+ index + ".png");
 		}
 
 		for (int index = 0; index < charLeftImages.length; index++)
@@ -66,7 +69,8 @@ public class Character
 		this.currentDirection = initialDirection;
 		this.parent = parent;
 		this.animationFrames = animationFrames;
-		
+		c.addElement(gridX, gridY, this);
+		collisionGrid = c;
 		items = new ArrayList<>();
 	}
 
@@ -79,6 +83,7 @@ public class Character
 	{
 		animationDuration = duration;
 	}
+
 	public static PImage mirrorHorizontal(PImage imageToMirror)
 	{
 		if (imageToMirror == null)
@@ -131,8 +136,14 @@ public class Character
 	{
 		if (!isMoving)
 		{
-			currentDirection = direction;
-			isMoving = true;
+			if (direction == currentDirection && collisionGrid.moveElement(this, direction))
+			{
+				currentDirection = direction;
+				isMoving = true;
+			} else
+			{
+				currentDirection = direction;
+			}
 		}
 	}
 
@@ -197,26 +208,37 @@ public class Character
 		{
 			animationIndex++;
 			animationIndex %= animationFrames;
-			currentAnimationFrame=0;
+			currentAnimationFrame = 0;
 		}
 	}
-	
+
 	public void giveItem(InventoryItem item)
 	{
 		items.add(item);
 	}
-	
+
 	public InventoryItem takeAwayItem(InventoryItem item)
 	{
 		if (!items.contains(item))
 		{
 			return null;
-		}
-		else
+		} else
 		{
 			InventoryItem itemToReturn = items.get(items.indexOf(item));
 			items.remove(item);
 			return itemToReturn;
 		}
+	}
+
+	@Override
+	public int getGridX()
+	{
+		return gridX;
+	}
+
+	@Override
+	public int getGridY()
+	{
+		return gridY;
 	}
 }

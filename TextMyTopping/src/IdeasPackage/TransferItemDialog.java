@@ -1,5 +1,7 @@
 package IdeasPackage;
 
+import processing.core.PApplet;
+
 // This dialog ends in a transaction of an item between two characters.
 public class TransferItemDialog extends Dialog
 {
@@ -7,9 +9,9 @@ public class TransferItemDialog extends Dialog
 	private Character toCharacter;
 	private InventoryItem item;
 	
-	public TransferItemDialog(String[] lines, Character fromCharacter, Character toCharacter, InventoryItem item)
+	public TransferItemDialog(String[] lines, Character fromCharacter, Character toCharacter, InventoryItem item, PApplet parent)
 	{
-		super(lines);
+		super(lines, parent);
 		this.fromCharacter = fromCharacter;
 		this.toCharacter = toCharacter;
 		this.item = item;

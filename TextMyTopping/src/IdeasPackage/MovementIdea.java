@@ -16,28 +16,48 @@ public class MovementIdea extends PApplet
 {
 	private static final long serialVersionUID = 1L;
 	public static int GRID_SIZE = 32;
+	private final static int SCREEN_WIDTH = 640;
+	private final static int SCREEN_HEIGHT = 480;
+	private CollisionGrid collisionGrid;
+	private StaticObject[] treesRowLeft;
+	private StaticObject[] treesRowRight;
+	
 	private boolean keyLeft, keyRight, keyUp, keyDown;
+	
 
 	public static void main(String args[])
 	{
 		PApplet.main("IdeasPackage.MovementIdea");
+		
 	}
 
 	private Character testCharacter;
+	private StaticObject tree;
 
 	public void setup()
 	{
-
-		size(640, 480);
+		collisionGrid = new CollisionGrid(SCREEN_WIDTH/GRID_SIZE, SCREEN_HEIGHT/GRID_SIZE);
+		
+		treesRowLeft = new StaticObject[8];
+		treesRowRight = new StaticObject[treesRowLeft.length];
+		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		testCharacter = new Character(2, 2, Character.DIRECTION_RIGHT, 4,
-				"player", this);
+				"player", collisionGrid, this);
+		tree = new StaticObject(5, 5, "tree",  collisionGrid, this);
+		
+		for (int index = 0; index < treesRowLeft.length; index++)
+		{
+			treesRowLeft[index] = new StaticObject(7,index,"tree", collisionGrid, this);
+			treesRowLeft[index] = new StaticObject(9,index,"tree", collisionGrid, this);
+		}
 		frame.setTitle("Use Arrow Keys To Move");
+		
 	}
 
 	public void draw()
 	{
 		background(255);
-		testCharacter.draw();
+		collisionGrid.draw();
 		
 		if (keyLeft)
 		{
