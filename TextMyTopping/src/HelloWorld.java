@@ -16,6 +16,6 @@ public class HelloWorld extends PApplet{
 	
 	public void draw()
 	{
-		text("Test test 2",20,20);
+		text("Test asdfasdfgSD",20,20);
 	}
 }
