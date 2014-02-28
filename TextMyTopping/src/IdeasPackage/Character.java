@@ -1,5 +1,7 @@
 package IdeasPackage;
 
+import java.util.ArrayList;
+
 import processing.core.*;
 
 public class Character
@@ -26,6 +28,7 @@ public class Character
 	public final static int DIRECTION_DOWN = 2;
 	public final static int DIRECTION_LEFT = 3;
 
+	private ArrayList<InventoryItem> items;
 	public Character(int gridX, int gridY, int initialDirection,
 			int animationFrames, String name, PApplet parent)
 	{
@@ -63,6 +66,8 @@ public class Character
 		this.currentDirection = initialDirection;
 		this.parent = parent;
 		this.animationFrames = animationFrames;
+		
+		items = new ArrayList<>();
 	}
 
 	public void setMoveSpeed(float speed)
@@ -193,6 +198,25 @@ public class Character
 			animationIndex++;
 			animationIndex %= animationFrames;
 			currentAnimationFrame=0;
+		}
+	}
+	
+	public void giveItem(InventoryItem item)
+	{
+		items.add(item);
+	}
+	
+	public InventoryItem takeAwayItem(InventoryItem item)
+	{
+		if (!items.contains(item))
+		{
+			return null;
+		}
+		else
+		{
+			InventoryItem itemToReturn = items.get(items.indexOf(item));
+			items.remove(item);
+			return itemToReturn;
 		}
 	}
 }
