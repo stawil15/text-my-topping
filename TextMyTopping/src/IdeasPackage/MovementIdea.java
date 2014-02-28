@@ -48,7 +48,7 @@ public class MovementIdea extends PApplet
 		for (int index = 0; index < treesRowLeft.length; index++)
 		{
 			treesRowLeft[index] = new StaticObject(7,index,"tree", collisionGrid, this);
-			treesRowLeft[index] = new StaticObject(9,index,"tree", collisionGrid, this);
+			treesRowRight[index] = new StaticObject(9,index,"tree", collisionGrid, this);
 		}
 		frame.setTitle("Use Arrow Keys To Move");
 		
