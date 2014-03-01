@@ -42,7 +42,7 @@ public class StaticObject implements Collidable
 	{
 		if (images!=null)
 		{
-			parent.image(images[animationIndex], coordinates.getGridX()*MovementIdea.GRID_SIZE, coordinates.getGridY()*MovementIdea.GRID_SIZE);
+			parent.image(images[animationIndex], coordinates.getGridX()*Main.GRID_SIZE, coordinates.getGridY()*Main.GRID_SIZE);
 		}
 		
 		currentAnimationFrame++;
@@ -63,5 +63,10 @@ public class StaticObject implements Collidable
 	public GridCoordinate getCoordinates()
 	{
 		return coordinates;
+	}
+	
+	public void doInteract()
+	{
+		// Static object does not currently have an interaction
 	}
 }

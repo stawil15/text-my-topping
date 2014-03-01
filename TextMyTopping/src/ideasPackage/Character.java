@@ -19,7 +19,7 @@ public class Character implements Collidable
 	private float moveSpeed = 2.2f;
 	private float offsetX = 0;
 	private float offsetY = 0;
-	private boolean isMoving = false;
+	protected boolean isMoving = false;
 	private int animationFrames;
 
 	public final static int DIRECTION_UP = 0;
@@ -28,7 +28,7 @@ public class Character implements Collidable
 	public final static int DIRECTION_LEFT = 3;
 
 	private ArrayList<InventoryItem> items;
-	private CollisionGrid collisionGrid;
+	protected CollisionGrid collisionGrid;
 
 	public Character(GridCoordinate coordinates, int initialDirection,
 			int animationFrames, String imageName, CollisionGrid c, PApplet parent)
@@ -126,8 +126,8 @@ public class Character implements Collidable
 		updateOffset();
 		updateAnimation();
 		if (imageTodraw != null)
-			parent.image(imageTodraw, coordinates.getGridX() * MovementIdea.GRID_SIZE + offsetX,
-					coordinates.getGridY() * MovementIdea.GRID_SIZE + offsetY);
+			parent.image(imageTodraw, coordinates.getGridX() * Main.GRID_SIZE + offsetX,
+					coordinates.getGridY() * Main.GRID_SIZE + offsetY);
 	}
 
 	public void move(int direction)
@@ -154,7 +154,7 @@ public class Character implements Collidable
 		{
 		case DIRECTION_UP:
 			offsetY -= moveSpeed;
-			if (offsetY <= -MovementIdea.GRID_SIZE)
+			if (offsetY <= -Main.GRID_SIZE)
 			{
 				isMoving = false;
 				offsetY = 0;
@@ -163,7 +163,7 @@ public class Character implements Collidable
 			break;
 		case DIRECTION_RIGHT:
 			offsetX += moveSpeed;
-			if (offsetX >= MovementIdea.GRID_SIZE)
+			if (offsetX >= Main.GRID_SIZE)
 			{
 				isMoving = false;
 				offsetX = 0;
@@ -172,7 +172,7 @@ public class Character implements Collidable
 			break;
 		case DIRECTION_DOWN:
 			offsetY += moveSpeed;
-			if (offsetY >= MovementIdea.GRID_SIZE)
+			if (offsetY >= Main.GRID_SIZE)
 			{
 				isMoving = false;
 				offsetY = 0;
@@ -181,7 +181,7 @@ public class Character implements Collidable
 			break;
 		case DIRECTION_LEFT:
 			offsetX -= moveSpeed;
-			if (offsetX <= -MovementIdea.GRID_SIZE)
+			if (offsetX <= -Main.GRID_SIZE)
 			{
 				isMoving = false;
 				offsetX = 0;
@@ -214,6 +214,11 @@ public class Character implements Collidable
 	{
 		items.add(item);
 	}
+	
+	public void setDirection(int direction)
+	{
+		currentDirection = direction;
+	}
 
 	public InventoryItem takeAwayItem(InventoryItem item)
 	{
@@ -228,9 +233,9 @@ public class Character implements Collidable
 		}
 	}
 	
-	public void doInteraction()
+	public void doInteract()
 	{
-		
+		// Do nothing
 	}
 
 	public int getDirection()
@@ -241,5 +246,21 @@ public class Character implements Collidable
 	public GridCoordinate getCoordinates()
 	{
 		return coordinates;
+	}
+	
+	public int getOppositeDirection()
+	{
+		switch (currentDirection)
+		{
+		case DIRECTION_UP:
+			return DIRECTION_DOWN;
+		case DIRECTION_RIGHT:
+			return DIRECTION_LEFT;
+		case DIRECTION_DOWN:
+			return DIRECTION_UP;
+		case DIRECTION_LEFT:
+			return  DIRECTION_RIGHT;
+		}
+		return -1;
 	}
 }

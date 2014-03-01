@@ -9,7 +9,7 @@ public class TransferItemDialog extends Dialog
 	private Character toCharacter;
 	private InventoryItem item;
 	
-	public TransferItemDialog(String[] lines, Character fromCharacter, Character toCharacter, InventoryItem item, PApplet parent)
+	public TransferItemDialog(String[] lines, Character fromCharacter, Character toCharacter, InventoryItem item, Main parent)
 	{
 		super(lines, parent);
 		this.fromCharacter = fromCharacter;

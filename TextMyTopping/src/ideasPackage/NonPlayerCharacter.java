@@ -15,5 +15,10 @@ public class NonPlayerCharacter extends Character
 		this.dialog = dialog;
 		
 	}
+	
+	public void doInteract()
+	{
+		dialog.showDialog();
+	}
 
 }
