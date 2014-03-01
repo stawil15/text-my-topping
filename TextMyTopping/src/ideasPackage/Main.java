@@ -18,11 +18,13 @@ public class Main extends PApplet
 	private final static int SCREEN_WIDTH = 640;
 	private final static int SCREEN_HEIGHT = 480;
 	private CollisionGrid collisionGrid;
+	private SceneryGrid sceneryGrid;
 	private Dialog currentDialog;
 
 	private StaticObject[] treesRowLeft;
 	private StaticObject[] treesRowRight;
 	private Dialog TestDialog;
+	private Camera camera;
 
 	private boolean keyLeft, keyRight, keyUp, keyDown;
 
@@ -34,26 +36,50 @@ public class Main extends PApplet
 
 	private PlayerCharacter testCharacter;
 	private NonPlayerCharacter testNPC;
-	
+
 	private StaticObject tree;
 
 	public void setup()
 	{
 		collisionGrid = new CollisionGrid(SCREEN_WIDTH / GRID_SIZE,
-				SCREEN_HEIGHT / GRID_SIZE);
-		
-		Dialog npcDialog = new Dialog(new String[] {"Hello, I am an NPC!", "This is a new line!"},  this);
-		npcDialog.setNextDialog(new Dialog(new String[] {"This is showing how dialogs can be\nstringed together like linked\nlists."},this));
-		
-		testNPC = new NonPlayerCharacter(new GridCoordinate(8, 8), 2, 1, "npc", collisionGrid, npcDialog, this);
+				SCREEN_HEIGHT + 20/ GRID_SIZE + 20);
+		sceneryGrid = new SceneryGrid(SCREEN_WIDTH / GRID_SIZE + 20, SCREEN_HEIGHT
+				/ GRID_SIZE + 20);
 
+		for (int x = 0; x < SCREEN_WIDTH / GRID_SIZE; x++)
+		{
+			for (int y = 0; y < SCREEN_HEIGHT / GRID_SIZE; y++)
+			{
+				if (Math.random() < .90)
+				{
+				new SceneryObject(new GridCoordinate(x, y), "grass", 1, 20,
+						sceneryGrid, this);
+				}
+				else
+				{
+					new SceneryObject(new GridCoordinate(x, y), "flower", 2, 20+(int)(Math.random()*8),
+							sceneryGrid, this);
+				}
+			}
+		}
+
+		Dialog npcDialog = new Dialog(new String[] { "Hello, I am an NPC!",
+				"This is a new Page!" }, this);
+		npcDialog
+				.setNextDialog(new Dialog(
+						new String[] { "This shows how dialogs can be stringed\ntogether like linked lists." },
+						this));
+
+		testNPC = new NonPlayerCharacter(new GridCoordinate(8, 9), 2, 1, "npc",
+				collisionGrid, npcDialog, this);
 
 		treesRowLeft = new StaticObject[8];
 		treesRowRight = new StaticObject[treesRowLeft.length];
-		
+
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		testCharacter = new PlayerCharacter(new GridCoordinate(2, 2),
 				Character.DIRECTION_RIGHT, 4, "player", collisionGrid, this);
+		camera = new Camera(new GridCoordinate(0,0), testCharacter, this);
 		tree = new StaticObject(new GridCoordinate(5, 5), "tree",
 				collisionGrid, 4, 25, this);
 
@@ -68,17 +94,17 @@ public class Main extends PApplet
 		}
 		frame.setTitle("Use Arrow Keys To Move");
 		TestDialog = new Dialog(
-				new String[] { "Hello, World!\nA new line!\nPress Space To Continue." },
+				new String[] { "Hello, World!\nUse arrow keys to move\nPress [Space] To Continue." },
 				this);
 		TestDialog.showDialog();
-		
-
 
 	}
 
 	public void draw()
 	{
+		camera.update();
 		background(255);
+		sceneryGrid.draw();
 		collisionGrid.draw();
 
 		if (currentDialog != null)
@@ -133,11 +159,11 @@ public class Main extends PApplet
 		if (canMove())
 			testCharacter.move(Character.DIRECTION_UP);
 	}
-	
+
 	public void spaceKeyPressed()
 	{
 		boolean justClosedDialog = false;
-		if (currentDialog!=null)
+		if (currentDialog != null)
 		{
 			currentDialog.advanceText();
 			if (currentDialog == null)
@@ -145,8 +171,8 @@ public class Main extends PApplet
 				justClosedDialog = true;
 			}
 		}
-		
-		if (!justClosedDialog && currentDialog==null)
+
+		if (!justClosedDialog && currentDialog == null)
 			testCharacter.doInteract();
 	}
 

@@ -67,7 +67,7 @@ public class CollisionGrid
 		return true;
 	}
 
-	private GridCoordinate getNextCoordinate(Collidable entity)
+	public static GridCoordinate getNextCoordinate(Collidable entity)
 	{
 		if (entity == null)
 		{
@@ -148,5 +148,15 @@ public class CollisionGrid
 	{
 		return (xPosition >= 0 && xPosition < collisionGrid.length
 				&& yPosition >= 0 && yPosition < collisionGrid[0].length);
+	}
+	
+	public int getGridWidth()
+	{
+		return collisionGrid.length;
+	}
+	
+	public int getGridHeight()
+	{
+		return collisionGrid[0].length;
 	}
 }

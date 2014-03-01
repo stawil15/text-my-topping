@@ -10,6 +10,7 @@ public class Dialog
 	private Dialog nextDialog;
 	private static float dialogSpeed = .5f;
 	private int currentDialogLine = 0;
+	private float impatientPersonCharactersToAdvance = 5f;
 
 	protected float width = 500f;
 	protected float height = 80f;
@@ -30,7 +31,7 @@ public class Dialog
 		parent.textFont(dialogFont);
 		borderColor = parent.color(0);
 		textColor = parent.color(0);
-		backgroundColor = parent.color(255);
+		backgroundColor = parent.color(200,200,200,100);
 	}
 
 	public void setBorderColor(int color)
@@ -112,6 +113,10 @@ public class Dialog
 					parent.showDialog(nextDialog);
 				}
 			}
+		}
+		else
+		{
+			currentPositionInText += impatientPersonCharactersToAdvance;
 		}
 	}
 }

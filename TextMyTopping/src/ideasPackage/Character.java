@@ -1,5 +1,6 @@
 package ideasPackage;
 
+import java.awt.AlphaComposite;
 import java.util.ArrayList;
 
 import processing.core.*;
@@ -17,8 +18,8 @@ public class Character implements Collidable
 	private int currentAnimationFrame;
 	private int animationDuration = 3;
 	private float moveSpeed = 2.2f;
-	private float offsetX = 0;
-	private float offsetY = 0;
+	protected float offsetX = 0;
+	protected float offsetY = 0;
 	protected boolean isMoving = false;
 	private int animationFrames;
 
@@ -33,6 +34,7 @@ public class Character implements Collidable
 	public Character(GridCoordinate coordinates, int initialDirection,
 			int animationFrames, String imageName, CollisionGrid c, PApplet parent)
 	{
+		this.parent = parent;
 		charRightImages = new PImage[animationFrames];
 		charLeftImages = new PImage[animationFrames];
 		charUpImages = new PImage[animationFrames];
@@ -60,12 +62,14 @@ public class Character implements Collidable
 
 		for (int index = 0; index < charLeftImages.length; index++)
 		{
-			charLeftImages[index] = mirrorHorizontal(charRightImages[index]);
+			charLeftImages[index] = parent
+					.loadImage("data\\sprites\\character\\" + imageName + "\\left"
+							+ index + ".png");;
 		}
 
 		this.coordinates = coordinates;
 		this.currentDirection = initialDirection;
-		this.parent = parent;
+		
 		this.animationFrames = animationFrames;
 		c.addElement(coordinates, this);
 		collisionGrid = c;
@@ -80,28 +84,6 @@ public class Character implements Collidable
 	public void setAnimationDuration(int duration)
 	{
 		animationDuration = duration;
-	}
-
-	public static PImage mirrorHorizontal(PImage imageToMirror)
-	{
-		if (imageToMirror == null)
-		{
-			return null;
-		}
-
-		imageToMirror.loadPixels();
-		PImage mirroredImage = new PImage(imageToMirror.width,
-				imageToMirror.height);
-		for (int x = 0; x < imageToMirror.width; x++)
-		{
-			for (int y = 0; y < imageToMirror.height; y++)
-			{
-				mirroredImage.set(imageToMirror.width - 1 - x, y,
-						imageToMirror.get(x, y));
-			}
-		}
-		mirroredImage.updatePixels();
-		return mirroredImage;
 	}
 
 	public void draw()
@@ -236,6 +218,11 @@ public class Character implements Collidable
 	public void doInteract()
 	{
 		// Do nothing
+	}
+	
+	public CollisionGrid getCollisionGrid()
+	{
+		return collisionGrid;
 	}
 
 	public int getDirection()

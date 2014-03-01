@@ -19,4 +19,19 @@ public class PlayerCharacter extends Character
 			collisionGrid.doInteraction(this);
 		}
 	}
+	
+	public boolean isMoving()
+	{
+		return isMoving;
+	}
+	
+	public float getOffsetX()
+	{
+		return offsetX;
+	}
+	
+	public float getOffsetY()
+	{
+		return offsetY;
+	}
 }
