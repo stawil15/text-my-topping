@@ -1,8 +1,8 @@
 package ideasPackage;
 
 public interface Collidable
-{
-	public int getGridX();
-	public int getGridY();
+{;
+	public GridCoordinate getCoordinates();
 	public void draw();
+	public int getDirection();
 }

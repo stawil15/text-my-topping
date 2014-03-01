@@ -41,14 +41,14 @@ public class MovementIdea extends PApplet
 		treesRowLeft = new StaticObject[8];
 		treesRowRight = new StaticObject[treesRowLeft.length];
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
-		testCharacter = new Character(2, 2, Character.DIRECTION_RIGHT, 4,
+		testCharacter = new Character(new GridCoordinate(2, 2), Character.DIRECTION_RIGHT, 4,
 				"player", collisionGrid, this);
-		tree = new StaticObject(5, 5, "tree", collisionGrid, 4, 25, this);
+		tree = new StaticObject(new GridCoordinate(5, 5), "tree", collisionGrid, 4, 25, this);
 		
 		for (int index = 0; index < treesRowLeft.length; index++)
 		{
-			treesRowLeft[index] = new StaticObject(7, index, "tree", collisionGrid, 4, 25, this);
-			treesRowRight[index] = new StaticObject(9, index, "tree", collisionGrid, 4, 25, this);
+			treesRowLeft[index] = new StaticObject(new GridCoordinate(7, index), "tree", collisionGrid, 4, 25, this);
+			treesRowRight[index] = new StaticObject(new GridCoordinate(9, index), "tree", collisionGrid, 4, 25, this);
 		}
 		frame.setTitle("Use Arrow Keys To Move");
 		

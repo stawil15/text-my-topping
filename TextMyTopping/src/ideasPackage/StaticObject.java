@@ -5,7 +5,7 @@ import processing.core.*;
 public class StaticObject implements Collidable
 {
 
-	private int gridX, gridY;
+	private GridCoordinate coordinates;
 	private PImage images[];
 	private PApplet parent;
 	
@@ -13,9 +13,9 @@ public class StaticObject implements Collidable
 	private int animationDuration;
 	private int currentAnimationFrame;
 	
-	public StaticObject(int gridX, int gridY, String imageName, CollisionGrid c, int animationFrames, int anationDuration, PApplet parent)
+	public StaticObject(GridCoordinate coordinates, String imageName, CollisionGrid c, int animationFrames, int anationDuration, PApplet parent)
 	{
-		this(gridX, gridY, c, parent);
+		this(coordinates, c, parent);
 		this.animationDuration = anationDuration;
 		images = new PImage[animationFrames];
 		for (int index = 0; index < animationFrames; index++)
@@ -24,18 +24,17 @@ public class StaticObject implements Collidable
 		}
 		
 	}
-	public StaticObject(int gridX, int gridY, String imageName, CollisionGrid c,PApplet parent)
+	public StaticObject(GridCoordinate coordinates, String imageName, CollisionGrid c,PApplet parent)
 	{
-		this(gridX,gridY,c,parent);
+		this(coordinates,c,parent);
 		images = new PImage[1];
 		images[0] = parent.loadImage("\\data\\sprites\\static\\" + imageName + ".png");
 	}
 	
-	public StaticObject(int gridX, int gridY, CollisionGrid c, PApplet parent)
+	public StaticObject(GridCoordinate coordinates, CollisionGrid c, PApplet parent)
 	{
-		this.gridX = gridX;
-		this.gridY = gridY;
-		c.addElement(gridX, gridY, this);
+		this.coordinates = coordinates;
+		c.addElement(coordinates, this);
 		this.parent = parent;
 	}
 	
@@ -43,7 +42,7 @@ public class StaticObject implements Collidable
 	{
 		if (images!=null)
 		{
-			parent.image(images[animationIndex], gridX*MovementIdea.GRID_SIZE, gridY*MovementIdea.GRID_SIZE);
+			parent.image(images[animationIndex], coordinates.getGridX()*MovementIdea.GRID_SIZE, coordinates.getGridY()*MovementIdea.GRID_SIZE);
 		}
 		
 		currentAnimationFrame++;
@@ -53,19 +52,16 @@ public class StaticObject implements Collidable
 			animationIndex %= images.length;
 			currentAnimationFrame = 0;
 		}
-		
-		
+	}
+	
+	public int getDirection()
+	{
+		return 0;
 	}
 
 	@Override
-	public int getGridX()
+	public GridCoordinate getCoordinates()
 	{
-		return gridX;
-	}
-
-	@Override
-	public int getGridY()
-	{
-		return gridY;
+		return coordinates;
 	}
 }

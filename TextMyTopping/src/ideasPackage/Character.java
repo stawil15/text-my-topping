@@ -13,8 +13,7 @@ public class Character implements Collidable
 	private PApplet parent;
 	private int currentDirection;
 	private int animationIndex = 0;
-	private int gridX;
-	private int gridY;
+	private GridCoordinate coordinates;
 	private int currentAnimationFrame;
 	private int animationDuration = 3;
 	private float moveSpeed = 2.2f;
@@ -31,7 +30,7 @@ public class Character implements Collidable
 	private ArrayList<InventoryItem> items;
 	private CollisionGrid collisionGrid;
 
-	public Character(int gridX, int gridY, int initialDirection,
+	public Character(GridCoordinate coordinates, int initialDirection,
 			int animationFrames, String imageName, CollisionGrid c, PApplet parent)
 	{
 		charRightImages = new PImage[animationFrames];
@@ -64,12 +63,11 @@ public class Character implements Collidable
 			charLeftImages[index] = mirrorHorizontal(charRightImages[index]);
 		}
 
-		this.gridX = gridX;
-		this.gridY = gridY;
+		this.coordinates = coordinates;
 		this.currentDirection = initialDirection;
 		this.parent = parent;
 		this.animationFrames = animationFrames;
-		c.addElement(gridX, gridY, this);
+		c.addElement(coordinates, this);
 		collisionGrid = c;
 		items = new ArrayList<>();
 	}
@@ -128,15 +126,15 @@ public class Character implements Collidable
 		updateOffset();
 		updateAnimation();
 		if (imageTodraw != null)
-			parent.image(imageTodraw, gridX * MovementIdea.GRID_SIZE + offsetX,
-					gridY * MovementIdea.GRID_SIZE + offsetY);
+			parent.image(imageTodraw, coordinates.getGridX() * MovementIdea.GRID_SIZE + offsetX,
+					coordinates.getGridY() * MovementIdea.GRID_SIZE + offsetY);
 	}
 
 	public void move(int direction)
 	{
 		if (!isMoving)
 		{
-			if (direction == currentDirection && collisionGrid.moveElement(this, direction))
+			if (direction == currentDirection && collisionGrid.moveElement(this))
 			{
 				currentDirection = direction;
 				isMoving = true;
@@ -160,7 +158,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetY = 0;
-				gridY--;
+				coordinates.setGridY(coordinates.getGridY()-1);
 			}
 			break;
 		case DIRECTION_RIGHT:
@@ -169,7 +167,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetX = 0;
-				gridX++;
+				coordinates.setGridX(coordinates.getGridX()+1);
 			}
 			break;
 		case DIRECTION_DOWN:
@@ -178,7 +176,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetY = 0;
-				gridY++;
+				coordinates.setGridY(coordinates.getGridY()+1);
 			}
 			break;
 		case DIRECTION_LEFT:
@@ -187,7 +185,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetX = 0;
-				gridX--;
+				coordinates.setGridX(coordinates.getGridX()-1);
 			}
 			break;
 		}
@@ -229,16 +227,19 @@ public class Character implements Collidable
 			return itemToReturn;
 		}
 	}
-
-	@Override
-	public int getGridX()
+	
+	public void doInteraction()
 	{
-		return gridX;
+		
 	}
 
-	@Override
-	public int getGridY()
+	public int getDirection()
 	{
-		return gridY;
+		return currentDirection;
+	}
+	@Override
+	public GridCoordinate getCoordinates()
+	{
+		return coordinates;
 	}
 }
