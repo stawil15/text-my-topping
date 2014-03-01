@@ -46,7 +46,7 @@ public class Main extends PApplet
 		sceneryGrid = new SceneryGrid(SCREEN_WIDTH / GRID_SIZE + 20,
 				SCREEN_HEIGHT / GRID_SIZE + 20);
 
-		for (int x = 0; x < SCREEN_HEIGHT / GRID_SIZE + 20; x++)
+		for (int x = 0; x < SCREEN_WIDTH / GRID_SIZE + 20; x++)
 		{
 			for (int y = 0; y < SCREEN_HEIGHT / GRID_SIZE + 20; y++)
 			{
@@ -103,10 +103,12 @@ public class Main extends PApplet
 
 	public void draw()
 	{
-		camera.update();
+		
 		background(255);
+		camera.update();
 		sceneryGrid.draw();
 		collisionGrid.draw();
+		
 
 		if (currentDialog != null)
 		{

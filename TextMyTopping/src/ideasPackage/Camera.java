@@ -12,7 +12,6 @@ public class Camera
 	private final static int BORDER = 2;
 	public boolean movingLeft = false, movingRight = false, movingUp = false,
 			movingDown = false;
-	private int direction;
 
 	public Camera(GridCoordinate location, PlayerCharacter tracker,
 			PApplet parent)
@@ -52,7 +51,6 @@ public class Camera
 			{
 				location.decrementY();
 				movingUp = true;
-				direction = Character.DIRECTION_UP;
 				offsetYUp = Main.GRID_SIZE;
 			}
 			if (isNearBottomEdge(nextCoordinate, BORDER,
@@ -60,21 +58,18 @@ public class Camera
 			{
 				location.incrementY();
 				movingDown = true;
-				direction = Character.DIRECTION_DOWN;
 				offsetYDown = -Main.GRID_SIZE;
 			} 
 			if (isNearLeftEdge(nextCoordinate, BORDER, screenGridHeight))
 			{
 				location.decrementX();
 				movingLeft = true;
-				direction = Character.DIRECTION_LEFT;
 				offsetXLeft = Main.GRID_SIZE;
 			} 
 			if (isNearRightEdge(nextCoordinate, BORDER, screenGridWidth))
 			{
 				location.incrementX();
 				movingRight = true;
-				direction = Character.DIRECTION_RIGHT;
 				offsetXRight = -Main.GRID_SIZE;
 			}
 		}
@@ -112,13 +107,9 @@ public class Camera
 			movingDown = false;
 		}
 
-		System.out.println("Moving up " + movingUp);
-		System.out.println("Moving down " + movingDown);
-		System.out.println("Moving left " + movingLeft);
-		System.out.println("Moving right " + movingRight);
 		if (movingUp)
 		{
-			updateOffset();
+			updateOffset(Character.DIRECTION_UP);
 		}
 		else
 		{
@@ -127,7 +118,7 @@ public class Camera
 		
 		if (movingLeft)
 		{
-			updateOffset();
+			updateOffset(Character.DIRECTION_LEFT);
 		}
 		else
 		{
@@ -136,7 +127,7 @@ public class Camera
 		
 		if (movingRight)
 		{
-			updateOffset();
+			updateOffset(Character.DIRECTION_RIGHT);
 		}
 		else
 		{
@@ -145,7 +136,7 @@ public class Camera
 		
 		if (movingDown)
 		{
-			updateOffset();
+			updateOffset(Character.DIRECTION_DOWN);
 		}
 		else
 		{
@@ -153,7 +144,7 @@ public class Camera
 		}
 	}
 
-	public void updateOffset()
+	public void updateOffset(int direction)
 	{
 		switch (direction)
 		{
