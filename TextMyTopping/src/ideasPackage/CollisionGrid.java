@@ -1,4 +1,4 @@
-package IdeasPackage;
+package ideasPackage;
 
 public class CollisionGrid
 {

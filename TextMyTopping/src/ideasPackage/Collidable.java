@@ -1,4 +1,4 @@
-package IdeasPackage;
+package ideasPackage;
 
 public interface Collidable
 {
