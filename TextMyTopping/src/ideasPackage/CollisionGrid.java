@@ -3,10 +3,16 @@ package ideasPackage;
 public class CollisionGrid
 {
 	private Collidable collisionGrid[][];
+	private Camera camera;
 
 	public CollisionGrid(int x_entities, int y_entities)
 	{
 		collisionGrid = new Collidable[x_entities][y_entities];
+	}
+	
+	public void setCamera(Camera camera)
+	{
+		this.camera = camera;
 	}
 
 	public void addElement(GridCoordinate coordinates, Collidable element)
@@ -129,8 +135,8 @@ public class CollisionGrid
 		{
 			for (Collidable c : row)
 			{
-				if (c != null)
-					c.draw();
+				if (c != null && camera != null)
+					c.draw(camera.getCameraOffsetX(),camera.getCameraOffsetY());
 			}
 		}
 	}

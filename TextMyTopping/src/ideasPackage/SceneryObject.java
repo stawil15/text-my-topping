@@ -14,7 +14,8 @@ public class SceneryObject
 	PApplet parent;
 
 	public SceneryObject(GridCoordinate coordinates, String imageName,
-			int animationFrames, int animationDuration, SceneryGrid sceneryGrid, PApplet parent)
+			int animationFrames, int animationDuration,
+			SceneryGrid sceneryGrid, PApplet parent)
 	{
 		currentAnimationFrame = 0;
 		animationIndex = 0;
@@ -31,10 +32,11 @@ public class SceneryObject
 		}
 	}
 
-	public void draw()
+	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
 		parent.image(sceneryImages[animationIndex], coordinates.getGridX()
-				* Main.GRID_SIZE, coordinates.getGridY() * Main.GRID_SIZE);
+				* Main.GRID_SIZE + cameraOffsetX, coordinates.getGridY()
+				* Main.GRID_SIZE + cameraOffsetY);
 		updateAnimation();
 	}
 

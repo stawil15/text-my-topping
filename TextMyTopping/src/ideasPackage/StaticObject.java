@@ -38,11 +38,11 @@ public class StaticObject implements Collidable
 		this.parent = parent;
 	}
 	
-	public void draw()
+	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
 		if (images!=null)
 		{
-			parent.image(images[animationIndex], coordinates.getGridX()*Main.GRID_SIZE, coordinates.getGridY()*Main.GRID_SIZE);
+			parent.image(images[animationIndex], coordinates.getGridX()*Main.GRID_SIZE + cameraOffsetX, coordinates.getGridY()*Main.GRID_SIZE + cameraOffsetY);
 		}
 		
 		currentAnimationFrame++;

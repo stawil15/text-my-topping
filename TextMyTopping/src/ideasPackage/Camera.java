@@ -7,8 +7,12 @@ public class Camera
 	private GridCoordinate location;
 	private PlayerCharacter tracker;
 	private PApplet parent;
-	private float offsetX, offsetY;
+	private float offsetXLeft, offsetXRight, offsetYDown,offsetYUp;
 	private CollisionGrid collisionGrid;
+	private final static int BORDER = 2;
+	public boolean movingLeft = false, movingRight = false, movingUp = false,
+			movingDown = false;
+	private int direction;
 
 	public Camera(GridCoordinate location, PlayerCharacter tracker,
 			PApplet parent)
@@ -16,7 +20,7 @@ public class Camera
 		this.location = location;
 		this.tracker = tracker;
 		this.parent = parent;
-		collisionGrid = tracker.collisionGrid;
+		collisionGrid = tracker.getCollisionGrid();
 
 		int screenGridWidth = parent.width / Main.GRID_SIZE;
 		int screenGridHeight = parent.height / Main.GRID_SIZE;
@@ -33,7 +37,6 @@ public class Camera
 
 	public void update()
 	{
-		System.out.println(location.getGridX() +", " + location.getGridY());
 		int screenGridWidth = parent.width / Main.GRID_SIZE;
 		int screenGridHeight = parent.height / Main.GRID_SIZE;
 
@@ -43,64 +46,185 @@ public class Camera
 			nextCoordinate = CollisionGrid.getNextCoordinate(tracker);
 		}
 
-		if (nextCoordinate != null
-				&& isNearEdge(nextCoordinate, 2, screenGridWidth,
-						screenGridHeight))
+		if (tracker.isMoving && nextCoordinate != null)
 		{
-			switch (tracker.getDirection())
+			if (isNearTopEdge(nextCoordinate, BORDER, screenGridHeight))
 			{
-			case Character.DIRECTION_UP:
 				location.decrementY();
-				break;
-			case Character.DIRECTION_RIGHT:
-				location.incrementX();
-				break;
-			case Character.DIRECTION_DOWN:
-				location.incrementY();
-				break;
-			case Character.DIRECTION_LEFT:
-				location.incrementX();
-				break;
+				movingUp = true;
+				direction = Character.DIRECTION_UP;
+				offsetYUp = Main.GRID_SIZE;
 			}
+			if (isNearBottomEdge(nextCoordinate, BORDER,
+					screenGridHeight))
+			{
+				location.incrementY();
+				movingDown = true;
+				direction = Character.DIRECTION_DOWN;
+				offsetYDown = -Main.GRID_SIZE;
+			} 
+			if (isNearLeftEdge(nextCoordinate, BORDER, screenGridHeight))
+			{
+				location.decrementX();
+				movingLeft = true;
+				direction = Character.DIRECTION_LEFT;
+				offsetXLeft = Main.GRID_SIZE;
+			} 
+			if (isNearRightEdge(nextCoordinate, BORDER, screenGridWidth))
+			{
+				location.incrementX();
+				movingRight = true;
+				direction = Character.DIRECTION_RIGHT;
+				offsetXRight = -Main.GRID_SIZE;
+			}
+		}
+		else
+		{
+			movingUp = false;
+			movingDown = false;
+			movingLeft = false;
+			movingRight = false;
 		}
 
 		if (location.getGridX() < 0)
 		{
 			location.setGridX(0);
+			movingLeft = false;
 		}
 
 		if (location.getGridY() < 0)
 		{
 			location.setGridY(0);
+			movingUp = false;
 		}
 
 		if (location.getGridX() + screenGridWidth > collisionGrid
 				.getGridWidth())
 		{
 			location.setGridX(collisionGrid.getGridWidth() - screenGridWidth);
+			movingRight = false;
 		}
 
 		if (location.getGridY() + screenGridHeight > collisionGrid
 				.getGridHeight())
 		{
 			location.setGridY(collisionGrid.getGridHeight() - screenGridHeight);
+			movingDown = false;
+		}
+
+		System.out.println("Moving up " + movingUp);
+		System.out.println("Moving down " + movingDown);
+		System.out.println("Moving left " + movingLeft);
+		System.out.println("Moving right " + movingRight);
+		if (movingUp)
+		{
+			updateOffset();
+		}
+		else
+		{
+			offsetYUp = 0;
+		}
+		
+		if (movingLeft)
+		{
+			updateOffset();
+		}
+		else
+		{
+			offsetXLeft = 0;
+		}
+		
+		if (movingRight)
+		{
+			updateOffset();
+		}
+		else
+		{
+			offsetXRight = 0;
+		}
+		
+		if (movingDown)
+		{
+			updateOffset();
+		}
+		else
+		{
+			offsetYDown = 0;
 		}
 	}
 
-	public boolean isNearEdge(GridCoordinate coordinate, int distance,
-			int screenGridWidth, int screenGridHeight)
+	public void updateOffset()
 	{
-		int x = coordinate.getGridX();
-		int y = coordinate.getGridY();
-
-		if (x - location.getGridX() <= distance
-				|| y - location.getGridY() <= distance
-				|| x - location.getGridX() >= screenGridWidth - distance
-				|| y - location.getGridY() >= screenGridHeight - distance)
+		switch (direction)
 		{
-			return true;
-
+		case Character.DIRECTION_UP:
+			offsetYUp -= tracker.getMoveSpeed();
+			if (offsetYUp <= 0)
+			{
+				movingUp = false;
+				offsetYUp = 0;
+			}
+			break;
+		case Character.DIRECTION_RIGHT:
+			offsetXRight += tracker.getMoveSpeed();
+			if (offsetXRight >= 0)
+			{
+				movingRight = false;
+				offsetXRight = 0;
+			}
+			break;
+		case Character.DIRECTION_DOWN:
+			offsetYDown += tracker.getMoveSpeed();
+			if (offsetYDown >= 0)
+			{
+				movingDown = false;
+				offsetYDown = 0;
+			}
+			break;
+		case Character.DIRECTION_LEFT:
+			offsetXLeft -= tracker.getMoveSpeed();
+			if (offsetXLeft <= 0)
+			{
+				movingLeft = false;
+				offsetXLeft = 0;
+			}
+			break;
 		}
-		return false;
+	}
+
+	public boolean isNearLeftEdge(GridCoordinate coordinate, int distance,
+			int screenGridWidth)
+	{
+		return (coordinate.getGridX() - location.getGridX() < distance);
+	}
+
+	public boolean isNearRightEdge(GridCoordinate coordinate, int distance,
+			int screenGridWidth)
+	{
+		return (coordinate.getGridX() - location.getGridX() >= screenGridWidth
+				- distance);
+	}
+
+	public boolean isNearBottomEdge(GridCoordinate coordinate, int distance,
+			int screenGridHeight)
+	{
+		return (coordinate.getGridY() - location.getGridY() >= screenGridHeight
+				- distance);
+	}
+
+	public boolean isNearTopEdge(GridCoordinate coordinate, int distance,
+			int screenGridHeight)
+	{
+		return (coordinate.getGridY() - location.getGridY() < distance);
+	}
+
+	public float getCameraOffsetX()
+	{
+		return -(location.getGridX() * Main.GRID_SIZE + offsetXLeft + offsetXRight);
+	}
+
+	public float getCameraOffsetY()
+	{
+		return -(location.getGridY() * Main.GRID_SIZE + offsetYUp + offsetYDown);
 	}
 }

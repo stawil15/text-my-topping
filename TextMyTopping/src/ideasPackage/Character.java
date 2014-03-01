@@ -17,7 +17,7 @@ public class Character implements Collidable
 	private GridCoordinate coordinates;
 	private int currentAnimationFrame;
 	private int animationDuration = 3;
-	private float moveSpeed = 2.2f;
+	private float moveSpeed = 8.2f;
 	protected float offsetX = 0;
 	protected float offsetY = 0;
 	protected boolean isMoving = false;
@@ -80,13 +80,18 @@ public class Character implements Collidable
 	{
 		this.moveSpeed = speed;
 	}
+	
+	public float getMoveSpeed()
+	{
+		return moveSpeed;
+	}
 
 	public void setAnimationDuration(int duration)
 	{
 		animationDuration = duration;
 	}
 
-	public void draw()
+	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
 		PImage imageTodraw = null;
 		switch (currentDirection)
@@ -108,8 +113,8 @@ public class Character implements Collidable
 		updateOffset();
 		updateAnimation();
 		if (imageTodraw != null)
-			parent.image(imageTodraw, coordinates.getGridX() * Main.GRID_SIZE + offsetX,
-					coordinates.getGridY() * Main.GRID_SIZE + offsetY);
+			parent.image(imageTodraw, coordinates.getGridX() * Main.GRID_SIZE + offsetX + cameraOffsetX,
+					coordinates.getGridY() * Main.GRID_SIZE + offsetY + cameraOffsetY);
 	}
 
 	public void move(int direction)

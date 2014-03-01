@@ -4,10 +4,16 @@ package ideasPackage;
 public class SceneryGrid
 {
 	public SceneryObject[][] sceneryGrid;
+	private Camera camera;
 	
 	public SceneryGrid(int xEntities, int yEntities)
 	{
 		sceneryGrid = new SceneryObject[xEntities][yEntities];
+	}
+	
+	public void setCamera(Camera camera)
+	{
+		this.camera = camera;
 	}
 	
 	public void addSceneryObject(SceneryObject entity)
@@ -28,9 +34,9 @@ public class SceneryGrid
 		{
 			for (SceneryObject entity: row)
 			{
-				if (entity!=null)
+				if (entity!=null && camera!=null)
 				{
-					entity.draw();
+					entity.draw(camera.getCameraOffsetX(), camera.getCameraOffsetY());
 				}
 			}
 		}
