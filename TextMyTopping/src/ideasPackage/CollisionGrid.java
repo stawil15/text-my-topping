@@ -58,6 +58,11 @@ public class CollisionGrid
 		{
 			return false;
 		}
+		
+		if (!isValidPosition(coordinate))
+		{
+			return false;
+		}
 
 		return true;
 	}
