@@ -4,21 +4,22 @@ public class CollisionGrid
 {
 	private Collidable collisionGrid[][];
 	private Camera camera;
+	private GridHelper helper;
 
-	public CollisionGrid(int x_entities, int y_entities)
+	public CollisionGrid(int xEntities, int yEntities)
 	{
-		collisionGrid = new Collidable[x_entities][y_entities];
+		collisionGrid = new Collidable[xEntities][yEntities];
+		helper = new GridHelper(collisionGrid, camera);
 	}
 	
 	public void setCamera(Camera camera)
 	{
 		this.camera = camera;
+		helper.setCamera(camera);
 	}
 
 	public void addElement(GridCoordinate coordinates, Collidable element)
 	{
-		if (collisionGrid.length == 0)
-			return;
 		if (isValidPosition(coordinates))
 		{
 			collisionGrid[coordinates.getGridX()][coordinates.getGridY()] = element;
@@ -35,9 +36,6 @@ public class CollisionGrid
 
 	public Collidable removeElementAt(GridCoordinate coordinates)
 	{
-		if (collisionGrid.length == 0)
-			return null;
-
 		Collidable returnedElement = null;
 		if (isValidPosition(coordinates))
 		{
@@ -54,9 +52,6 @@ public class CollisionGrid
 		{
 			return false;
 		}
-
-		if (collisionGrid.length == 0)
-			return false;
 
 		GridCoordinate coordinate = getNextCoordinate(entity);
 
@@ -105,7 +100,6 @@ public class CollisionGrid
 		if (canElementMove(entity))
 		{
 			removeElementAt(entity.getCoordinates());
-
 			addElement(getNextCoordinate(entity), entity);
 			return true;
 		} else
@@ -131,14 +125,7 @@ public class CollisionGrid
 
 	public void draw()
 	{
-		for (Collidable[] row : collisionGrid)
-		{
-			for (Collidable c : row)
-			{
-				if (c != null && camera != null)
-					c.draw(camera.getCameraOffsetX(),camera.getCameraOffsetY());
-			}
-		}
+		helper.draw(collisionGrid);
 	}
 
 	private boolean isValidPosition(GridCoordinate coordinates)
@@ -164,5 +151,10 @@ public class CollisionGrid
 	public int getGridHeight()
 	{
 		return collisionGrid[0].length;
+	}
+	
+	public void addDuplicateObject(Drawable entity)
+	{
+		helper.addDuplicate(entity);
 	}
 }

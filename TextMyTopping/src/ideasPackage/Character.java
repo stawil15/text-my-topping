@@ -1,8 +1,7 @@
 package ideasPackage;
 
-import java.awt.AlphaComposite;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import processing.core.*;
 
 public class Character implements Collidable
@@ -32,7 +31,8 @@ public class Character implements Collidable
 	protected CollisionGrid collisionGrid;
 
 	public Character(GridCoordinate coordinates, int initialDirection,
-			int animationFrames, String imageName, CollisionGrid c, PApplet parent)
+			int animationFrames, String imageName, CollisionGrid c, boolean addToGrid,
+			PApplet parent)
 	{
 		this.parent = parent;
 		charRightImages = new PImage[animationFrames];
@@ -43,8 +43,8 @@ public class Character implements Collidable
 		for (int index = 0; index < charRightImages.length; index++)
 		{
 			charRightImages[index] = parent
-					.loadImage("data\\sprites\\character\\" + imageName + "\\right"
-							+ index + ".png");
+					.loadImage("data\\sprites\\character\\" + imageName
+							+ "\\right" + index + ".png");
 		}
 
 		for (int index = 0; index < charRightImages.length; index++)
@@ -56,22 +56,26 @@ public class Character implements Collidable
 		for (int index = 0; index < charRightImages.length; index++)
 		{
 			charDownImages[index] = parent
-					.loadImage("data\\sprites\\character\\" + imageName + "\\down"
-							+ index + ".png");
+					.loadImage("data\\sprites\\character\\" + imageName
+							+ "\\down" + index + ".png");
 		}
 
 		for (int index = 0; index < charLeftImages.length; index++)
 		{
 			charLeftImages[index] = parent
-					.loadImage("data\\sprites\\character\\" + imageName + "\\left"
-							+ index + ".png");;
+					.loadImage("data\\sprites\\character\\" + imageName
+							+ "\\left" + index + ".png");
 		}
 
 		this.coordinates = coordinates;
 		this.currentDirection = initialDirection;
-		
 		this.animationFrames = animationFrames;
-		c.addElement(coordinates, this);
+		
+		if (addToGrid)
+			c.addElement(coordinates, this);
+		else
+			c.addDuplicateObject(this);
+		
 		collisionGrid = c;
 		items = new ArrayList<>();
 	}
@@ -80,7 +84,7 @@ public class Character implements Collidable
 	{
 		this.moveSpeed = speed;
 	}
-	
+
 	public float getMoveSpeed()
 	{
 		return moveSpeed;
@@ -93,35 +97,22 @@ public class Character implements Collidable
 
 	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
-		PImage imageTodraw = null;
-		switch (currentDirection)
-		{
-		case DIRECTION_LEFT:
-			imageTodraw = charLeftImages[animationIndex];
-			break;
-		case DIRECTION_RIGHT:
-			imageTodraw = charRightImages[animationIndex];
-			break;
-		case DIRECTION_UP:
-			imageTodraw = charUpImages[animationIndex];
-			break;
-		case DIRECTION_DOWN:
-			imageTodraw = charDownImages[animationIndex];
-			break;
-		}
+		PImage imageTodraw = getImageToDraw();
 
 		updateOffset();
 		updateAnimation();
 		if (imageTodraw != null)
-			parent.image(imageTodraw, coordinates.getGridX() * Main.GRID_SIZE + offsetX + cameraOffsetX,
-					coordinates.getGridY() * Main.GRID_SIZE + offsetY + cameraOffsetY);
+			parent.image(imageTodraw, coordinates.getGridX() * Main.GRID_SIZE
+					+ offsetX + cameraOffsetX, coordinates.getGridY()
+					* Main.GRID_SIZE + offsetY + cameraOffsetY);
 	}
 
 	public void move(int direction)
 	{
 		if (!isMoving)
 		{
-			if (direction == currentDirection && collisionGrid.moveElement(this))
+			if (direction == currentDirection
+					&& collisionGrid.moveElement(this))
 			{
 				currentDirection = direction;
 				isMoving = true;
@@ -145,7 +136,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetY = 0;
-				coordinates.setGridY(coordinates.getGridY()-1);
+				coordinates.setGridY(coordinates.getGridY() - 1);
 			}
 			break;
 		case DIRECTION_RIGHT:
@@ -154,7 +145,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetX = 0;
-				coordinates.setGridX(coordinates.getGridX()+1);
+				coordinates.setGridX(coordinates.getGridX() + 1);
 			}
 			break;
 		case DIRECTION_DOWN:
@@ -163,7 +154,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetY = 0;
-				coordinates.setGridY(coordinates.getGridY()+1);
+				coordinates.setGridY(coordinates.getGridY() + 1);
 			}
 			break;
 		case DIRECTION_LEFT:
@@ -172,7 +163,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetX = 0;
-				coordinates.setGridX(coordinates.getGridX()-1);
+				coordinates.setGridX(coordinates.getGridX() - 1);
 			}
 			break;
 		}
@@ -201,7 +192,7 @@ public class Character implements Collidable
 	{
 		items.add(item);
 	}
-	
+
 	public void setDirection(int direction)
 	{
 		currentDirection = direction;
@@ -219,12 +210,12 @@ public class Character implements Collidable
 			return itemToReturn;
 		}
 	}
-	
+
 	public void doInteract()
 	{
 		// Do nothing
 	}
-	
+
 	public CollisionGrid getCollisionGrid()
 	{
 		return collisionGrid;
@@ -234,12 +225,13 @@ public class Character implements Collidable
 	{
 		return currentDirection;
 	}
+
 	@Override
 	public GridCoordinate getCoordinates()
 	{
 		return coordinates;
 	}
-	
+
 	public int getOppositeDirection()
 	{
 		switch (currentDirection)
@@ -251,8 +243,43 @@ public class Character implements Collidable
 		case DIRECTION_DOWN:
 			return DIRECTION_UP;
 		case DIRECTION_LEFT:
-			return  DIRECTION_RIGHT;
+			return DIRECTION_RIGHT;
 		}
 		return -1;
+	}
+
+	@Override
+	public void drawAtExactly(float x, float y, boolean updateAnimation)
+	{
+		PImage imageTodraw = getImageToDraw();
+
+		if (imageTodraw != null)
+		{
+			parent.image(imageTodraw, x, y);
+			if (updateAnimation)
+				updateAnimation();
+		}
+
+	}
+
+	private PImage getImageToDraw()
+	{
+		PImage imageTodraw = null;
+		switch (currentDirection)
+		{
+		case DIRECTION_LEFT:
+			imageTodraw = charLeftImages[animationIndex];
+			break;
+		case DIRECTION_RIGHT:
+			imageTodraw = charRightImages[animationIndex];
+			break;
+		case DIRECTION_UP:
+			imageTodraw = charUpImages[animationIndex];
+			break;
+		case DIRECTION_DOWN:
+			imageTodraw = charDownImages[animationIndex];
+			break;
+		}
+		return imageTodraw;
 	}
 }

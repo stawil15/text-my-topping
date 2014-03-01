@@ -6,9 +6,9 @@ public class PlayerCharacter extends Character
 {
 
 	public PlayerCharacter(GridCoordinate coordinates, int initialDirection,
-			int animationFrames, String imageName, CollisionGrid c, PApplet parent)
+			int animationFrames, String imageName, CollisionGrid c, boolean addToGrid, PApplet parent)
 	{
-		super(coordinates, initialDirection, animationFrames, imageName, c, parent);
+		super(coordinates, initialDirection, animationFrames, imageName, c, addToGrid, parent);
 	}
 	
 	@Override
