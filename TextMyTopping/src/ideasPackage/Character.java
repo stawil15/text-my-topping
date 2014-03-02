@@ -16,7 +16,7 @@ public class Character implements Collidable
 	private GridCoordinate coordinates;
 	private int currentAnimationFrame;
 	private int animationDuration = 3;
-	private float moveSpeed = 3f;
+	private float moveSpeed = 4f;
 	protected float offsetX = 0;
 	protected float offsetY = 0;
 	protected boolean isMoving = false;

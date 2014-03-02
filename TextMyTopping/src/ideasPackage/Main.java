@@ -1,5 +1,7 @@
 package ideasPackage;
 
+import java.util.ArrayList;
+
 import processing.core.*;
 
 // Eric Mustee
@@ -16,8 +18,8 @@ public class Main extends PApplet
 {
 	private static final long serialVersionUID = 1L;
 	public static int GRID_SIZE = 32;
-	public final static int SCREEN_WIDTH = 640;
-	public final static int SCREEN_HEIGHT = 480;
+	public final static int SCREEN_WIDTH = 1024;
+	public final static int SCREEN_HEIGHT = 768;
 	private CollisionGrid collisionGrid;
 	private SceneryGrid sceneryGrid;
 	private Dialog currentDialog;
@@ -25,10 +27,18 @@ public class Main extends PApplet
 	private Camera camera;
 	private PlayerCharacter testCharacter;
 	private NonPlayerCharacter testNPC;
+	private NonPlayerCharacter testNPC2;
+
 	private StaticObject tree;
 
 	private int tilesX = 64;
 	private int tilesY = 64;
+
+	public static char LEFT_KEY = LEFT;
+	private static char RIGHT_KEY = RIGHT;
+	public static char UP_KEY = UP;
+	public static char DOWN_KEY = DOWN;
+	public static char SPACE_KEY = ' ';
 
 	private boolean keyLeft, keyRight, keyUp, keyDown;
 
@@ -43,9 +53,10 @@ public class Main extends PApplet
 		collisionGrid = new CollisionGrid(tilesX, tilesY);
 		sceneryGrid = new SceneryGrid(tilesX, tilesY);
 
-		SceneryObject grass = new SceneryObject(null, "grass", 1, 20, sceneryGrid, false, this);
-		SceneryObject flower = new SceneryObject(null, "flower", 2, 20 + (int) (Math.random() * 8), sceneryGrid, false,
-				this);
+		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,
+				sceneryGrid, false, this);
+		SceneryObject flower = new SceneryObject(null, "flower", 2,
+				20 + (int) (Math.random() * 8), sceneryGrid, false, this);
 
 		for (int x = 0; x < tilesX; x++)
 		{
@@ -53,23 +64,57 @@ public class Main extends PApplet
 			{
 				if (Math.random() < .90)
 				{
-					sceneryGrid.addSceneryObject(new GridCoordinate(x, y), grass);
+					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
+							grass);
 				} else
 				{
-					sceneryGrid.addSceneryObject(new GridCoordinate(x, y), flower);
+					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
+							flower);
 				}
 			}
 		}
 
-		Dialog npcDialog = new Dialog(new String[] { "Hello, I am an NPC!", "This is a new Page!" }, this);
-		npcDialog.setNextDialog(new Dialog(
-				new String[] { "This shows how dialogs can be stringed\ntogether like linked lists." }, this));
+		Dialog npcDialog = new Dialog(new String[] { "Hello, I am an NPC!",
+				"This is a new Page!" }, this);
+		npcDialog
+				.setNextDialog(new Dialog(
+						new String[] { "This shows how dialogs can be stringed\ntogether like linked lists." },
+						this));
 
-		testNPC = new NonPlayerCharacter(new GridCoordinate(8, 9), 2, 1, "npc", collisionGrid, npcDialog, true, this);
+		ArrayList<String> choices = new ArrayList<String>();
+		choices.add("The first one");
+		choices.add("The second one");
+		choices.add("The third one");
+		choices.add("The fourth one");
+		choices.add("The fifth one");
+		choices.add("The sixth one");
+		choices.add("The seventh one");
+
+		ArrayList<Dialog> nextDialogs = new ArrayList<Dialog>();
+		nextDialogs.add(new Dialog(
+				new String[] { "You selected  the first choice" }, this));
+		nextDialogs.add(new Dialog(
+				new String[] { "You selected  the second choice" }, this));
+		nextDialogs.add(new Dialog(new String[] { "The third choice" }, this));
+		nextDialogs.add(new Dialog(new String[] { "The fourth choice" }, this));
+		nextDialogs.add(new Dialog(new String[] { "The fifth choice" }, this));
+		nextDialogs.add(new Dialog(new String[] { "The sixth choice" }, this));
+		nextDialogs.add(new Dialog(new String[] { "The last choice" }, this));
+
+		BranchingDialog branchDialog = new BranchingDialog(
+				new String[] {
+						"Here is a branching Dialog",
+						"You will be presented with choices\nUse the arrows to choose\nAnd press space to select" },
+				this, choices, nextDialogs);
+		testNPC = new NonPlayerCharacter(new GridCoordinate(8, 9), 2, 1, "npc",
+				collisionGrid, npcDialog, true, this);
+		testNPC2 = new NonPlayerCharacter(new GridCoordinate(10, 11), 0, 1,
+				"npc", collisionGrid, branchDialog, true, this);
 
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
-		testCharacter = new PlayerCharacter(new GridCoordinate(2, 2), Character.DIRECTION_RIGHT, 4, "player",
-				collisionGrid, true, this);
+		testCharacter = new PlayerCharacter(new GridCoordinate(9, 11),
+				Character.DIRECTION_RIGHT, 4, "player", collisionGrid, true,
+				this);
 		camera = new Camera(new GridCoordinate(0, 0), testCharacter, this);
 		tree = new StaticObject(null, "tree", collisionGrid, 4, 25, false, this);
 
@@ -79,7 +124,8 @@ public class Main extends PApplet
 			collisionGrid.addElement(new GridCoordinate(7, index), tree);
 		}
 		frame.setTitle("Use Arrow Keys To Move");
-		TestDialog = new Dialog(new String[] { "Hello, World!\nUse arrow keys to move\nPress [Space] To Continue." },
+		TestDialog = new Dialog(
+				new String[] { "Hello, World!\nUse arrow keys to move\nPress [Space] To Continue." },
 				this);
 		TestDialog.showDialog();
 		collisionGrid.setCamera(camera);
@@ -148,7 +194,7 @@ public class Main extends PApplet
 			testCharacter.move(Character.DIRECTION_UP);
 	}
 
-	public void spaceKeyPressed()
+	public void spaceKeyReleased()
 	{
 		boolean justClosedDialog = false;
 		if (currentDialog != null)
@@ -186,7 +232,6 @@ public class Main extends PApplet
 			keyDown = true;
 			break;
 		case ' ':
-			spaceKeyPressed();
 			break;
 		}
 	}
@@ -211,6 +256,9 @@ public class Main extends PApplet
 			break;
 		case DOWN:
 			keyDown = false;
+			break;
+		case ' ':
+			spaceKeyReleased();
 			break;
 		}
 	}
