@@ -10,11 +10,11 @@ public class BranchingDialog extends Dialog implements KeyListener
 {
 	// This type of dialog ends with a choice and allows it to branch
 	// to other dialogs.
-	private boolean atSelection;
-	private int currentSelection;
-	private final static int SELECTION_LINES = 3;
-	private int firstLine = 0;
-	private int lastLine = SELECTION_LINES-1;
+	
+	private boolean atSelection; // Whether it is time to select a choice
+	private int currentSelection; // The current selection
+	private final static int SELECTION_LINES = 3; // How many lines to display while selecting
+	private int firstLine = 0; // Keeps track of which line to diplay
 
 	private ArrayList<String> choices;
 	private ArrayList<Dialog> nextDialogs;
@@ -31,16 +31,21 @@ public class BranchingDialog extends Dialog implements KeyListener
 	@Override
 	public void drawDialog()
 	{
+		// We are in selection mode, display the selections
 		if (atSelection)
 		{
+			// Offset from the edge of the screen
 			float offsetX = (parent.width - width) / 2;
+			
+			// Draw the box
 			parent.stroke(borderColor);
 			parent.strokeWeight(2);
 			parent.fill(backgroundColor);
 			parent.rect(offsetX, parent.height - borderY - height, width,
 					height);
+			
+			// Decide on which text to display
 			parent.fill(textColor);
-
 			String textToDisplay = "";
 
 
@@ -55,7 +60,7 @@ public class BranchingDialog extends Dialog implements KeyListener
 			}
 			
 
-			for (int index = firstLine; index < firstLine + SELECTION_LINES; index++)
+			for (int index = firstLine; index < min(firstLine + SELECTION_LINES,choices.size()); index++)
 			{
 				if (index == currentSelection)
 				{
@@ -68,11 +73,13 @@ public class BranchingDialog extends Dialog implements KeyListener
 				}
 			}
 
+			// Display the text
 			parent.text(textToDisplay, offsetX + offsetTextX, parent.height
 					- borderY - height + offsetTextY);
 
 		} else
 		{
+			// We are not in selection mode, draw the dialog like normal
 			super.drawDialog();
 		}
 	}
