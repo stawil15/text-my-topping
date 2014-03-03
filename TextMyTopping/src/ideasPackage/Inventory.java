@@ -48,7 +48,9 @@ public class Inventory extends PApplet
 	{
 		textColor = color;
 	}
-
+	
+	// draws the inventory menu 5x5 grid of items
+	// still needs work
 	public void drawInventory()
 	{
 		for (int index = 0; index < width; index = index + offAndWidth)
