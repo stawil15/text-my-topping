@@ -98,6 +98,7 @@ public class Main extends PApplet
 		// Create a tree and add some to the collisionGrid
 		tree = new StaticObject(null, "tree", collisionGrid, 4, 25, false, this);
 		StaticObject fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false, this);
+		fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}, this));
 		collisionGrid.addElement(new GridCoordinate(10, 10), fastTree);
 		for (int index = 0; index < 8; index++)
 		{

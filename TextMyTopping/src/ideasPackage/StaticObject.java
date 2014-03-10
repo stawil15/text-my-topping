@@ -12,6 +12,7 @@ public class StaticObject implements Collidable
 	private int animationIndex;
 	private int animationDuration;
 	private int currentAnimationFrame;
+	private Dialog dialog;
 
 	public StaticObject(GridCoordinate coordinates, String imageName, CollisionGrid c, int animationFrames,
 			int anationDuration, boolean addToGrid, PApplet parent)
@@ -69,6 +70,11 @@ public class StaticObject implements Collidable
 	{
 		return 0;
 	}
+	
+	public void setDialog(Dialog dialog)
+	{
+		this.dialog = dialog;
+	}
 
 	@Override
 	public GridCoordinate getCoordinates()
@@ -78,7 +84,10 @@ public class StaticObject implements Collidable
 
 	public void doInteract()
 	{
-		// Static object does not currently have an interaction
+		if (dialog!=null)
+		{
+			GUISystem.showDialog(dialog);
+		}
 	}
 
 	@Override
