@@ -108,7 +108,7 @@ public class BranchingDialog extends Dialog implements KeyListener
 
 	public void selectChoice(int choice)
 	{
-		parent.showDialog(null);
+		GUISystem.showDialog(null);
 		atSelection = false;
 		currentSelection = 0;
 		firstLine = 0;

@@ -9,7 +9,7 @@ public class Camera
 	private PApplet parent;
 	private float offsetXLeft, offsetXRight, offsetYDown,offsetYUp;
 	private CollisionGrid collisionGrid;
-	private final static int BORDER = 2;
+	private final static int BORDER = 5;
 	public boolean movingLeft = false, movingRight = false, movingUp = false,
 			movingDown = false;
 

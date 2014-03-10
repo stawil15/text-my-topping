@@ -61,7 +61,7 @@ public class Dialog
 
 	public void showDialog()
 	{
-		parent.showDialog(this);
+		GUISystem.showDialog(this);
 	}
 
 	public void drawDialog()
@@ -108,11 +108,11 @@ public class Dialog
 			currentPositionInText = 0;
 			if (currentDialogLine == lines.length)
 			{
-				parent.showDialog(null);
+				GUISystem.showDialog(null);
 				currentDialogLine = 0;
 				if (nextDialog != null)
 				{
-					parent.showDialog(nextDialog);
+					GUISystem.showDialog(nextDialog);
 				}
 			}
 		} else

@@ -1,5 +1,6 @@
 package ideasPackage;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import processing.core.*;
@@ -24,8 +25,7 @@ public class Main extends PApplet
 	public final static int SCREEN_HEIGHT = 768;
 
 	// Grids containing objects of the game
-	private CollisionGrid collisionGrid;
-	private SceneryGrid sceneryGrid;
+	private Level level;
 
 	// The camera is positioned in the top left corner
 	private Camera camera;
@@ -45,11 +45,11 @@ public class Main extends PApplet
 	private int tilesY = 64;
 
 	// Keyboard controls
-	public static char LEFT_KEY = LEFT;
-	private static char RIGHT_KEY = RIGHT;
-	public static char UP_KEY = UP;
-	public static char DOWN_KEY = DOWN;
-	public static char SPACE_KEY = ' ';
+	public static int LEFT_KEY = KeyEvent.VK_LEFT;
+	public static int RIGHT_KEY = KeyEvent.VK_RIGHT;
+	public static int UP_KEY = KeyEvent.VK_UP;
+	public static int DOWN_KEY = KeyEvent.VK_DOWN;
+	public static int SPACE_KEY = KeyEvent.VK_SPACE;
 
 	// Stores whether a key is pressed or not
 	private boolean keyLeft, keyRight, keyUp, keyDown;
@@ -67,11 +67,11 @@ public class Main extends PApplet
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
+				// Setup the collision grids first
+		CollisionGrid collisionGrid = new CollisionGrid(tilesX, tilesY);
+		SceneryGrid sceneryGrid = new SceneryGrid(tilesX, tilesY);
 
-		// Setup the collision grids first
-		collisionGrid = new CollisionGrid(tilesX, tilesY);
-		sceneryGrid = new SceneryGrid(tilesX, tilesY);
-
+		
 		// Create some scenery objects to add to the grid.
 		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,
 				sceneryGrid, false, this);
@@ -97,7 +97,8 @@ public class Main extends PApplet
 
 		// Create a tree and add some to the collisionGrid
 		tree = new StaticObject(null, "tree", collisionGrid, 4, 25, false, this);
-
+		StaticObject fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false, this);
+		collisionGrid.addElement(new GridCoordinate(10, 10), fastTree);
 		for (int index = 0; index < 8; index++)
 		{
 			collisionGrid.addElement(new GridCoordinate(5, index), tree);
@@ -158,145 +159,17 @@ public class Main extends PApplet
 				this);
 		TestDialog.showDialog();
 
-		// Set the cameras of the grids after the camera is created. This is
-		// necessary
-		// or the grid will not be drawn.
-		collisionGrid.setCamera(camera);
-		sceneryGrid.setCamera(camera);
-
+		// Create the level
+		level = new Level(collisionGrid, sceneryGrid, camera,this);
 	}
 
 	public void draw()
 	{
-
-		background(255);
-		camera.update();
-		sceneryGrid.draw();
-		collisionGrid.draw();
-
-		if (currentDialog != null)
-		{
-			currentDialog.drawDialog();
-		}
-
-		if (keyLeft)
-		{
-			keyLeftDown();
-		} else if (keyRight)
-		{
-			keyRightDown();
-		} else if (keyDown)
-		{
-			keyDownDown();
-		} else if (keyUp)
-		{
-			keyUpDown();
-		}
-
+		level.draw();
+		GUISystem.draw();
 	}
 
-	// This method returns whether the Player Character should be able to move
-	public boolean canMove()
-	{
-		if (currentDialog != null)
-			return false;
 
-		return true;
-	}
 
-	// Called when the left key is held down
-	public void keyLeftDown()
-	{
-		if (canMove())
-			testCharacter.move(Character.DIRECTION_LEFT);
-	}
-
-	// Called when the right key is held down
-	public void keyRightDown()
-	{
-		if (canMove())
-			testCharacter.move(Character.DIRECTION_RIGHT);
-	}
-
-	// Called when the down key is held down
-	public void keyDownDown()
-	{
-		if (canMove())
-			testCharacter.move(Character.DIRECTION_DOWN);
-	}
-
-	// Called when the up key is held down
-	public void keyUpDown()
-	{
-		if (canMove())
-			testCharacter.move(Character.DIRECTION_UP);
-	}
-
-	// Called when the space key is released
-	public void spaceKeyReleased()
-	{
-		boolean justClosedDialog = false;
-		if (currentDialog != null)
-		{
-			currentDialog.advanceText();
-			if (currentDialog == null)
-			{
-				justClosedDialog = true;
-			}
-		}
-
-		if (!justClosedDialog && currentDialog == null)
-			testCharacter.doInteract();
-	}
-
-	// Dialogs call this method to show themselves
-	public void showDialog(Dialog d)
-	{
-		currentDialog = d;
-	}
-
-	// Record which key was pressed
-	public void keyPressed()
-	{
-		switch (keyCode)
-		{
-		case LEFT:
-			keyLeft = true;
-			break;
-		case RIGHT:
-			keyRight = true;
-			break;
-		case UP:
-			keyUp = true;
-			break;
-		case DOWN:
-			keyDown = true;
-			break;
-		case ' ':
-			break;
-		}
-	}
-
-	// Record which key was released
-	public void keyReleased()
-	{
-		switch (keyCode)
-		{
-		case LEFT:
-			keyLeft = false;
-			break;
-		case RIGHT:
-			keyRight = false;
-			break;
-		case UP:
-			keyUp = false;
-			break;
-		case DOWN:
-			keyDown = false;
-			break;
-		case ' ':
-			spaceKeyReleased();
-			break;
-		}
-	}
+	
 }
