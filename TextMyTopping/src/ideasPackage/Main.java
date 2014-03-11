@@ -3,6 +3,8 @@ package ideasPackage;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import processing.core.*;
+import java.io.*;
+import java.util.*;
 
 // Eric Mustee
 // 2/28/2014
@@ -77,6 +79,8 @@ public class Main extends PApplet
 		SceneryObject flower = new SceneryObject(null, "flower", 2,
 				20 + (int) (Math.random() * 8), sceneryGrid, false, this);
 
+		
+		
 		// Fill the scenery grid
 		for (int x = 0; x < tilesX; x++)
 		{

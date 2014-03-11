@@ -12,7 +12,7 @@ public class SceneryObject implements Drawable
 	private int animationDuration;
 	private int animationIndex;
 	PApplet parent;
-
+	
 	public SceneryObject(GridCoordinate coordinates, String imageName, int animationFrames, int animationDuration,
 			SceneryGrid sceneryGrid, boolean addToGrid, PApplet parent)
 	{
