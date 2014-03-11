@@ -122,7 +122,11 @@ public class Main extends PApplet
 		{
 			for (int y = 0; y < map[x].length; y++)
 			{
-				if (map[y][x] != 2)
+				if (map[y][x] == 9)
+				{
+					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), invisibleWall);
+				}
+				else if (map[y][x] != 2)
 				{
 					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),
 							grass);
