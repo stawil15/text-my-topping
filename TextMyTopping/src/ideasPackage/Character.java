@@ -10,7 +10,7 @@ public class Character implements Collidable
 	private PImage[] charRightImages;
 	private PImage[] charUpImages;
 	private PImage[] charDownImages;
-	private PApplet parent;
+	protected PApplet parent;
 	private int currentDirection;
 	private int animationIndex = 0;
 	private GridCoordinate coordinates;
@@ -31,10 +31,9 @@ public class Character implements Collidable
 	protected CollisionGrid collisionGrid;
 
 	public Character(GridCoordinate coordinates, int initialDirection,
-			int animationFrames, String imageName, CollisionGrid c, boolean addToGrid,
-			PApplet parent)
+			int animationFrames, String imageName, CollisionGrid c, boolean addToGrid)
 	{
-		this.parent = parent;
+		parent = Main.getMainObject();
 		charRightImages = new PImage[animationFrames];
 		charLeftImages = new PImage[animationFrames];
 		charUpImages = new PImage[animationFrames];

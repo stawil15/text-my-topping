@@ -23,11 +23,11 @@ public class Dialog
 	protected float currentPositionInText;
 	protected boolean finishedDisplayingText;
 
-	public Dialog(String[] lines, Main parent)
+	public Dialog(String[] lines)
 	{
+		parent = Main.getMainObject();
 		this.lines = lines;
 		dialogFont = parent.loadFont("data\\fonts\\MiniPower.vlw");
-		this.parent = parent;
 		parent.textFont(dialogFont);
 		borderColor = parent.color(0);
 		textColor = parent.color(0);

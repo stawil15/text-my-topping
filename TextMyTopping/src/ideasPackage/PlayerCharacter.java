@@ -3,16 +3,14 @@ package ideasPackage;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import processing.core.PApplet;
-
 public class PlayerCharacter extends Character implements KeyListener
 {
 
 	private boolean leftKeyDown, rightKeyDown, upKeyDown, downKeyDown;
 	public PlayerCharacter(GridCoordinate coordinates, int initialDirection,
-			int animationFrames, String imageName, CollisionGrid c, boolean addToGrid, PApplet parent)
+			int animationFrames, String imageName, CollisionGrid c, boolean addToGrid)
 	{
-		super(coordinates, initialDirection, animationFrames, imageName, c, addToGrid, parent);
+		super(coordinates, initialDirection, animationFrames, imageName, c, addToGrid);
 		parent.addKeyListener(this);
 	}
 	

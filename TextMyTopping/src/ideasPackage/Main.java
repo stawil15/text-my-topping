@@ -2,9 +2,8 @@ package ideasPackage;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
 import processing.core.*;
-import java.io.*;
-import java.util.*;
 
 // Eric Mustee
 // 2/28/2014
@@ -24,6 +23,7 @@ public class Main extends PApplet
 	public static int GRID_SIZE = 32;
 	public final static int SCREEN_WIDTH = 1024;
 	public final static int SCREEN_HEIGHT = 768;
+	private static Main mainClass;
 
 	// Grids containing objects of the game
 	private Level level;
@@ -32,10 +32,11 @@ public class Main extends PApplet
 	private Camera camera;
 
 	// NPC stuff
-	private Dialog currentDialog;
 	private Dialog TestDialog;
 	private PlayerCharacter testCharacter;
+	@SuppressWarnings("unused")
 	private NonPlayerCharacter testNPC;
+	@SuppressWarnings("unused")
 	private NonPlayerCharacter testNPC2;
 
 	// A tree
@@ -53,9 +54,6 @@ public class Main extends PApplet
 	public static int DOWN_KEY = KeyEvent.VK_DOWN;
 	public static int SPACE_KEY = KeyEvent.VK_SPACE;
 
-	// Stores whether a key is pressed or not
-	private boolean keyLeft, keyRight, keyUp, keyDown;
-
 	// Start Processing
 	public static void main(String args[])
 	{
@@ -66,6 +64,7 @@ public class Main extends PApplet
 	public void setup()
 	{
 
+		mainClass = this;
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
@@ -76,11 +75,11 @@ public class Main extends PApplet
 		
 		// Create some scenery objects to add to the grid.
 		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,
-				sceneryGrid, false, this);
+				sceneryGrid, false);
 		SceneryObject flower = new SceneryObject(null, "flower", 2,
-				20 + (int) (Math.random() * 8), sceneryGrid, false, this);
-		tree = new StaticObject(null, "tree", collisionGrid, 1, 25, false, this);
-		fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false, this);
+				20 + (int) (Math.random() * 8), sceneryGrid, false);
+		tree = new StaticObject(null, "tree", collisionGrid, 1, 25, false);
+		fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false);
 		
 
 		readCSV maploader = new readCSV();
@@ -123,7 +122,7 @@ public class Main extends PApplet
 				else if (map[y][x] == 3)
 				{
 					collisionGrid.addElement(new GridCoordinate(x, y), fastTree);
-					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}, this));
+					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
 				}
 			}
 		}
@@ -141,11 +140,10 @@ public class Main extends PApplet
 
 		// Create dialogs
 		Dialog npcDialog = new Dialog(new String[] { "Hello, I am an NPC!",
-				"This is a new Page!" }, this);
+				"This is a new Page!" });
 		npcDialog
 				.setNextDialog(new Dialog(
-						new String[] { "This shows how dialogs can be stringed\ntogether like linked lists." },
-						this));
+						new String[] { "This shows how dialogs can be stringed\ntogether like linked lists." }));
 
 		ArrayList<String> choices = new ArrayList<String>();
 		choices.add("The first one");
@@ -158,39 +156,36 @@ public class Main extends PApplet
 
 		ArrayList<Dialog> nextDialogs = new ArrayList<Dialog>();
 		nextDialogs.add(new Dialog(
-				new String[] { "You selected  the first choice" }, this));
+				new String[] { "You selected  the first choice" }));
 		nextDialogs.add(new Dialog(
-				new String[] { "You selected  the second choice" }, this));
-		nextDialogs.add(new Dialog(new String[] { "The third choice" }, this));
-		nextDialogs.add(new Dialog(new String[] { "The fourth choice" }, this));
-		nextDialogs.add(new Dialog(new String[] { "The fifth choice" }, this));
-		nextDialogs.add(new Dialog(new String[] { "The sixth choice" }, this));
-		nextDialogs.add(new Dialog(new String[] { "The last choice" }, this));
+				new String[] { "You selected  the second choice" }));
+		nextDialogs.add(new Dialog(new String[] { "The third choice" }));
+		nextDialogs.add(new Dialog(new String[] { "The fourth choice" }));
+		nextDialogs.add(new Dialog(new String[] { "The fifth choice" }));
+		nextDialogs.add(new Dialog(new String[] { "The sixth choice" }));
+		nextDialogs.add(new Dialog(new String[] { "The last choice" }));
 
 		BranchingDialog branchDialog = new BranchingDialog(
 				new String[] {
 						"Here is a branching Dialog",
-						"You will be presented with choices\nUse the arrows to choose\nAnd press space to select" },
-				this, choices, nextDialogs);
+						"You will be presented with choices\nUse the arrows to choose\nAnd press space to select" }, choices, nextDialogs);
 
 		// Create npcs
 		testNPC = new NonPlayerCharacter(new GridCoordinate(8, 9), 2, 1, "npc",
-				collisionGrid, npcDialog, true, this);
+				collisionGrid, npcDialog, true);
 		testNPC2 = new NonPlayerCharacter(new GridCoordinate(11, 7), 0, 1,
-				"npc", collisionGrid, branchDialog, true, this);
+				"npc", collisionGrid, branchDialog, true);
 
 		// Create the player character
 		testCharacter = new PlayerCharacter(new GridCoordinate(10, 4),
-				Character.DIRECTION_RIGHT, 4, "player", collisionGrid, true,
-				this);
+				Character.DIRECTION_RIGHT, 4, "player", collisionGrid, true);
 
 		// Create the camera
-		camera = new Camera(new GridCoordinate(0, 0), testCharacter, this);
+		camera = new Camera(new GridCoordinate(0, 0), testCharacter);
 
 		// This dialog shows at startup
 		TestDialog = new Dialog(
-				new String[] { "Hello, World!\nUse arrow keys to move\nPress [Space] To Continue." },
-				this);
+				new String[] { "Hello, World!\nUse arrow keys to move\nPress [Space] To Continue." });
 		TestDialog.showDialog();
 
 		// Create the level
@@ -201,6 +196,11 @@ public class Main extends PApplet
 	{
 		level.draw();
 		GUISystem.draw();
+	}
+	
+	public static Main getMainObject()
+	{
+		return mainClass;
 	}
 
 

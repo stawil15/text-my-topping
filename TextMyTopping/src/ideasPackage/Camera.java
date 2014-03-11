@@ -13,12 +13,11 @@ public class Camera
 	public boolean movingLeft = false, movingRight = false, movingUp = false,
 			movingDown = false;
 
-	public Camera(GridCoordinate location, PlayerCharacter tracker,
-			PApplet parent)
+	public Camera(GridCoordinate location, PlayerCharacter tracker)
 	{
 		this.location = location;
 		this.tracker = tracker;
-		this.parent = parent;
+		parent = Main.getMainObject();
 		collisionGrid = tracker.getCollisionGrid();
 
 		int screenGridWidth = parent.width / Main.GRID_SIZE;

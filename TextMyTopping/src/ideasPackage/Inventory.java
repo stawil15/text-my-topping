@@ -23,11 +23,11 @@ public class Inventory extends PApplet
 	protected int offAndWidth = itemSpaceOffset + itemSpaceWidth;
 	protected int equipOffset = 200;
 
-	public Inventory(InventoryItem item, Main parent)
+	public Inventory(InventoryItem item)
 	{
 		this.item = item;
 		inventoryFont = parent.loadFont("data\\fonts\\MiniPower.vlw");
-		this.parent = parent;
+		this.parent = Main.getMainObject();
 		parent.textFont(inventoryFont);
 		borderColor = parent.color(0);
 		textColor = parent.color(0);

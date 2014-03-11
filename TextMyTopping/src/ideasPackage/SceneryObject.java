@@ -14,13 +14,13 @@ public class SceneryObject implements Drawable
 	PApplet parent;
 	
 	public SceneryObject(GridCoordinate coordinates, String imageName, int animationFrames, int animationDuration,
-			SceneryGrid sceneryGrid, boolean addToGrid, PApplet parent)
+			SceneryGrid sceneryGrid, boolean addToGrid)
 	{
 		currentAnimationFrame = 0;
 		animationIndex = 0;
 		this.animationDuration = animationDuration;
 		this.coordinates = coordinates;
-		this.parent = parent;
+		parent = Main.getMainObject();
 
 		if (addToGrid)
 			sceneryGrid.addSceneryObject(coordinates, this);

@@ -11,9 +11,9 @@ public class InventoryOpen extends Inventory implements KeyListener
 	// class for open inventory
 	// press 'I' to open inventory
 	
-	public InventoryOpen(InventoryItem item, Main parent)
+	public InventoryOpen(InventoryItem item)
 	{
-		super(item, parent);
+		super(item);
 		// TODO Auto-generated constructor stub
 	}
 	

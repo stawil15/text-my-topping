@@ -15,9 +15,9 @@ public class StaticObject implements Collidable
 	private Dialog dialog;
 
 	public StaticObject(GridCoordinate coordinates, String imageName, CollisionGrid c, int animationFrames,
-			int anationDuration, boolean addToGrid, PApplet parent)
+			int anationDuration, boolean addToGrid)
 	{
-		this(coordinates, c, addToGrid, parent);
+		this(coordinates, c, addToGrid);
 		this.animationDuration = anationDuration;
 		images = new PImage[animationFrames];
 		for (int index = 0; index < animationFrames; index++)
@@ -27,21 +27,21 @@ public class StaticObject implements Collidable
 
 	}
 
-	public StaticObject(GridCoordinate coordinates, String imageName, CollisionGrid c, boolean addToGrid, PApplet parent)
+	public StaticObject(GridCoordinate coordinates, String imageName, CollisionGrid c, boolean addToGrid)
 	{
-		this(coordinates, c, addToGrid, parent);
+		this(coordinates, c, addToGrid);
 		images = new PImage[1];
 		images[0] = parent.loadImage("\\data\\sprites\\static\\" + imageName + "\\" + 0 + ".png");
 	}
 
-	public StaticObject(GridCoordinate coordinates, CollisionGrid c, boolean addToGrid, PApplet parent)
+	public StaticObject(GridCoordinate coordinates, CollisionGrid c, boolean addToGrid)
 	{
 		this.coordinates = coordinates;
 		if (addToGrid)
 			c.addElement(coordinates, this);
 		else
 			c.addDuplicateObject(this);
-		this.parent = parent;
+		parent = Main.getMainObject();
 	}
 
 	public void draw(float cameraOffsetX, float cameraOffsetY)

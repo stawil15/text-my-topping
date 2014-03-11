@@ -4,8 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-import processing.core.PApplet;
-
 public class BranchingDialog extends Dialog implements KeyListener
 {
 	// This type of dialog ends with a choice and allows it to branch
@@ -19,10 +17,9 @@ public class BranchingDialog extends Dialog implements KeyListener
 	private ArrayList<String> choices;
 	private ArrayList<Dialog> nextDialogs;
 
-	public BranchingDialog(String[] lines, Main parent,
-			ArrayList<String> choices, ArrayList<Dialog> nextDialogs)
+	public BranchingDialog(String[] lines,ArrayList<String> choices, ArrayList<Dialog> nextDialogs)
 	{
-		super(lines, parent);
+		super(lines);
 		parent.addKeyListener(this);
 		this.choices = choices;
 		this.nextDialogs = nextDialogs;
