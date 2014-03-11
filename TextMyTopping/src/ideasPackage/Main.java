@@ -42,6 +42,7 @@ public class Main extends PApplet
 	// A tree
 	private StaticObject tree;
 	private StaticObject fastTree;
+	private StaticObject invisibleWall;
 
 	// The number of tiles
 	private int tilesX = 64;
@@ -80,10 +81,26 @@ public class Main extends PApplet
 				20 + (int) (Math.random() * 8), sceneryGrid, false);
 		tree = new StaticObject(null, "tree", collisionGrid, 1, 25, false);
 		fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false);
+		invisibleWall = new StaticObject(null,collisionGrid,false);
 		
 
 		readCSV maploader = new readCSV();
 		int[][] map = maploader.readCsv("redSpriteMap.csv");
+		
+		int xOffset = 0;
+		int yOffset = 0;
+		
+		int gridWidth = SCREEN_WIDTH/GRID_SIZE;
+		int gridHeight = SCREEN_HEIGHT/GRID_SIZE;
+		
+		if (gridWidth > map.length)
+		{
+			xOffset = (gridWidth-map.length)/2;
+		}
+		if (gridHeight > map[0].length)
+		{
+			yOffset = (gridHeight-map[0].length)/2;
+		}
 		
 		 //Fill the scenery grid
 //		for (int x = 0; x < tilesX; x++)
@@ -107,21 +124,21 @@ public class Main extends PApplet
 			{
 				if (map[y][x] != 2)
 				{
-					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),
 							grass);
 				}
 				if (map[y][x] == 2)
 				{
-					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),
 							flower);
 				}
 				else if (map[y][x] == 1)
 				{
-					collisionGrid.addElement(new GridCoordinate(x, y), tree);
+					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), tree);
 				}
 				else if (map[y][x] == 3)
 				{
-					collisionGrid.addElement(new GridCoordinate(x, y), fastTree);
+					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastTree);
 					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
 				}
 			}
@@ -171,13 +188,13 @@ public class Main extends PApplet
 						"You will be presented with choices\nUse the arrows to choose\nAnd press space to select" }, choices, nextDialogs);
 
 		// Create npcs
-		testNPC = new NonPlayerCharacter(new GridCoordinate(8, 9), 2, 1, "npc",
+		testNPC = new NonPlayerCharacter(new GridCoordinate(8+xOffset, 9+yOffset), 2, 1, "npc",
 				collisionGrid, npcDialog, true);
-		testNPC2 = new NonPlayerCharacter(new GridCoordinate(11, 7), 0, 1,
+		testNPC2 = new NonPlayerCharacter(new GridCoordinate(11+xOffset, 7+yOffset), 0, 1,
 				"npc", collisionGrid, branchDialog, true);
 
 		// Create the player character
-		testCharacter = new PlayerCharacter(new GridCoordinate(10, 4),
+		testCharacter = new PlayerCharacter(new GridCoordinate(10+xOffset, 4+yOffset),
 				Character.DIRECTION_RIGHT, 4, "player", collisionGrid, true);
 
 		// Create the camera
