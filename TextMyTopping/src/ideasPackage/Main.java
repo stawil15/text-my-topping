@@ -154,7 +154,7 @@ public class Main extends PApplet
 		{  
 			for (int y = 0; y < NPC[x].length; y++)
 			{  
-				if (NPC[x][0] == "NPC")
+				if (NPC[x][0]!= null && NPC[x][0].equals("NPC"))
 				{
 					Dialog npcDialog = null;
 
