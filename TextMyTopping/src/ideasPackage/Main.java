@@ -40,6 +40,7 @@ public class Main extends PApplet
 
 	// A tree
 	private StaticObject tree;
+	private StaticObject fastTree;
 
 	// The number of tiles
 	private int tilesX = 64;
@@ -78,36 +79,65 @@ public class Main extends PApplet
 				sceneryGrid, false, this);
 		SceneryObject flower = new SceneryObject(null, "flower", 2,
 				20 + (int) (Math.random() * 8), sceneryGrid, false, this);
+		tree = new StaticObject(null, "tree", collisionGrid, 1, 25, false, this);
+		fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false, this);
+		
 
+		readCSV maploader = new readCSV();
+		int[][] map = maploader.readCsv("redSpriteMap.csv");
 		
-		
-		// Fill the scenery grid
-		for (int x = 0; x < tilesX; x++)
+		 //Fill the scenery grid
+//		for (int x = 0; x < tilesX; x++)
+//		{
+//			for (int y = 0; y < tilesY; y++)
+//			{
+//				if (Math.random() < .90)
+//				{
+//					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
+//							grass);
+//				} else
+//				{
+//					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
+//							flower);
+//				}
+//			}
+//		}
+		for (int x = 0; x < map.length; x++)
 		{
-			for (int y = 0; y < tilesY; y++)
+			for (int y = 0; y < map[x].length; y++)
 			{
-				if (Math.random() < .90)
+				if (map[y][x] != 2)
 				{
 					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
 							grass);
-				} else
+				}
+				if (map[y][x] == 2)
 				{
 					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
 							flower);
+				}
+				else if (map[y][x] == 1)
+				{
+					collisionGrid.addElement(new GridCoordinate(x, y), tree);
+				}
+				else if (map[y][x] == 3)
+				{
+					collisionGrid.addElement(new GridCoordinate(x, y), fastTree);
+					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}, this));
 				}
 			}
 		}
 
 		// Create a tree and add some to the collisionGrid
-		tree = new StaticObject(null, "tree", collisionGrid, 4, 25, false, this);
-		StaticObject fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false, this);
-		fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}, this));
-		collisionGrid.addElement(new GridCoordinate(10, 10), fastTree);
-		for (int index = 0; index < 8; index++)
-		{
-			collisionGrid.addElement(new GridCoordinate(5, index), tree);
-			collisionGrid.addElement(new GridCoordinate(7, index), tree);
-		}
+		//tree = new StaticObject(null, "tree", collisionGrid, 4, 25, false, this);
+		//StaticObject fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false, this);
+		//fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}, this));
+		//collisionGrid.addElement(new GridCoordinate(10, 10), fastTree);
+//		for (int index = 0; index < 8; index++)
+//		{
+//			collisionGrid.addElement(new GridCoordinate(5, index), tree);
+//			collisionGrid.addElement(new GridCoordinate(7, index), tree);
+//		}
 
 		// Create dialogs
 		Dialog npcDialog = new Dialog(new String[] { "Hello, I am an NPC!",
@@ -146,11 +176,11 @@ public class Main extends PApplet
 		// Create npcs
 		testNPC = new NonPlayerCharacter(new GridCoordinate(8, 9), 2, 1, "npc",
 				collisionGrid, npcDialog, true, this);
-		testNPC2 = new NonPlayerCharacter(new GridCoordinate(10, 11), 0, 1,
+		testNPC2 = new NonPlayerCharacter(new GridCoordinate(11, 7), 0, 1,
 				"npc", collisionGrid, branchDialog, true, this);
 
 		// Create the player character
-		testCharacter = new PlayerCharacter(new GridCoordinate(9, 11),
+		testCharacter = new PlayerCharacter(new GridCoordinate(10, 4),
 				Character.DIRECTION_RIGHT, 4, "player", collisionGrid, true,
 				this);
 
