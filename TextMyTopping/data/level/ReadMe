@@ -12,7 +12,7 @@ the file names will be similar, with a modifier at the beginning so that they ca
 
 I'm not sure how this will be implemented as of now, but it will be something like the following:
 
-[NPC Sprite][Behavior][Dialogue type][dialogue][dialogue][dialogue][dialogue][dialogue]
+[NPC Sprite][x][y][Behavior][Dialogue type][dialogue][dialogue][dialogue][dialogue][dialogue]
 
 NPC Sprite == sprite used. Red Shirt guy? Enemy?
 Behavior == any defining variables we need for how the NPC will behave
