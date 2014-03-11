@@ -29,3 +29,5 @@ example implementations:
 	Since we know the second NPC is an enemy, we would use the rest of the fields for the relavent information rather than dialgue choices.
 	For the first NPC, we know that it has bridged dialogue, so the next field indicated the amount of choices (2). Meaning the next two fields will contain choices and the two fields after that will contain the results.
 	Will get Very complicated if we want more complex bridged dialogues.
+	
+	
