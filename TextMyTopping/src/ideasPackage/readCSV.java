@@ -25,30 +25,48 @@ public class readCSV {
 			String[] dimmensions = line.split(",");
 
 			map = new int[Integer.parseInt(dimmensions[0])][Integer.parseInt(dimmensions[1])];
-			
-			for (int i = 0; i < Integer.parseInt(dimmensions[1]); i++)
+
+			System.out.println(dimmensions[0]);
+			System.out.println(dimmensions[1]);
+
+			System.out.println(Integer.parseInt(dimmensions[0]));
+			System.out.println(Integer.parseInt(dimmensions[1]));
+
+			for (int i = 0; i < Integer.parseInt(dimmensions[0]); i++)
 			{
-				while ((line = br.readLine()) != null) {  
-
+				if ((line = br.readLine()) != null) 
+				{  
 					String[] parsed = line.split(splitBy);  
-					for (int e = 0; e < Integer.parseInt(dimmensions[0]); e++)
+					for (int e = 0; e < Integer.parseInt(dimmensions[1]); e++)
 					{
-						map[e][i] = Integer.parseInt(parsed[e]);
+						map[i][e] = Integer.parseInt(parsed[e]);
+						System.out.print(map[i][e]);
 					}
-
+					System.out.println();
 				}
+			}
+			for (int x = 0; x < Integer.parseInt(dimmensions[0]); x ++)
+			{
+				for (int y = 0; y < Integer.parseInt(dimmensions[1]); y ++)
+				{
+					System.out.print(map[x][y]);
+				}
+				System.out.println();
 			}
 
 		} catch (FileNotFoundException e) {  
-			e.printStackTrace();  
+			e.printStackTrace();
+			System.out.println("file not found");
 		} catch (IOException e) {  
 			e.printStackTrace();  
+			System.out.println("io exception");
 		} finally {  
 			if (br != null) {  
-				try {  
+				try {
 					br.close();  
 				} catch (IOException e) {  
 					e.printStackTrace();  
+					System.out.println("io exception 2");
 				}  
 			}  
 		}  
