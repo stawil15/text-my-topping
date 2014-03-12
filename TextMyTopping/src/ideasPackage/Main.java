@@ -1,7 +1,6 @@
 package ideasPackage;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import processing.core.*;
 
@@ -66,6 +65,7 @@ public class Main extends PApplet
 	{
 
 		mainClass = this;
+		DialogManager.initializeDialogManager();
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
@@ -83,6 +83,7 @@ public class Main extends PApplet
 
 
 		readCSV maploader = new readCSV();
+		maploader.readDialogueData("redSpriteMap.csv");
 		int[][] map = maploader.readMapData("redSpriteMap.csv");
 
 		int xOffset = 0;
@@ -130,7 +131,6 @@ public class Main extends PApplet
 		}
 
 		String[][] NPC = maploader.readNPCData("NPC" + "redSpriteMap.csv"); //naming convention will allow us to add "NPC" to name variable.
-
 		for (int x = 0; x < NPC.length; x++)
 		{
 			if (NPC[x][0]!= null && NPC[x][0].equals("NPC"))
@@ -152,9 +152,10 @@ public class Main extends PApplet
 //					npcDialog.setNextDialog(new Dialog(new String[] {"testing"}));
 //					npcDialog.setNextDialog(new Dialog(new String[] {"testing"}));
 				}
-				else if (NPC[x][4].equals("bridged"))
+				else if (NPC[x][4]!=null && !NPC[x][4].equals(readCSV.NULL_DIALOG))
 				{
-					
+					npcDialog = DialogManager.getDialog(NPC[x][4]);
+					println("ASSINGNED: " + NPC[x][4]);
 				}
 
 				NonPlayerCharacter testNPC = new NonPlayerCharacter(new GridCoordinate(Integer.parseInt(NPC[x][1])+xOffset, Integer.parseInt(NPC[x][2])+yOffset), 2, 1, "npc",collisionGrid, npcDialog, true);

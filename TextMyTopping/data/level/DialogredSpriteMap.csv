@@ -1,0 +1,9 @@
+Default ,NPC1_Line1 ,This is the first page of the dialogue ,NPC1_Line2
+Default ,NPC1_Line2 ,This is a second page of the dialogue
+Default ,NPC2_Line1 ,Here is a branching Dialog ,NPC2_Line2
+Default ,NPC2_Line2 ,You will be presented with choices\nUse the arrows to choose\nAnd press space to select ,NPC2_Line3
+Branched ,NPC2_Line3 ,4 ,The first choice ,The second choice ,The third choice ,The fourth choice ,NPC2_Choice1 ,NPC2_Choice2 ,NPC2_Choice3 ,NPC2_Choice4
+Default ,NPC2_Choice1 ,The first choice 
+Default ,NPC2_Choice2 ,The second choice
+Default ,NPC2_Choice3 ,The third choice
+Default ,NPC2_Choice4 ,The last choice

@@ -24,6 +24,7 @@ public class Dialog
 	protected int textColor;
 	protected float currentPositionInText;
 	protected boolean finishedDisplayingText;
+	protected Dialog nextDialog;
 
 	public Dialog(String[] lines)
 	{
@@ -71,7 +72,7 @@ public class Dialog
 	public void drawDialog()
 	{
 
-		if (lines.length > 0)
+		if (lines!=null && lines.length > 0)
 		{
 			float offsetX = (parent.width - width) / 2;
 			parent.stroke(borderColor);
@@ -114,15 +115,20 @@ public class Dialog
 			{
 				GUISystem.showDialog(null);
 				currentDialogLine = 0;
-//				if (nextDialog != null)
-//				{
-//					GUISystem.showDialog(nextDialog);
-//				}
+				if (nextDialog != null)
+				{
+					GUISystem.showDialog(nextDialog);
+				}
 			}
 		} else
 		{
 			currentPositionInText += impatientPersonCharactersToAdvance;
 		}
+	}
+	
+	public void setNextDialog(Dialog d)
+	{
+		nextDialog = d;
 	}
 
 }

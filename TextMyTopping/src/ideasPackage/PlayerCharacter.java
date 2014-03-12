@@ -41,7 +41,6 @@ public class PlayerCharacter extends Character implements KeyListener
 	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
 		super.draw(cameraOffsetX,cameraOffsetY);
-		parent.println(animationIndex);
 		if (leftKeyDown)
 		{
 			keyLeftDown();

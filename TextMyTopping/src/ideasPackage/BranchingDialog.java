@@ -77,6 +77,10 @@ public class BranchingDialog extends Dialog implements KeyListener
 		} else
 		{
 			// We are not in selection mode, draw the dialog like normal
+			if (lines == null)
+			{
+				atSelection = true;
+			}
 			super.drawDialog();
 		}
 	}
