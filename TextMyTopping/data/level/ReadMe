@@ -1,0 +1,33 @@
+As of right now:
+
+0 == grass
+1 == tree
+2 == flower
+3 == fastTree
+
+NPC's will be in separate CSV file that will also need to be loaded.
+Unlike the map CSV, NPC's won't be formated in a simple grid, to account for dialog.
+
+the file names will be similar, with a modifier at the beginning so that they can be easy to access and specify.
+
+I'm not sure how this will be implemented as of now, but it will be something like the following:
+
+[NPC Sprite][x][y][Behavior][Dialogue type][dialogue][dialogue][dialogue][dialogue][dialogue]
+
+NPC Sprite == sprite used. Red Shirt guy? Enemy?
+Behavior == any defining variables we need for how the NPC will behave
+Dialogue Type == Defines how we will use the remaining dialogue fields. (Is the dialogue branched? etc)
+	if the Dialogue type is "enemy" we can store any relevant fields, such as HP in the dialogue fields.
+	
+Any interactable objects, such as trees will probably also be stored here eventually, but we need to define all variables needed.
+
+example implementations:
+	[NPC][x][y][noMovement][branched]["What's the weather like?"][(number of options/outcomes)2][(choice1)">good"][(choice2)">bad"][(response1)"That's great!"][(response2)"sucks to be you")]
+	[enemy][x][y][chase][HP][ATK]
+	*text in paranthesis will not be included
+	
+	Since we know the second NPC is an enemy, we would use the rest of the fields for the relavent information rather than dialgue choices.
+	For the first NPC, we know that it has bridged dialogue, so the next field indicated the amount of choices (2). Meaning the next two fields will contain choices and the two fields after that will contain the results.
+	Will get Very complicated if we want more complex bridged dialogues.
+	
+	
