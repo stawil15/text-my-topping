@@ -144,10 +144,17 @@ public class Main extends PApplet
 				{
 					System.out.println(NPC[x][7]);
 					npcDialog = new Dialog(new String[] {NPC[x][6]});
-					for (int i = 1; i <= Integer.parseInt(NPC[x][5]); i++)
+					for (int i = 2; i <= Integer.parseInt(NPC[x][5]); i++)
 					{
-						npcDialog.setNextDialog(new Dialog(new String[] {NPC[x][5+i]}));
+						npcDialog.setNextDialog(NPC[x][5+i]);
 					}
+//					npcDialog.setNextDialog(new Dialog(new String[] {"testing"}));
+//					npcDialog.setNextDialog(new Dialog(new String[] {"testing"}));
+//					npcDialog.setNextDialog(new Dialog(new String[] {"testing"}));
+				}
+				else if (NPC[x][4].equals("bridged"))
+				{
+					
 				}
 
 				NonPlayerCharacter testNPC = new NonPlayerCharacter(new GridCoordinate(Integer.parseInt(NPC[x][1])+xOffset, Integer.parseInt(NPC[x][2])+yOffset), 2, 1, "npc",collisionGrid, npcDialog, true);
@@ -232,7 +239,7 @@ public class Main extends PApplet
 		return mainClass;
 	}
 
-	public void LoadMap(String mapName, int charX, int charY)
+	public void LoadMap(String mapName, int charX, int charY, CollisionGrid cGrid, SceneryGrid sGrid)
 	{
 
 	}

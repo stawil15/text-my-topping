@@ -1,5 +1,7 @@
 package ideasPackage;
 
+import java.util.Arrays;
+
 import processing.core.*;
 
 public class Dialog
@@ -7,7 +9,7 @@ public class Dialog
 	protected String[] lines;
 	private PFont dialogFont;
 	protected Main parent;
-	private Dialog nextDialog;
+	//private Dialog nextDialog;
 	protected static float dialogSpeed = .5f;
 	protected int currentDialogLine = 0;
 	protected float impatientPersonCharactersToAdvance = 5f;
@@ -54,9 +56,11 @@ public class Dialog
 		dialogSpeed = speed;
 	}
 
-	public void setNextDialog(Dialog nextDialog)
+	public void setNextDialog(String nextDialog)
 	{
-		this.nextDialog = nextDialog;
+		//this.nextDialog = nextDialog;
+		lines = Arrays.copyOf(lines,lines.length+1);
+		lines[lines.length-1] = nextDialog;
 	}
 
 	public void showDialog()
@@ -110,10 +114,10 @@ public class Dialog
 			{
 				GUISystem.showDialog(null);
 				currentDialogLine = 0;
-				if (nextDialog != null)
-				{
-					GUISystem.showDialog(nextDialog);
-				}
+//				if (nextDialog != null)
+//				{
+//					GUISystem.showDialog(nextDialog);
+//				}
 			}
 		} else
 		{
