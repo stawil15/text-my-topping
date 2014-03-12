@@ -1,7 +1,6 @@
 package ideasPackage;
 
 import java.awt.event.KeyEvent;
-
 import processing.core.*;
 
 // Eric Mustee
