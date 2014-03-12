@@ -2,7 +2,7 @@ package ideasPackage;
 
 import processing.core.PApplet;
 
-public class Enemy extends PlayerCharacter
+public class Enemy extends Character
 {
 	private Dialog dialog;
 	public GridCoordinate playerLocation;
@@ -10,7 +10,7 @@ public class Enemy extends PlayerCharacter
 	public Enemy(GridCoordinate coordinates, int initialDirection, int animationFrames, String imageName,
 			CollisionGrid c, Weapon selectedWeapon, boolean addToGrid, PApplet parent, Path findPath, Attack attack)
 	{
-		super(coordinates, initialDirection, animationFrames, imageName, c, addToGrid, parent);
+		super(coordinates, initialDirection, animationFrames, imageName, c, addToGrid);
 	}
 
 	public void doInteract()
@@ -24,7 +24,7 @@ public class Enemy extends PlayerCharacter
 		// might want to male a separate class
 		// A* would be a start
 		// GridCoordinate playerLocation =
-		playerCoordinates = PlayerCharacter.this.getCoordinates();
+		playerCoordinates = getCoordinates();
 		
 		//float playerX = PlayerCharacter.getOffsetX();
 		
