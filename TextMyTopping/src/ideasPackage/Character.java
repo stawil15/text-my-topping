@@ -12,7 +12,7 @@ public class Character implements Collidable
 	private PImage[] charDownImages;
 	protected PApplet parent;
 	private int currentDirection;
-	private int animationIndex = 0;
+	protected int animationIndex = 0;
 	private GridCoordinate coordinates;
 	private int currentAnimationFrame;
 	private int animationDuration = 3;
@@ -98,8 +98,9 @@ public class Character implements Collidable
 	{
 		PImage imageTodraw = getImageToDraw();
 
-		updateOffset();
 		updateAnimation();
+		updateOffset();
+
 		if (imageTodraw != null)
 			parent.image(imageTodraw, coordinates.getGridX() * Main.GRID_SIZE
 					+ offsetX + cameraOffsetX, coordinates.getGridY()

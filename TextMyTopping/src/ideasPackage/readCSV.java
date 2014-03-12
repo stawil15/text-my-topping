@@ -108,6 +108,10 @@ public class readCSV
 			{
 				for (int y = 0; y < 20; y++)
 				{
+					if (NPC[x][y]!=null)
+						{
+							NPC[x][y] = NPC[x][y].replaceAll("\\\\n", "\n");
+						}
 					System.out.print(NPC[x][y] + " | ");
 				}
 				System.out.println();

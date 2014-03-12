@@ -207,7 +207,7 @@ public class Main extends PApplet
 		//
 		//			// Create the player character
 		testCharacter = new PlayerCharacter(new GridCoordinate(10+xOffset, 4+yOffset),
-				Character.DIRECTION_RIGHT, 4, "player", collisionGrid, true);
+				Character.DIRECTION_RIGHT, 8, "player", collisionGrid, true);
 
 		// Create the camera
 		camera = new Camera(new GridCoordinate(0, 0), testCharacter);
