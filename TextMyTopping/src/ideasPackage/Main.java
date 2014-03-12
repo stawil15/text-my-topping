@@ -45,8 +45,8 @@ public class Main extends PApplet
 	private StaticObject invisibleWall;
 
 	// The number of tiles
-	private int tilesX = 128; //
-	private int tilesY = 128; //
+	private int tilesX = 18; //
+	private int tilesY = 18; //
 
 	// Keyboard controls
 	public static int LEFT_KEY = KeyEvent.VK_LEFT;
