@@ -86,9 +86,9 @@ public class Main extends PApplet
 		invisibleWall = new StaticObject(null,collisionGrid,false);
 
 		//It worked once. I don't know how I broke it.
-		minim = new Minim(this);
-		player = minim.loadFile("data/audio/bgm/z1title.mid");
-		player.loop();
+//		minim = new Minim(this);
+//		player = minim.loadFile("data/audio/bgm/z1title.mid");
+//		player.loop();
 		
 		int xOffset = 0;
 		int yOffset = 0;
