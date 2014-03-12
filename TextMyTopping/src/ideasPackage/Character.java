@@ -116,6 +116,25 @@ public class Character implements Collidable
 			{
 				currentDirection = direction;
 				isMoving = true;
+				switch (currentDirection)
+				{
+				case DIRECTION_UP:
+					coordinates.setGridY(coordinates.getGridY() - 1);
+					offsetY = Main.GRID_SIZE;
+					break;
+				case DIRECTION_RIGHT:
+					coordinates.setGridX(coordinates.getGridX() + 1);
+					offsetX = -Main.GRID_SIZE;
+					break;
+				case DIRECTION_DOWN: 
+					coordinates.setGridY(coordinates.getGridY() + 1);
+					offsetY = -Main.GRID_SIZE;
+					break;
+				case DIRECTION_LEFT:
+					coordinates.setGridX(coordinates.getGridX() - 1);
+					offsetX = Main.GRID_SIZE;
+					break;
+				}
 			} else
 			{
 				currentDirection = direction;
@@ -132,38 +151,38 @@ public class Character implements Collidable
 		{
 		case DIRECTION_UP:
 			offsetY -= moveSpeed;
-			if (offsetY <= -Main.GRID_SIZE)
+			if (offsetY <= 0)
 			{
 				isMoving = false;
 				offsetY = 0;
-				coordinates.setGridY(coordinates.getGridY() - 1);
+
 			}
 			break;
 		case DIRECTION_RIGHT:
 			offsetX += moveSpeed;
-			if (offsetX >= Main.GRID_SIZE)
+			if (offsetX >= 0)
 			{
 				isMoving = false;
 				offsetX = 0;
-				coordinates.setGridX(coordinates.getGridX() + 1);
+				
 			}
 			break;
 		case DIRECTION_DOWN:
 			offsetY += moveSpeed;
-			if (offsetY >= Main.GRID_SIZE)
+			if (offsetY >= 0)
 			{
 				isMoving = false;
 				offsetY = 0;
-				coordinates.setGridY(coordinates.getGridY() + 1);
+				
 			}
 			break;
 		case DIRECTION_LEFT:
 			offsetX -= moveSpeed;
-			if (offsetX <= -Main.GRID_SIZE)
+			if (offsetX <= 0)
 			{
 				isMoving = false;
 				offsetX = 0;
-				coordinates.setGridX(coordinates.getGridX() - 1);
+				
 			}
 			break;
 		}

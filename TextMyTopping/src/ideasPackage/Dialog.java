@@ -57,13 +57,6 @@ public class Dialog
 		dialogSpeed = speed;
 	}
 
-	public void setNextDialog(String nextDialog)
-	{
-		//this.nextDialog = nextDialog;
-		lines = Arrays.copyOf(lines,lines.length+1);
-		lines[lines.length-1] = nextDialog;
-	}
-
 	public void showDialog()
 	{
 		GUISystem.showDialog(this);

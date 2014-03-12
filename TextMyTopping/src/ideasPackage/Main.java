@@ -43,10 +43,6 @@ public class Main extends PApplet
 	private StaticObject fastTree;
 	private StaticObject invisibleWall;
 
-	// The number of tiles
-	private int tilesX = 18; //
-	private int tilesY = 18; //
-
 	// Keyboard controls
 	public static int LEFT_KEY = KeyEvent.VK_LEFT;
 	public static int RIGHT_KEY = KeyEvent.VK_RIGHT;
@@ -70,11 +66,15 @@ public class Main extends PApplet
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
 		// Setup the collision grids first
-		CollisionGrid collisionGrid = new CollisionGrid(tilesX, tilesY);
-		SceneryGrid sceneryGrid = new SceneryGrid(tilesX, tilesY);
+		readCSV maploader = new readCSV();
+		maploader.readDialogueData("redSpriteMap.csv");
+		int[][] map = maploader.readMapData("redSpriteMap.csv");
 
 
-		// Create some scenery objects to add to the grid.
+		CollisionGrid collisionGrid = new CollisionGrid(map.length, map[0].length);
+		SceneryGrid sceneryGrid = new SceneryGrid(map.length, map[0].length);
+		
+		// Create some scenery objects to add to the grid later.
 		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,sceneryGrid, false);
 		SceneryObject flower = new SceneryObject(null, "flower", 2, 20 + (int) (Math.random() * 8), sceneryGrid, false);
 		tree = new StaticObject(null, "tree", collisionGrid, 1, 25, false);
@@ -82,9 +82,7 @@ public class Main extends PApplet
 		invisibleWall = new StaticObject(null,collisionGrid,false);
 
 
-		readCSV maploader = new readCSV();
-		maploader.readDialogueData("redSpriteMap.csv");
-		int[][] map = maploader.readMapData("redSpriteMap.csv");
+
 
 		int xOffset = 0;
 		int yOffset = 0;
@@ -100,6 +98,7 @@ public class Main extends PApplet
 		{
 			yOffset = (gridHeight-map[0].length)/2;
 		}
+		
 		for (int x = 0; x < map.length; x++)
 		{
 			for (int y = 0; y < map[x].length; y++)
@@ -136,23 +135,7 @@ public class Main extends PApplet
 			if (NPC[x][0]!= null && NPC[x][0].equals("NPC"))
 			{
 				Dialog npcDialog = null;
-				System.out.println(NPC[x][4]);
-				System.out.println(NPC[x][5]);
-				System.out.println(NPC[x][6]);
-
-				if (NPC[x][4].equals("stringed"))
-				{
-					System.out.println(NPC[x][7]);
-					npcDialog = new Dialog(new String[] {NPC[x][6]});
-					for (int i = 2; i <= Integer.parseInt(NPC[x][5]); i++)
-					{
-						npcDialog.setNextDialog(NPC[x][5+i]);
-					}
-//					npcDialog.setNextDialog(new Dialog(new String[] {"testing"}));
-//					npcDialog.setNextDialog(new Dialog(new String[] {"testing"}));
-//					npcDialog.setNextDialog(new Dialog(new String[] {"testing"}));
-				}
-				else if (NPC[x][4]!=null && !NPC[x][4].equals(readCSV.NULL_DIALOG))
+				if (NPC[x][4]!=null && !NPC[x][4].equals(readCSV.NULL_DIALOG))
 				{
 					npcDialog = DialogManager.getDialog(NPC[x][4]);
 					println("ASSINGNED: " + NPC[x][4]);

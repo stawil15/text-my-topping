@@ -1,9 +1,15 @@
+Default ,NPC1_Line3 ,Pages can be added in any order. 
 Default ,NPC1_Line1 ,This is the first page of the dialogue ,NPC1_Line2
-Default ,NPC1_Line2 ,This is a second page of the dialogue
+Default ,NPC1_Line2 ,This is a second page of the dialogue ,NPC1_Line3
 Default ,NPC2_Line1 ,Here is a branching Dialog ,NPC2_Line2
 Default ,NPC2_Line2 ,You will be presented with choices\nUse the arrows to choose\nAnd press space to select ,NPC2_Line3
-Branched ,NPC2_Line3 ,4 ,The first choice ,The second choice ,The third choice ,The fourth choice ,NPC2_Choice1 ,NPC2_Choice2 ,NPC2_Choice3 ,NPC2_Choice4
+Branched ,NPC2_Line3 ,5 ,The first choice ,The second choice ,The third choice ,The fourth choice ,What?! Can you repeat that? ,NPC2_Choice1 ,NPC2_Choice2 ,NPC2_Choice3 ,NPC2_Choice4 ,NPC2_Line1
 Default ,NPC2_Choice1 ,The first choice 
 Default ,NPC2_Choice2 ,The second choice
 Default ,NPC2_Choice3 ,The third choice
-Default ,NPC2_Choice4 ,The last choice
+Default ,NPC2_Choice4 ,The fourth choice\c prepare for another branch! ,NPC2_Line4
+Branched ,NPC2_Line4 ,2 ,This is a test ,and so is this ,NPC2_Choice21 ,NPC2_Choice22
+Default ,NPC2_Choice21 ,Sorry\c you failed the test :'(\nThe correct answer was 2.
+Default ,NPC2_Choice22 ,Yay\c you passed!\nThese dialogs seem to go on forever amiright? ,NPC2_Line5
+Branched ,NPC2_Line5 ,2 ,Yes ,No ,NPC2_Choice22 ,NPC2_Choice31
+Default ,NPC2_Choice31 , Okay, bye!

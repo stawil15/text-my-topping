@@ -1,10 +1,14 @@
 package ideasPackage;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.util.ArrayList;
+
+import javax.swing.text.rtf.RTFEditorKit;
 
 import processing.core.PApplet;
 
@@ -93,14 +97,12 @@ public class readCSV
 
 		System.out.println("Started");
 
-		NPC = new String[20][20];
+		NPC = new String[getLinesInFile(csvFileToRead)][20];
 
 		try
 		{
 			br = new BufferedReader(new FileReader(csvFileToRead));
-
 			System.out.println("test");
-
 			int i = 0;
 
 			while (line != null)
@@ -115,9 +117,9 @@ public class readCSV
 				}
 				i++;
 			}
-			for (int x = 0; x < 20; x++)
+			for (int x = 0; x < NPC.length; x++)
 			{
-				for (int y = 0; y < 20; y++)
+				for (int y = 0; y < NPC[x].length; y++)
 				{
 					if (NPC[x][y] != null)
 					{
@@ -158,7 +160,7 @@ public class readCSV
 	public void readDialogueData(String filename)
 	{
 		String csvFileToRead = "data/level/Dialog" + filename;
-		String rawDialogs[][] = new String[20][20];
+		String rawDialogs[][] = new String[getLinesInFile(csvFileToRead)][20];
 		String line = "";
 		String splitBy = " ,";
 
@@ -174,14 +176,17 @@ public class readCSV
 					String[] parsed = line.split(splitBy);
 					for (int e = 0; e < parsed.length; e++)
 					{
-						rawDialogs[i][e] = parsed[e];
+						if (i < rawDialogs.length)
+						{
+							rawDialogs[i][e] = parsed[e];
+						}
 					}
 				}
 				i++;
 			}
-			for (int x = 0; x < 20; x++)
+			for (int x = 0; x < rawDialogs.length; x++)
 			{
-				for (int y = 0; y < 20; y++)
+				for (int y = 0; y < rawDialogs[x].length; y++)
 				{
 					if (rawDialogs[x][y] != null)
 					{
@@ -204,7 +209,7 @@ public class readCSV
 			e.printStackTrace();
 		}
 
-		for (int index = rawDialogs.length-1; index>=0; index--)
+		for (int index = rawDialogs.length - 1; index >= 0; index--)
 		{
 			String[] dialogRow = rawDialogs[index];
 			if (dialogRow != null && dialogRow.length > 0 && dialogRow[0] != null)
@@ -212,34 +217,53 @@ public class readCSV
 				if (dialogRow[0].equals(TYPE_DEFAULT_DIALOG))
 				{
 					Dialog addedDialog = DialogManager.addDialog(new Dialog(new String[] { dialogRow[2] }),
-							dialogRow[1]);
+							dialogRow[1], dialogRow);
 					if (dialogRow[3] != null && !dialogRow[3].equals(NULL_DIALOG))
 					{
-						addedDialog.setNextDialog(DialogManager.getDialog(dialogRow[3]));
+						DialogManager.setNextDialog(dialogRow[3], dialogRow[1]);
 					}
 
 				} else if (dialogRow[0].equals(TYPE_BRANCHING_DIALOG))
 				{
 					ArrayList<String> choices = new ArrayList<String>();
 					ArrayList<Dialog> responses = new ArrayList<Dialog>();
-					
+
 					int numberOfOptions = Integer.parseInt(dialogRow[2]);
 					PApplet.println("NUM OF OPTIONS: " + numberOfOptions);
 
 					for (int optionIndex = 0; optionIndex < numberOfOptions; optionIndex++)
 					{
-						choices.add(dialogRow[3+optionIndex]);
-						PApplet.println("Option " + numberOfOptions + ": " + dialogRow[3+optionIndex]);
-						responses.add(DialogManager.getDialog(dialogRow[3+numberOfOptions+optionIndex]));
-						
+						choices.add(dialogRow[3 + optionIndex]);
+						PApplet.println("Option " + numberOfOptions + ": " + dialogRow[3 + optionIndex]);
+						responses.add(DialogManager.getDialog(dialogRow[3 + numberOfOptions + optionIndex]));
+
 					}
-					
-					DialogManager.addDialog(new BranchingDialog(null, choices, responses), dialogRow[1]);
+
+					DialogManager.addDialog(new BranchingDialog(null, choices, responses), dialogRow[1], dialogRow);
 				}
-				
-				
+
 			}
 		}
+
+	}
+
+	public int getLinesInFile(String filename)
+	{
+		try
+		{
+			LineNumberReader lnr = new LineNumberReader(new FileReader(new File(filename)));
+			lnr.skip(Long.MAX_VALUE);
+			return lnr.getLineNumber() + 1;
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 
 	}
 }

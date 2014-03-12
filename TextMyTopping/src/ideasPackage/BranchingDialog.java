@@ -165,6 +165,16 @@ public class BranchingDialog extends Dialog implements KeyListener
 		// TODO Auto-generated method stub
 
 	}
+	
+	public ArrayList<Dialog> getNextDialogs()
+	{
+		return nextDialogs;
+	}
+	
+	public void setNextDialog(int index, Dialog d)
+	{
+		nextDialogs.set(index, d);
+	}
 
 	private int min(int a, int b)
 	{
