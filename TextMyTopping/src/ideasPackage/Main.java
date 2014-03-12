@@ -20,7 +20,7 @@ public class Main extends PApplet
 	private static final long serialVersionUID = 1L;
 
 	// Needed constants
-	public static int GRID_SIZE = 32;
+	public static int GRID_SIZE = 64; //
 	public final static int SCREEN_WIDTH = 1024;
 	public final static int SCREEN_HEIGHT = 768;
 	private static Main mainClass;
@@ -45,8 +45,8 @@ public class Main extends PApplet
 	private StaticObject invisibleWall;
 
 	// The number of tiles
-	private int tilesX = 64;
-	private int tilesY = 64;
+	private int tilesX = 128; //
+	private int tilesY = 128; //
 
 	// Keyboard controls
 	public static int LEFT_KEY = KeyEvent.VK_LEFT;
