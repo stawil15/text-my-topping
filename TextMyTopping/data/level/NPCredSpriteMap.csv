@@ -1,2 +1,2 @@
-NPC,8,9,noMovement,stringed,3,Hello \, I am an NPC!, This is a new Page!,This shows how dialogs can be stringed\ntogether like linked lists.,
-NPC,11,7,noMovement,stringed,2,Here is a Branching Dialog,You will be presented with choices\nUse the arrows to choose\nAnd press space to select,bridged,3,>The first one,>The second one,>The third one,You chose the first!,You chose the second!,You chose the Third!
+NPC ,8 ,9 ,noMovement ,stringed ,3 ,Hello, I am an NPC! , This is a new Page! ,This shows how dialogs can be stringed\ntogether like linked lists. ,
+NPC ,11 ,7 ,noMovement ,branched ,2 ,Here is a Branching Dialog ,You will be presented with choices\nUse the arrows to choose\nAnd press space to select ,bridged ,3 ,>The first one ,>The second one ,>The third one ,You chose the first! ,You chose the second! ,You chose the Third!

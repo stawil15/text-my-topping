@@ -78,7 +78,7 @@ public class readCSV
 		String csvFileToRead = "data/level/" + filename;
 		BufferedReader br = null;
 		String line = "";
-		String splitBy = ",";
+		String splitBy = " ,";
 
 		System.out.println("Started");
 
@@ -108,7 +108,7 @@ public class readCSV
 			{
 				for (int y = 0; y < 20; y++)
 				{
-					System.out.print(NPC[x][y]);
+					System.out.print(NPC[x][y] + " | ");
 				}
 				System.out.println();
 			}
