@@ -97,7 +97,7 @@ public class readCSV
 
 		System.out.println("Started");
 
-		NPC = new String[getLinesInFile(csvFileToRead)][20];
+		NPC = new String[getLinesInFile(csvFileToRead)][4];
 
 		try
 		{
