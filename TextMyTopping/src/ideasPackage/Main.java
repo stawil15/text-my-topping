@@ -2,6 +2,7 @@ package ideasPackage;
 
 import java.awt.event.KeyEvent;
 import processing.core.*;
+import ddf.minim.*;
 
 // Eric Mustee
 // 2/28/2014
@@ -28,6 +29,10 @@ public class Main extends PApplet
 
 	// The camera is positioned in the top left corner
 	private Camera camera;
+
+	//Music
+	Minim minim;
+	AudioPlayer groove;
 
 	// NPC stuff
 	private Dialog TestDialog;
@@ -72,7 +77,7 @@ public class Main extends PApplet
 
 		CollisionGrid collisionGrid = new CollisionGrid(map.length, map[0].length);
 		SceneryGrid sceneryGrid = new SceneryGrid(map.length, map[0].length);
-		
+
 		// Create some scenery objects to add to the grid later.
 		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,sceneryGrid, false);
 		SceneryObject flower = new SceneryObject(null, "flower", 2, 20 + (int) (Math.random() * 8), sceneryGrid, false);
@@ -80,8 +85,9 @@ public class Main extends PApplet
 		fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false);
 		invisibleWall = new StaticObject(null,collisionGrid,false);
 
-
-
+		minim = new Minim(this);
+		groove = minim.loadFile("data/audio/bgm/z1title.mid");
+		groove.loop();
 
 		int xOffset = 0;
 		int yOffset = 0;
@@ -97,7 +103,7 @@ public class Main extends PApplet
 		{
 			yOffset = (gridHeight-map[0].length)/2;
 		}
-		
+
 		for (int x = 0; x < map.length; x++)
 		{
 			for (int y = 0; y < map[x].length; y++)
