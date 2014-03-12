@@ -75,10 +75,8 @@ public class Main extends PApplet
 
 
 		// Create some scenery objects to add to the grid.
-		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,
-				sceneryGrid, false);
-		SceneryObject flower = new SceneryObject(null, "flower", 2,
-				20 + (int) (Math.random() * 8), sceneryGrid, false);
+		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,sceneryGrid, false);
+		SceneryObject flower = new SceneryObject(null, "flower", 2, 20 + (int) (Math.random() * 8), sceneryGrid, false);
 		tree = new StaticObject(null, "tree", collisionGrid, 1, 25, false);
 		fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false);
 		invisibleWall = new StaticObject(null,collisionGrid,false);
@@ -101,23 +99,6 @@ public class Main extends PApplet
 		{
 			yOffset = (gridHeight-map[0].length)/2;
 		}
-
-		//Fill the scenery grid
-		//		for (int x = 0; x < tilesX; x++)
-		//		{
-		//			for (int y = 0; y < tilesY; y++)
-		//			{
-		//				if (Math.random() < .90)
-		//				{
-		//					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
-		//							grass);
-		//				} else
-		//				{
-		//					sceneryGrid.addSceneryObject(new GridCoordinate(x, y),
-		//							flower);
-		//				}
-		//			}
-		//		}
 		for (int x = 0; x < map.length; x++)
 		{
 			for (int y = 0; y < map[x].length; y++)
@@ -151,24 +132,25 @@ public class Main extends PApplet
 		String[][] NPC = maploader.readNPCData("NPC" + "redSpriteMap.csv"); //naming convention will allow us to add "NPC" to name variable.
 
 		for (int x = 0; x < NPC.length; x++)
-		{  
-			for (int y = 0; y < NPC[x].length; y++)
-			{  
-				if (NPC[x][0]!= null && NPC[x][0].equals("NPC"))
+		{
+			if (NPC[x][0]!= null && NPC[x][0].equals("NPC"))
+			{
+				Dialog npcDialog = null;
+				System.out.println(NPC[x][4]);
+				System.out.println(NPC[x][5]);
+				System.out.println(NPC[x][6]);
+
+				if (NPC[x][4].equals("stringed"))
 				{
-					Dialog npcDialog = null;
-
-					if (NPC[x][4] == "stringed")
+					System.out.println(NPC[x][7]);
+					npcDialog = new Dialog(new String[] {NPC[x][6]});
+					for (int i = 1; i <= Integer.parseInt(NPC[x][5]); i++)
 					{
-						npcDialog = new Dialog(new String[] {NPC[x][6]});
-						for (int i = 1; i <= Integer.parseInt(NPC[x][5]); i++)
-						{
-							npcDialog.setNextDialog(new Dialog(new String[] {NPC[x][5+i]}));
-						}
+						npcDialog.setNextDialog(new Dialog(new String[] {NPC[x][5+i]}));
 					}
-
-					NonPlayerCharacter testNPC = new NonPlayerCharacter(new GridCoordinate(Integer.parseInt(NPC[x][1])+xOffset, Integer.parseInt(NPC[x][2])+yOffset), 2, 1, "npc",collisionGrid, npcDialog, true);
 				}
+
+				NonPlayerCharacter testNPC = new NonPlayerCharacter(new GridCoordinate(Integer.parseInt(NPC[x][1])+xOffset, Integer.parseInt(NPC[x][2])+yOffset), 2, 1, "npc",collisionGrid, npcDialog, true);
 			}
 		}
 
@@ -250,7 +232,10 @@ public class Main extends PApplet
 		return mainClass;
 	}
 
+	public void LoadMap(String mapName, int charX, int charY)
+	{
 
+	}
 
 
 }
