@@ -212,7 +212,7 @@ public class readCSV
 			{
 				if (dialogRow[0].equals(TYPE_DEFAULT_DIALOG))
 				{
-					Dialog addedDialog = DialogManager.addDialog(new Dialog(new String[] { dialogRow[2] }),
+					DialogManager.addDialog(new Dialog(new String[] { dialogRow[2] }),
 							dialogRow[1], dialogRow);
 					if (dialogRow[3] != null && !dialogRow[3].equals(NULL_DIALOG))
 					{

@@ -97,7 +97,7 @@ public class Main extends PApplet
 
 		// Setup the collision grids first
 		readCSV maploader = new readCSV();
-		//maploader.readDialogueData(mapName);
+		maploader.readDialogueData(mapName);
 		int[][] map = maploader.readMapData(mapName);
 		
 		//Maps
