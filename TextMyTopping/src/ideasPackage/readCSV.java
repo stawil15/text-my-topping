@@ -32,21 +32,17 @@ public class readCSV
 			br = new BufferedReader(new FileReader(csvFileToRead));
 			line = br.readLine(); // Read first line
 			String[] dimmensions = line.split(",");
+			
+			//First two positions in CSV contain array dimentions
+			map = new int[Integer.parseInt(dimmensions[0])][Integer.parseInt(dimmensions[1])];
 
-			map = new int[Integer.parseInt(dimmensions[0])][Integer.parseInt(dimmensions[1])]; // First
-																								// two
-																								// positions
-																								// in
-																								// CSV
-																								// contain
-																								// dimensions.
-
+			//Print for debugging
 			System.out.println(dimmensions[0]);
 			System.out.println(dimmensions[1]);
-
 			System.out.println(Integer.parseInt(dimmensions[0]));
 			System.out.println(Integer.parseInt(dimmensions[1]));
 
+			//Makes the rest of the CSV into a 2D array
 			for (int i = 0; i < Integer.parseInt(dimmensions[0]); i++)
 			{
 				if ((line = br.readLine()) != null)
