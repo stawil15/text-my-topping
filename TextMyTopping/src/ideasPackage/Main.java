@@ -33,6 +33,10 @@ public class Main extends PApplet
 	//Music stuff. Uses Minim Library from Processing.
 	Minim minim;
 	AudioPlayer player;
+	
+	//Grid stuff
+	private CollisionGrid collisionGrid;
+	private SceneryGrid sceneryGrid;
 
 	// NPC stuff
 	private Dialog TestDialog;
@@ -69,14 +73,44 @@ public class Main extends PApplet
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
+		LoadMap("redSpriteMap",10,10);
+
+
+
+		// Create the camera, centered on main character
+		
+	}
+
+	public void draw()
+	{
+		level.draw();
+		GUISystem.draw();
+	}
+
+	public static Main getMainObject()
+	{
+		return mainClass;
+	}
+	
+	public void LoadLevel()
+	{
+		
+		
+		LoadMap("string here", 1,1);
+	}
+
+	public void LoadMap(String mapName, int charX, int charY)
+	{
+		//Stuff will get moved here later.
+
 		// Setup the collision grids first
 		readCSV maploader = new readCSV();
 		maploader.readDialogueData("redSpriteMap.csv");
 		int[][] map = maploader.readMapData("redSpriteMap.csv");
 
 		//Maps
-		CollisionGrid collisionGrid = new CollisionGrid(map.length, map[0].length);//What blocks your path
-		SceneryGrid sceneryGrid = new SceneryGrid(map.length, map[0].length);//Floor tiles
+		collisionGrid = new CollisionGrid(map.length, map[0].length);//What blocks your path
+		sceneryGrid = new SceneryGrid(map.length, map[0].length);//Floor tiles
 
 		// Create some scenery objects to add to the grid later.
 		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,sceneryGrid, false);
@@ -160,12 +194,10 @@ public class Main extends PApplet
 				}
 			}
 		}
-		
+
 		//Creates main character
 		mainCharacter = new PlayerCharacter(new GridCoordinate(10+xOffset, 4+yOffset),
 				Character.DIRECTION_RIGHT, 8, "player", collisionGrid, true);
-
-		// Create the camera, centered on main character
 		camera = new Camera(new GridCoordinate(0, 0), mainCharacter);
 
 		// This dialog shows at startup
@@ -175,22 +207,7 @@ public class Main extends PApplet
 
 		// Create the level
 		level = new Level(collisionGrid, sceneryGrid, camera,this);
-	}
-
-	public void draw()
-	{
-		level.draw();
-		GUISystem.draw();
-	}
-
-	public static Main getMainObject()
-	{
-		return mainClass;
-	}
-
-	public void LoadMap(String mapName, int charX, int charY, CollisionGrid cGrid, SceneryGrid sGrid)
-	{
-		//Stuff will get moved here later.
+		
 	}
 
 
