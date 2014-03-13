@@ -73,12 +73,7 @@ public class Main extends PApplet
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
-		LoadMap("redSpriteMap",10,10);
-
-
-
-		// Create the camera, centered on main character
-		
+		LoadMap("redSpriteMap.csv",10,4);
 	}
 
 	public void draw()
@@ -91,13 +86,6 @@ public class Main extends PApplet
 	{
 		return mainClass;
 	}
-	
-	public void LoadLevel()
-	{
-		
-		
-		LoadMap("string here", 1,1);
-	}
 
 	public void LoadMap(String mapName, int charX, int charY)
 	{
@@ -105,9 +93,9 @@ public class Main extends PApplet
 
 		// Setup the collision grids first
 		readCSV maploader = new readCSV();
-		maploader.readDialogueData("redSpriteMap.csv");
-		int[][] map = maploader.readMapData("redSpriteMap.csv");
-
+		maploader.readDialogueData(mapName);
+		int[][] map = maploader.readMapData(mapName);
+		
 		//Maps
 		collisionGrid = new CollisionGrid(map.length, map[0].length);//What blocks your path
 		sceneryGrid = new SceneryGrid(map.length, map[0].length);//Floor tiles
@@ -171,7 +159,7 @@ public class Main extends PApplet
 			}
 		}
 
-		String[][] NPC = maploader.readNPCData("NPC" + "redSpriteMap.csv"); //naming convention will allow us to add "NPC" to name variable.
+		String[][] NPC = maploader.readNPCData("NPC" + mapName); //naming convention will allow us to add "NPC" to name variable.
 		for (int x = 0; x < NPC.length; x++)
 		{
 			if (NPC[x][0]!= null)
@@ -196,7 +184,7 @@ public class Main extends PApplet
 		}
 
 		//Creates main character
-		mainCharacter = new PlayerCharacter(new GridCoordinate(10+xOffset, 4+yOffset),
+		mainCharacter = new PlayerCharacter(new GridCoordinate(charX+xOffset, charY+yOffset),
 				Character.DIRECTION_RIGHT, 8, "player", collisionGrid, true);
 		camera = new Camera(new GridCoordinate(0, 0), mainCharacter);
 
