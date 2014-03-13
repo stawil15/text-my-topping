@@ -30,19 +30,19 @@ public class Main extends PApplet
 	// The camera is positioned in the top left corner
 	private Camera camera;
 
-	//Music
+	//Music stuff. Uses Minim Library from Processing.
 	Minim minim;
 	AudioPlayer player;
 
 	// NPC stuff
 	private Dialog TestDialog;
-	private PlayerCharacter testCharacter;
+	private PlayerCharacter mainCharacter;
 	@SuppressWarnings("unused")
 	private NonPlayerCharacter testNPC;
 	@SuppressWarnings("unused")
 	private NonPlayerCharacter testNPC2;
 
-	// A tree
+	// Stuff stuff
 	private StaticObject tree;
 	private StaticObject fastTree;
 	private StaticObject invisibleWall;
@@ -74,9 +74,9 @@ public class Main extends PApplet
 		maploader.readDialogueData("redSpriteMap.csv");
 		int[][] map = maploader.readMapData("redSpriteMap.csv");
 
-
-		CollisionGrid collisionGrid = new CollisionGrid(map.length, map[0].length);
-		SceneryGrid sceneryGrid = new SceneryGrid(map.length, map[0].length);
+		//Maps
+		CollisionGrid collisionGrid = new CollisionGrid(map.length, map[0].length);//What blocks your path
+		SceneryGrid sceneryGrid = new SceneryGrid(map.length, map[0].length);//Floor tiles
 
 		// Create some scenery objects to add to the grid later.
 		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,sceneryGrid, false);
@@ -89,13 +89,14 @@ public class Main extends PApplet
 		minim = new Minim(this);
 		player = minim.loadFile("data/audio/bgm/OnettTheme.mp3");
 		player.loop();
-		
+
+		//If map is smaller than screen view, offset will be used to center map on screen
 		int xOffset = 0;
 		int yOffset = 0;
-
+		//calculate grid size on screen
 		int gridWidth = SCREEN_WIDTH/GRID_SIZE;
 		int gridHeight = SCREEN_HEIGHT/GRID_SIZE;
-
+		//calculate correct offset (if any)
 		if (gridWidth > map.length)
 		{
 			xOffset = (gridWidth-map.length)/2;
@@ -105,6 +106,7 @@ public class Main extends PApplet
 			yOffset = (gridHeight-map[0].length)/2;
 		}
 
+		//Builds map based on CSV contents
 		for (int x = 0; x < map.length; x++)
 		{
 			for (int y = 0; y < map[x].length; y++)
@@ -138,76 +140,33 @@ public class Main extends PApplet
 		String[][] NPC = maploader.readNPCData("NPC" + "redSpriteMap.csv"); //naming convention will allow us to add "NPC" to name variable.
 		for (int x = 0; x < NPC.length; x++)
 		{
-			if (NPC[x][0]!= null && NPC[x][0].equals("NPC"))
+			if (NPC[x][0]!= null)
 			{
-				Dialog npcDialog = null;
-				if (NPC[x][4]!=null && !NPC[x][4].equals(readCSV.NULL_DIALOG))
+				if (NPC[x][0].equals("NPC"))
 				{
-					npcDialog = DialogManager.getDialog(NPC[x][4]);
-					println("ASSINGNED: " + NPC[x][4]);
+					Dialog npcDialog = null;
+					if (NPC[x][4]!=null && !NPC[x][4].equals(readCSV.NULL_DIALOG))
+					{
+						//Creates NPC dialog
+						npcDialog = DialogManager.getDialog(NPC[x][4]);
+						println("ASSINGNED: " + NPC[x][4]);
+					}
+					//Places NPC
+					NonPlayerCharacter testNPC = new NonPlayerCharacter(new GridCoordinate(Integer.parseInt(NPC[x][1])+xOffset, Integer.parseInt(NPC[x][2])+yOffset), 2, 1, "npc",collisionGrid, npcDialog, true);
 				}
-
-				NonPlayerCharacter testNPC = new NonPlayerCharacter(new GridCoordinate(Integer.parseInt(NPC[x][1])+xOffset, Integer.parseInt(NPC[x][2])+yOffset), 2, 1, "npc",collisionGrid, npcDialog, true);
+				else if (NPC[x][0].equals("enemy"))
+				{
+					//stuff goes here.
+				}
 			}
 		}
-
-		// Create a tree and add some to the collisionGrid
-		//tree = new StaticObject(null, "tree", collisionGrid, 4, 25, false, this);
-		//StaticObject fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false, this);
-		//fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}, this));
-		//collisionGrid.addElement(new GridCoordinate(10, 10), fastTree);
-		//		for (int index = 0; index < 8; index++)
-		//		{
-		//			collisionGrid.addElement(new GridCoordinate(5, index), tree);
-		//			collisionGrid.addElement(new GridCoordinate(7, index), tree);
-		//		}
-
-		// Create dialogs
-		//			Dialog npcDialog = new Dialog(new String[] { "Hello, I am an NPC!",
-		//			"This is a new Page!" });
-		//			npcDialog
-		//			.setNextDialog(new Dialog(
-		//					new String[] { "This shows how dialogs can be stringed\ntogether like linked lists." }));
-		//
-		//			ArrayList<String> choices = new ArrayList<String>();
-		//			choices.add("The first one");
-		//			choices.add("The second one");
-		//			choices.add("The third one");
-		//			choices.add("The fourth one");
-		//			choices.add("The fifth one");
-		//			choices.add("The sixth one");
-		//			choices.add("The seventh one");
-		//
-		//			ArrayList<Dialog> nextDialogs = new ArrayList<Dialog>();
-		//			nextDialogs.add(new Dialog(
-		//					new String[] { "You selected  the first choice" }));
-		//			nextDialogs.add(new Dialog(
-		//					new String[] { "You selected  the second choice" }));
-		//			nextDialogs.add(new Dialog(new String[] { "The third choice" }));
-		//			nextDialogs.add(new Dialog(new String[] { "The fourth choice" }));
-		//			nextDialogs.add(new Dialog(new String[] { "The fifth choice" }));
-		//			nextDialogs.add(new Dialog(new String[] { "The sixth choice" }));
-		//			nextDialogs.add(new Dialog(new String[] { "The last choice" }));
-		//
-		//			BranchingDialog branchDialog = new BranchingDialog(
-		//					new String[] {
-		//							"Here is a branching Dialog",
-		//					"You will be presented with choices\nUse the arrows to choose\nAnd press space to select" }, choices, nextDialogs);
-		//
-		//
-		//
-		//			// Create npcs
-		//			//		testNPC = new NonPlayerCharacter(new GridCoordinate(8+xOffset, 9+yOffset), 2, 1, "npc",
-		//			//				collisionGrid, npcDialog, true);
-		//			testNPC2 = new NonPlayerCharacter(new GridCoordinate(11+xOffset, 7+yOffset), 0, 1,
-		//					"npc", collisionGrid, branchDialog, true);
-		//
-		//			// Create the player character
-		testCharacter = new PlayerCharacter(new GridCoordinate(10+xOffset, 4+yOffset),
+		
+		//Creates main character
+		mainCharacter = new PlayerCharacter(new GridCoordinate(10+xOffset, 4+yOffset),
 				Character.DIRECTION_RIGHT, 8, "player", collisionGrid, true);
 
-		// Create the camera
-		camera = new Camera(new GridCoordinate(0, 0), testCharacter);
+		// Create the camera, centered on main character
+		camera = new Camera(new GridCoordinate(0, 0), mainCharacter);
 
 		// This dialog shows at startup
 		TestDialog = new Dialog(
@@ -231,7 +190,7 @@ public class Main extends PApplet
 
 	public void LoadMap(String mapName, int charX, int charY, CollisionGrid cGrid, SceneryGrid sGrid)
 	{
-
+		//Stuff will get moved here later.
 	}
 
 
