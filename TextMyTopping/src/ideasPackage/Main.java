@@ -85,9 +85,9 @@ public class Main extends PApplet
 		fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false);
 		invisibleWall = new StaticObject(null,collisionGrid,false);
 
-		//It worked once. I don't know how I broke it.
+		//Can't get .mid working again. MP3 works fine
 		minim = new Minim(this);
-		player = minim.loadFile("data/audio/bgm/z1title.mid");
+		player = minim.loadFile("data/audio/bgm/OnettTheme.mp3");
 		player.loop();
 		
 		int xOffset = 0;
