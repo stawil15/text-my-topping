@@ -10,4 +10,12 @@ public class Path {
 //		int playerX = 
 //	}
 	
+	// needs to be recursive
+	public GridCoordinate playerLocation, enemyLocation;
+	public float playerX, playerY, enemyX, enemyY;
+	
+	public Character player, enemy;
+	
+	// int playerX = playerLocation.getGridX();
+	
 }
