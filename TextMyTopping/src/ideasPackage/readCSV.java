@@ -43,12 +43,12 @@ public class readCSV
 			System.out.println(Integer.parseInt(dimmensions[1]));
 
 			//Makes the rest of the CSV into a 2D array
-			for (int i = 0; i < Integer.parseInt(dimmensions[0]); i++)
+			for (int i = 0; i < Integer.parseInt(dimmensions[1]); i++)
 			{
 				if ((line = br.readLine()) != null)
 				{
 					String[] parsed = line.split(splitBy);
-					for (int e = 0; e < parsed.length; e++)
+					for (int e = 0; e < Integer.parseInt(dimmensions[0]); e++) //parsed.length; e++)
 					{
 						map[e][i] = Integer.parseInt(parsed[e]);
 					}

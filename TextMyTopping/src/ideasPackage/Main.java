@@ -156,6 +156,10 @@ public class Main extends PApplet
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastTree);
 					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
 				}
+				else if (map[x][y] == 5)
+				{
+					//5 == Door
+				}
 			}
 		}
 
