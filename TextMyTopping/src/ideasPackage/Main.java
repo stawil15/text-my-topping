@@ -73,7 +73,7 @@ public class Main extends PApplet
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
-		LoadMap("redSpriteMap.csv",10,4);
+		LoadMap("megaSpriteMap.csv",10,4);
 	}
 
 	public void draw()
@@ -93,7 +93,7 @@ public class Main extends PApplet
 
 		// Setup the collision grids first
 		readCSV maploader = new readCSV();
-		maploader.readDialogueData(mapName);
+		//maploader.readDialogueData(mapName);
 		int[][] map = maploader.readMapData(mapName);
 		
 		//Maps
@@ -102,8 +102,8 @@ public class Main extends PApplet
 
 		// Create some scenery objects to add to the grid later.
 		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,sceneryGrid, false);
-		SceneryObject flower = new SceneryObject(null, "flower", 2, 20 + (int) (Math.random() * 8), sceneryGrid, false);
-		tree = new StaticObject(null, "tree", collisionGrid, 1, 25, false);
+		SceneryObject flower = new SceneryObject(null, "flower", 2, 20, sceneryGrid, false);
+		tree = new StaticObject(null, "tree", collisionGrid, 4, 40, false);
 		fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false);
 		invisibleWall = new StaticObject(null,collisionGrid,false);
 
@@ -131,27 +131,27 @@ public class Main extends PApplet
 		//Builds map based on CSV contents
 		for (int x = 0; x < map.length; x++)
 		{
-			for (int y = 0; y < map[x].length; y++)
+			for (int y = 0; y < map[0].length; y++)
 			{
-				if (map[y][x] == 9)
+				if (map[x][y] == 9)
 				{
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), invisibleWall);
 				}
-				else if (map[y][x] != 2)
+				else if (map[x][y] != 2)
 				{
 					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),
 							grass);
 				}
-				if (map[y][x] == 2)
+				if (map[x][y] == 2)
 				{
 					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),
 							flower);
 				}
-				else if (map[y][x] == 1)
+				else if (map[x][y] == 1)
 				{
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), tree);
 				}
-				else if (map[y][x] == 3)
+				else if (map[x][y] == 3)
 				{
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastTree);
 					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));

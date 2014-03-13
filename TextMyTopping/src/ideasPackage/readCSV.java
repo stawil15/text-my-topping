@@ -48,9 +48,9 @@ public class readCSV
 				if ((line = br.readLine()) != null)
 				{
 					String[] parsed = line.split(splitBy);
-					for (int e = 0; e < Integer.parseInt(dimmensions[1]); e++)
+					for (int e = 0; e < parsed.length; e++)
 					{
-						map[i][e] = Integer.parseInt(parsed[e]);
+						map[e][i] = Integer.parseInt(parsed[e]);
 					}
 				}
 			}
