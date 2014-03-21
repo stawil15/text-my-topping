@@ -50,6 +50,8 @@ public class Main extends PApplet
 	private StaticObject tree;
 	private StaticObject fastTree;
 	private StaticObject invisibleWall;
+	private StaticObject cactus;
+	private StaticObject fastCactus;
 
 	// Keyboard controls
 	public static int LEFT_KEY = KeyEvent.VK_LEFT;
@@ -115,7 +117,9 @@ public class Main extends PApplet
 		tree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 40, false);
 		fastTree = new StaticObject(null,"forest\\tree", collisionGrid, 4, 4, false);
 		invisibleWall = new StaticObject(null,collisionGrid,false);
-
+		cactus = new StaticObject(null, "desert\\tree", collisionGrid, 4, 40, false);
+		SceneryObject sand = new SceneryObject(null, "desert\\grass", 1, 20,sceneryGrid, false);
+		SceneryObject dflower = new SceneryObject(null, "desert\\flower", 2, 20, sceneryGrid, false);
 		//Can't get .mid working again. MP3 works fine
 		minim = new Minim(this);
 		player = minim.loadFile("data/audio/bgm/OnettTheme.mp3");
@@ -146,32 +150,41 @@ public class Main extends PApplet
 				{
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), invisibleWall);
 				}
-				else if (map[x][y] != 2)
-				{
-					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),
-							grass);
-				}
-				if (map[x][y] == 2)
-				{
-					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),
-							flower);
-				}
 				else if (map[x][y] == 1)
 				{
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),grass);
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), tree);
+				}
+				else if (map[x][y] == 2)
+				{
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),flower);
 				}
 				else if (map[x][y] == 3)
 				{
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),grass);
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastTree);
 					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
 				}
-				else if (map[x][y] == 5)
+				else if (map[x][y] == 11)
 				{
-					//5 == Door
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),sand);
+					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), cactus);
+				}
+				else if (map[x][y] == 12)
+				{
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),dflower);
+				}
+				else if (map[x][y] == 13)
+				{
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),sand);
+					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastCactus);
+					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
 				}
 				else if (map[x][y] == 20)
 				{
-					
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),sand);
+					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastCactus);
+					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
 				}
 			}
 		}
