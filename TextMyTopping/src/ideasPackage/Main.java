@@ -125,7 +125,7 @@ public class Main extends PApplet
 		SceneryObject sand = new SceneryObject(null, "desert\\grass", 1, 20,sceneryGrid, false);
 		SceneryObject dflower = new SceneryObject(null, "desert\\flower", 2, 20, sceneryGrid, false);
 		// snow
-		snowTree = new StaticObject(null, "sow\\tree", collisionGrid, 4, 40, false);
+		snowTree = new StaticObject(null, "snow\\tree", collisionGrid, 4, 40, false);
 		SceneryObject snow = new SceneryObject(null, "snow\\grass", 1, 20,sceneryGrid, false);
 		SceneryObject sflower = new SceneryObject(null, "snow\\flower", 2, 20, sceneryGrid, false);
 		//Can't get .mid working again. MP3 works fine
