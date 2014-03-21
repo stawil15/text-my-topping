@@ -2,6 +2,7 @@ package ideasPackage;
 
 
 import java.util.ArrayList;
+
 import processing.core.*;
 
 public class Character implements Collidable
@@ -30,6 +31,55 @@ public class Character implements Collidable
 	private ArrayList<InventoryItem> items;
 	protected CollisionGrid collisionGrid;
 
+	protected Character(GridCoordinate coordinates, int initialDirection,
+			int animationFrames, String imageName, CollisionGrid c, String folderName, boolean addToGrid)
+	{
+		parent = Main.getMainObject();
+		charRightImages = new PImage[animationFrames];
+		charLeftImages = new PImage[animationFrames];
+		charUpImages = new PImage[animationFrames];
+		charDownImages = new PImage[animationFrames];
+
+		for (int index = 0; index < charRightImages.length; index++)
+		{
+			charRightImages[index] = parent
+					.loadImage("data\\sprites\\character\\" + imageName
+							+ "\\right" + index + ".png");
+		}
+
+		for (int index = 0; index < charRightImages.length; index++)
+		{
+			charUpImages[index] = parent.loadImage("data\\sprites\\character\\"
+					+ imageName + "\\up" + index + ".png");
+		}
+
+		for (int index = 0; index < charRightImages.length; index++)
+		{
+			charDownImages[index] = parent
+					.loadImage("data\\sprites\\character\\" + imageName
+							+ "\\down" + index + ".png");
+		}
+
+		for (int index = 0; index < charLeftImages.length; index++)
+		{
+			charLeftImages[index] = parent
+					.loadImage("data\\sprites\\character\\" + imageName
+							+ "\\left" + index + ".png");
+		}
+
+		this.coordinates = coordinates;
+		this.currentDirection = initialDirection;
+		this.animationFrames = animationFrames;
+		
+		if (addToGrid)
+			c.addElement(coordinates, this);
+		else
+			c.addDuplicateObject(this);
+		
+		collisionGrid = c;
+		items = new ArrayList<>();
+	}
+	
 	public Character(GridCoordinate coordinates, int initialDirection,
 			int animationFrames, String imageName, CollisionGrid c, boolean addToGrid)
 	{
@@ -300,5 +350,10 @@ public class Character implements Collidable
 			break;
 		}
 		return imageTodraw;
+	}
+	
+	protected boolean canMove()
+	{
+		return !GUISystem.showingDialog();
 	}
 }

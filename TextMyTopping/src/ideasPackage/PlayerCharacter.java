@@ -158,9 +158,6 @@ public class PlayerCharacter extends Character implements KeyListener
 			move(Character.DIRECTION_UP);
 	}
 	
-	private boolean canMove()
-	{
-		return !GUISystem.showingDialog();
-	}
+	
 
 }

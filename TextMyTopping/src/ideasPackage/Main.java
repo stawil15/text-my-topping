@@ -40,7 +40,7 @@ public class Main extends PApplet
 
 	// NPC stuff
 	private Dialog TestDialog;
-	private PlayerCharacter mainCharacter;
+	private static PlayerCharacter mainCharacter;
 	@SuppressWarnings("unused")
 	private NonPlayerCharacter testNPC;
 	@SuppressWarnings("unused")
@@ -169,6 +169,10 @@ public class Main extends PApplet
 				{
 					//5 == Door
 				}
+				else if (map[x][y] == 20)
+				{
+					
+				}
 			}
 		}
 
@@ -211,5 +215,9 @@ public class Main extends PApplet
 		
 	}
 
+	public static PlayerCharacter getPlayer()
+	{
+		return mainCharacter;
+	}
 
 }
