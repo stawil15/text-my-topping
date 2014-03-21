@@ -1,9 +1,6 @@
 package ideasPackage;
 
-import java.util.Arrays;
 
-import ddf.minim.AudioPlayer;
-import ddf.minim.Minim;
 import processing.core.*;
 
 public class Dialog
