@@ -186,6 +186,10 @@ public class Main extends PApplet
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastCactus);
 					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
 				}
+				else
+				{
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),grass);
+				}
 			}
 		}
 
