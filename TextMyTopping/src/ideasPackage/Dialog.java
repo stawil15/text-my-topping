@@ -27,9 +27,6 @@ public class Dialog
 	protected float currentPositionInText;
 	protected boolean finishedDisplayingText;
 	protected Dialog nextDialog;
-	
-	Minim minim;
-	AudioPlayer player;
 
 	public Dialog(String[] lines)
 	{
@@ -94,9 +91,6 @@ public class Dialog
 			parent.text(lines[currentDialogLine].substring(0, subStringLength),
 					offsetX + offsetTextX, parent.height - borderY - height
 							+ offsetTextY);
-			minim = new Minim(this);
-			player = minim.loadFile("data/audio/TextboxBloop8-bit.ogg");
-			//player.loop();
 		}
 	}
 
