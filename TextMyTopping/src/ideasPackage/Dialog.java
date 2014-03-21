@@ -95,7 +95,7 @@ public class Dialog
 					offsetX + offsetTextX, parent.height - borderY - height
 							+ offsetTextY);
 			minim = new Minim(this);
-			player = minim.loadFile("data/audio/bgm/TextboxBloop8-bit.ogg");
+			player = minim.loadFile("data/audio/TextboxBloop8-bit.ogg");
 			//player.loop();
 		}
 	}
