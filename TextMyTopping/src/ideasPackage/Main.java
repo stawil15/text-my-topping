@@ -52,6 +52,8 @@ public class Main extends PApplet
 	private StaticObject invisibleWall;
 	private StaticObject cactus;
 	private StaticObject fastCactus;
+	private StaticObject snowTree;
+	private StaticObject fastSnowTree;
 
 	// Keyboard controls
 	public static int LEFT_KEY = KeyEvent.VK_LEFT;
@@ -112,14 +114,20 @@ public class Main extends PApplet
 		sceneryGrid = new SceneryGrid(map.length, map[0].length);//Floor tiles
 
 		// Create some scenery objects to add to the grid later.
+		// forest
 		SceneryObject grass = new SceneryObject(null, "forest\\grass", 1, 20,sceneryGrid, false);
 		SceneryObject flower = new SceneryObject(null, "forest\\flower", 2, 20, sceneryGrid, false);
 		tree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 40, false);
 		fastTree = new StaticObject(null,"forest\\tree", collisionGrid, 4, 4, false);
 		invisibleWall = new StaticObject(null,collisionGrid,false);
+		// desert
 		cactus = new StaticObject(null, "desert\\tree", collisionGrid, 4, 40, false);
 		SceneryObject sand = new SceneryObject(null, "desert\\grass", 1, 20,sceneryGrid, false);
 		SceneryObject dflower = new SceneryObject(null, "desert\\flower", 2, 20, sceneryGrid, false);
+		// snow
+		snowTree = new StaticObject(null, "sow\\tree", collisionGrid, 4, 40, false);
+		SceneryObject snow = new SceneryObject(null, "snow\\grass", 1, 20,sceneryGrid, false);
+		SceneryObject sflower = new SceneryObject(null, "snow\\flower", 2, 20, sceneryGrid, false);
 		//Can't get .mid working again. MP3 works fine
 		minim = new Minim(this);
 		player = minim.loadFile("data/audio/bgm/OnettTheme.mp3");
@@ -165,7 +173,7 @@ public class Main extends PApplet
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastTree);
 					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
 				}
-				else if (map[x][y] == 11)
+				else if (map[x][y] == 11) // start desert
 				{
 					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),sand);
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), cactus);
@@ -178,6 +186,21 @@ public class Main extends PApplet
 				{
 					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),sand);
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastCactus);
+					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
+				}
+				else if (map[x][y] == 21) // start snow
+				{
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),snow);
+					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), snowTree);
+				}
+				else if (map[x][y] == 22)
+				{
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),sflower);
+				}
+				else if (map[x][y] == 23)
+				{
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),snow);
+					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastSnowTree);
 					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
 				}
 				else if (map[x][y] == 20)
