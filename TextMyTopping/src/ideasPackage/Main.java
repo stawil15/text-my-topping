@@ -57,6 +57,12 @@ public class Main extends PApplet
 	public static int UP_KEY = KeyEvent.VK_UP;
 	public static int DOWN_KEY = KeyEvent.VK_DOWN;
 	public static int SPACE_KEY = KeyEvent.VK_SPACE;
+	
+//	// stuff for start screen
+//	int buttonX, buttonY;
+//	int buttonWidth, buttonHeight;
+//	boolean buttonOver;
+//	PApplet parent;
 
 	// Start Processing
 	public static void main(String args[])
@@ -67,7 +73,6 @@ public class Main extends PApplet
 
 	public void setup()
 	{
-
 		mainClass = this;
 		DialogManager.initializeDialogManager();
 		// Set the screen size and title

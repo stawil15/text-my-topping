@@ -2,63 +2,50 @@
 
 package ideasPackage;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
 import processing.core.*;
 
-public class Inventory extends PApplet
+public class Inventory extends Dialog implements KeyListener
 {
 	// class for all items in inventory
-
-	private InventoryItem item;
-
-	protected int width = 725;
-	protected int height = 525;
-	protected int borderColor;
-	protected int backgroundColor;
-	protected int textColor;
-	private PFont inventoryFont;
-	protected Main parent;
-
-	protected int itemSpaceOffset = 25;
-	protected int itemSpaceWidth = 75;
-	protected int offAndWidth = itemSpaceOffset + itemSpaceWidth;
-	protected int equipOffset = 200;
-
-	public Inventory(InventoryItem item)
-	{
-		this.item = item;
-		inventoryFont = parent.loadFont("data\\fonts\\MiniPower.vlw");
-		this.parent = Main.getMainObject();
-		parent.textFont(inventoryFont);
-		borderColor = parent.color(0);
-		textColor = parent.color(0);
-		backgroundColor = parent.color(200, 200, 200, 100);
-	} // end Inventory
-
-	public void setBorderColor(int color)
-	{
-		borderColor = color;
-	}
-
-	public void setBackgroundColor(int color)
-	{
-		backgroundColor = color;
-	}
-
-	public void setTextColor(int color)
-	{
-		textColor = color;
-	}
+	// this class extends dialog to bring up a menu with items in the inventory
 	
-	// draws the inventory menu 5x5 grid of items
-	// still needs work
-	public void drawInventory()
+	private boolean selection; // can be selected
+	private int selected; // item selected
+	private int line = 0; // which line is displayed
+	private static int LINES = 3; // lines of dialog displayed
+	
+	private ArrayList<String> items;
+	private ArrayList<Dialog> nextDialogs;
+
+	public Inventory(String[] lines, ArrayList<String> items, ArrayList<Dialog> nextDialogs) {
+		super(lines);
+		parent.addKeyListener(this);
+		this.items = items;
+		this.nextDialogs = nextDialogs;
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e)
 	{
-		for (int index = 0; index < width; index = index + offAndWidth)
-		{
-			for (int jndex = 0; jndex < height; jndex = jndex + offAndWidth)
-			{
-				rect(index + itemSpaceOffset + equipOffset, jndex + itemSpaceOffset, itemSpaceWidth, itemSpaceWidth);
-			}
-		}
-	} // end drawInventory
+		
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}	
 } // end Inventory class
