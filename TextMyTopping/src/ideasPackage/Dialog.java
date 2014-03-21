@@ -2,6 +2,8 @@ package ideasPackage;
 
 import java.util.Arrays;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import processing.core.*;
 
 public class Dialog
@@ -25,6 +27,9 @@ public class Dialog
 	protected float currentPositionInText;
 	protected boolean finishedDisplayingText;
 	protected Dialog nextDialog;
+	
+	Minim minim;
+	AudioPlayer player;
 
 	public Dialog(String[] lines)
 	{
@@ -89,6 +94,9 @@ public class Dialog
 			parent.text(lines[currentDialogLine].substring(0, subStringLength),
 					offsetX + offsetTextX, parent.height - borderY - height
 							+ offsetTextY);
+			minim = new Minim(this);
+			player = minim.loadFile("data/audio/bgm/TextboxBloop8-bit.ogg");
+			//player.loop();
 		}
 	}
 
