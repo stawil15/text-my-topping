@@ -22,7 +22,7 @@ public class StaticObject implements Collidable
 		images = new PImage[animationFrames];
 		for (int index = 0; index < animationFrames; index++)
 		{
-			images[index] = parent.loadImage("\\data\\sprites\\static\\" + imageName + "\\" + index + ".png");
+			images[index] = parent.loadImage("\\data\\sprites\\scenery\\" + imageName + "\\" + index + ".png");
 		}
 
 	}
@@ -31,7 +31,7 @@ public class StaticObject implements Collidable
 	{
 		this(coordinates, c, addToGrid);
 		images = new PImage[1];
-		images[0] = parent.loadImage("\\data\\sprites\\static\\" + imageName + "\\" + 0 + ".png");
+		images[0] = parent.loadImage("\\data\\sprites\\scenery\\" + imageName + "\\" + 0 + ".png");
 	}
 
 	public StaticObject(GridCoordinate coordinates, CollisionGrid c, boolean addToGrid)
