@@ -78,7 +78,7 @@ public class Main extends PApplet
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
-		LoadMap("redSpriteMap.csv",10,4);
+		LoadMap("megaSpriteMap.csv",10,4);
 	}
 
 	public void draw()
@@ -110,10 +110,10 @@ public class Main extends PApplet
 		sceneryGrid = new SceneryGrid(map.length, map[0].length);//Floor tiles
 
 		// Create some scenery objects to add to the grid later.
-		SceneryObject grass = new SceneryObject(null, "grass", 1, 20,sceneryGrid, false);
-		SceneryObject flower = new SceneryObject(null, "flower", 2, 20, sceneryGrid, false);
-		tree = new StaticObject(null, "tree", collisionGrid, 4, 40, false);
-		fastTree = new StaticObject(null,"tree", collisionGrid, 4, 4, false);
+		SceneryObject grass = new SceneryObject(null, "forest\\grass", 1, 20,sceneryGrid, false);
+		SceneryObject flower = new SceneryObject(null, "forest\\flower", 2, 20, sceneryGrid, false);
+		tree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 40, false);
+		fastTree = new StaticObject(null,"forest\\tree", collisionGrid, 4, 4, false);
 		invisibleWall = new StaticObject(null,collisionGrid,false);
 
 		//Can't get .mid working again. MP3 works fine
