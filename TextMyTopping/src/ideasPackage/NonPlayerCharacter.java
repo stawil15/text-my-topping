@@ -13,7 +13,7 @@ public class NonPlayerCharacter extends Character
 
 	}
 
-	public void doInteract()
+	public void doInteract(int interactionId)
 	{
 		dialog.showDialog();
 	}

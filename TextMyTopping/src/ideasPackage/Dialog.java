@@ -24,7 +24,6 @@ public class Dialog
 	protected float currentPositionInText;
 	protected boolean finishedDisplayingText;
 	protected Dialog nextDialog;
-
 	public Dialog(String[] lines)
 	{
 		parent = Main.getMainObject();
@@ -75,7 +74,10 @@ public class Dialog
 			parent.fill(textColor);
 
 			if (!finishedDisplayingText)
+			{
 				currentPositionInText += dialogSpeed;
+				GUISystem.playDialogSound();
+			}
 
 			int subStringLength = (int) (currentPositionInText);
 
@@ -84,6 +86,7 @@ public class Dialog
 				subStringLength = lines[currentDialogLine].length();
 				finishedDisplayingText = true;
 			}
+
 
 			parent.text(lines[currentDialogLine].substring(0, subStringLength),
 					offsetX + offsetTextX, parent.height - borderY - height

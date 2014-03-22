@@ -43,28 +43,28 @@ public class Character implements Collidable
 		for (int index = 0; index < charRightImages.length; index++)
 		{
 			charRightImages[index] = parent
-					.loadImage("data\\sprites\\character\\" + imageName
-							+ "\\right" + index + ".png");
+					.loadImage("data\\sprites\\" + folderName +  "\\" + imageName
+							+ "\\" + index + ".png");
 		}
 
 		for (int index = 0; index < charRightImages.length; index++)
 		{
-			charUpImages[index] = parent.loadImage("data\\sprites\\character\\"
-					+ imageName + "\\up" + index + ".png");
+			charUpImages[index] = parent.loadImage("data\\sprites\\" + folderName +  "\\"
+					+ imageName + "\\" + index + ".png");
 		}
 
 		for (int index = 0; index < charRightImages.length; index++)
 		{
 			charDownImages[index] = parent
-					.loadImage("data\\sprites\\character\\" + imageName
-							+ "\\down" + index + ".png");
+					.loadImage("data\\sprites\\" + folderName +  "\\" + imageName
+							+ "\\" + index + ".png");
 		}
 
 		for (int index = 0; index < charLeftImages.length; index++)
 		{
 			charLeftImages[index] = parent
-					.loadImage("data\\sprites\\character\\" + imageName
-							+ "\\left" + index + ".png");
+					.loadImage("data\\sprites\\" + folderName +  "\\" + imageName
+							+ "\\" + index + ".png");
 		}
 
 		this.coordinates = coordinates;
@@ -157,13 +157,15 @@ public class Character implements Collidable
 					* Main.GRID_SIZE + offsetY + cameraOffsetY);
 	}
 
-	public void move(int direction)
+	public boolean move(int direction)
 	{
+		boolean didMove = false;
 		if (!isMoving)
 		{
 			if (direction == currentDirection
 					&& collisionGrid.moveElement(this))
 			{
+				didMove = true;
 				currentDirection = direction;
 				isMoving = true;
 				switch (currentDirection)
@@ -190,6 +192,7 @@ public class Character implements Collidable
 				currentDirection = direction;
 			}
 		}
+		return didMove;
 	}
 
 	private void updateOffset()
@@ -205,7 +208,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetY = 0;
-
+				finishedMoving();
 			}
 			break;
 		case DIRECTION_RIGHT:
@@ -214,7 +217,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetX = 0;
-				
+				finishedMoving();
 			}
 			break;
 		case DIRECTION_DOWN:
@@ -223,7 +226,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetY = 0;
-				
+				finishedMoving();
 			}
 			break;
 		case DIRECTION_LEFT:
@@ -232,7 +235,7 @@ public class Character implements Collidable
 			{
 				isMoving = false;
 				offsetX = 0;
-				
+				finishedMoving();
 			}
 			break;
 		}
@@ -280,7 +283,7 @@ public class Character implements Collidable
 		}
 	}
 
-	public void doInteract()
+	public void doInteract(int interactionId)
 	{
 		// Do nothing
 	}
@@ -355,5 +358,10 @@ public class Character implements Collidable
 	protected boolean canMove()
 	{
 		return !GUISystem.showingDialog();
+	}
+	
+	public void finishedMoving()
+	{
+		// Can be overridden in child classes, (ex: MoveableObject)
 	}
 }

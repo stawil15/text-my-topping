@@ -32,7 +32,7 @@ public class Main extends PApplet
 
 	//Music stuff. Uses Minim Library from Processing.
 	Minim minim;
-	AudioPlayer player;
+	AudioPlayer Musicplayer;
 	
 	//Grid stuff
 	private CollisionGrid collisionGrid;
@@ -61,6 +61,7 @@ public class Main extends PApplet
 	public static int UP_KEY = KeyEvent.VK_UP;
 	public static int DOWN_KEY = KeyEvent.VK_DOWN;
 	public static int SPACE_KEY = KeyEvent.VK_SPACE;
+	public static int SHIFT_KEY = KeyEvent.VK_SHIFT;
 	
 //	// stuff for start screen
 //	int buttonX, buttonY;
@@ -108,6 +109,7 @@ public class Main extends PApplet
 		readCSV maploader = new readCSV();
 		maploader.readDialogueData(mapName);
 		int[][] map = maploader.readMapData(mapName);
+		GUISystem.initialize();
 		
 		//Maps
 		collisionGrid = new CollisionGrid(map.length, map[0].length);//What blocks your path
@@ -130,8 +132,8 @@ public class Main extends PApplet
 		SceneryObject sflower = new SceneryObject(null, "snow\\flower", 2, 20, sceneryGrid, false);
 		//Can't get .mid working again. MP3 works fine
 		minim = new Minim(this);
-		player = minim.loadFile("data/audio/bgm/OnettTheme.mp3");
-		player.loop();
+		Musicplayer = minim.loadFile("data/audio/bgm/OnettTheme.mp3");
+		Musicplayer.loop();
 
 		//If map is smaller than screen view, offset will be used to center map on screen
 		int xOffset = 0;
@@ -208,6 +210,11 @@ public class Main extends PApplet
 					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset, y+yOffset),sand);
 					collisionGrid.addElement(new GridCoordinate(x+xOffset, y+yOffset), fastCactus);
 					fastTree.setDialog(new Dialog(new String[] {"It's really windy right here.\nIn this exact spot."}));
+				}
+				else if (map[x][y] == 4)
+				{
+					new MoveableObject(new GridCoordinate(x+xOffset,y+yOffset), 0, 1, "rock", collisionGrid, true);
+					sceneryGrid.addSceneryObject(new GridCoordinate(x+xOffset,y+yOffset), grass);
 				}
 				else
 				{

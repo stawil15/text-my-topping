@@ -108,7 +108,7 @@ public class CollisionGrid
 		}
 	}
 
-	public void doInteraction(Collidable entity)
+	public void doInteraction(Collidable entity, int interactionId)
 	{
 		Collidable entityToInteractWith = getEntityAt(getNextCoordinate(entity));
 		if (entityToInteractWith != null)
@@ -119,7 +119,7 @@ public class CollisionGrid
 				PlayerCharacter player = (PlayerCharacter)(entity);
 				npc.setDirection(player.getOppositeDirection());
 			}
-			entityToInteractWith.doInteract();
+			entityToInteractWith.doInteract(interactionId);
 		}
 	}
 

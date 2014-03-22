@@ -7,40 +7,43 @@ public class PlayerCharacter extends Character implements KeyListener
 {
 
 	private boolean leftKeyDown, rightKeyDown, upKeyDown, downKeyDown;
-	public PlayerCharacter(GridCoordinate coordinates, int initialDirection,
-			int animationFrames, String imageName, CollisionGrid c, boolean addToGrid)
+	public final static int MAIN_INTERACTION = 0;
+	public final static int SECONDARY_INTERACTION = 1;
+
+	public PlayerCharacter(GridCoordinate coordinates, int initialDirection, int animationFrames, String imageName,
+			CollisionGrid c, boolean addToGrid)
 	{
 		super(coordinates, initialDirection, animationFrames, imageName, c, addToGrid);
 		parent.addKeyListener(this);
 	}
-	
+
 	@Override
-	public void doInteract()
+	public void doInteract(int interactionId)
 	{
 		if (!isMoving)
 		{
-			collisionGrid.doInteraction(this);
+			collisionGrid.doInteraction(this, interactionId);
 		}
 	}
-	
+
 	public boolean isMoving()
 	{
 		return isMoving;
 	}
-	
+
 	public float getOffsetX()
 	{
 		return offsetX;
 	}
-	
+
 	public float getOffsetY()
 	{
 		return offsetY;
 	}
-	
+
 	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
-		super.draw(cameraOffsetX,cameraOffsetY);
+		super.draw(cameraOffsetX, cameraOffsetY);
 		if (leftKeyDown)
 		{
 			keyLeftDown();
@@ -54,7 +57,7 @@ public class PlayerCharacter extends Character implements KeyListener
 		{
 			keyUpDown();
 		}
-		
+
 	}
 
 	@Override
@@ -81,7 +84,11 @@ public class PlayerCharacter extends Character implements KeyListener
 		{
 			spaceKeyPressed();
 		}
-		
+		if (keyCode == Main.SHIFT_KEY)
+		{
+			shiftKeyPressed();
+		}
+
 	}
 
 	@Override
@@ -91,22 +98,19 @@ public class PlayerCharacter extends Character implements KeyListener
 		if (keyCode == Main.LEFT_KEY)
 		{
 			leftKeyDown = false;
-		}
-		else if (keyCode == Main.RIGHT_KEY)
+		} else if (keyCode == Main.RIGHT_KEY)
 		{
 			rightKeyDown = false;
-		}
-		else if (keyCode == Main.UP_KEY)
+		} else if (keyCode == Main.UP_KEY)
 		{
 			upKeyDown = false;
-		}
-		else if (keyCode == Main.DOWN_KEY)
+		} else if (keyCode == Main.DOWN_KEY)
 		{
 			downKeyDown = false;
 		}
-		
+
 	}
-	
+
 	private void spaceKeyPressed()
 	{
 		boolean justClosedDialog = false;
@@ -120,16 +124,24 @@ public class PlayerCharacter extends Character implements KeyListener
 		}
 
 		if (!justClosedDialog && !GUISystem.showingDialog())
-			doInteract();
+			doInteract(MAIN_INTERACTION);
+	}
+
+	private void shiftKeyPressed()
+	{
+		if (!isMoving)
+		{
+			doInteract(SECONDARY_INTERACTION);
+		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	// Called when the left key is held down
 	private void keyLeftDown()
 	{
@@ -157,7 +169,5 @@ public class PlayerCharacter extends Character implements KeyListener
 		if (canMove())
 			move(Character.DIRECTION_UP);
 	}
-	
-	
 
 }

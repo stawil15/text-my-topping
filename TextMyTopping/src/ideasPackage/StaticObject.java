@@ -82,9 +82,9 @@ public class StaticObject implements Collidable
 		return coordinates;
 	}
 
-	public void doInteract()
+	public void doInteract(int interactionId)
 	{
-		if (dialog!=null)
+		if (dialog!=null && interactionId == PlayerCharacter.MAIN_INTERACTION)
 		{
 			GUISystem.showDialog(dialog);
 		}
