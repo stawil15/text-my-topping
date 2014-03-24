@@ -14,7 +14,7 @@ public class Character implements Collidable
 	protected PApplet parent;
 	private int currentDirection;
 	protected int animationIndex = 0;
-	private GridCoordinate coordinates;
+	protected GridCoordinate coordinates;
 	private int currentAnimationFrame;
 	private int animationDuration = 3;
 	private float moveSpeed = 4f;

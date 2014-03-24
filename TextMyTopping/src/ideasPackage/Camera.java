@@ -13,19 +13,12 @@ public class Camera
 	public boolean movingLeft = false, movingRight = false, movingUp = false,
 			movingDown = false;
 
-	public Camera(GridCoordinate location, PlayerCharacter tracker)
+	public Camera(PlayerCharacter tracker)
 	{
-		this.location = location;
 		this.tracker = tracker;
 		parent = Main.getMainObject();
-		collisionGrid = tracker.getCollisionGrid();
 
-		int screenGridWidth = parent.width / Main.GRID_SIZE;
-		int screenGridHeight = parent.height / Main.GRID_SIZE;
-
-		location = new GridCoordinate(tracker.getCoordinates().getGridX()
-				- screenGridWidth / 2, tracker.getCoordinates().getGridY()
-				- screenGridHeight / 2);
+		centerCameraAroundTracker();
 	}
 
 	public GridCoordinate getLocation()
@@ -35,6 +28,7 @@ public class Camera
 
 	public void update()
 	{
+		collisionGrid = tracker.getCollisionGrid();
 		int screenGridWidth = parent.width / Main.GRID_SIZE;
 		int screenGridHeight = parent.height / Main.GRID_SIZE;
 
@@ -180,6 +174,15 @@ public class Camera
 			}
 			break;
 		}
+	}
+	
+	public void centerCameraAroundTracker()
+	{
+		int screenGridWidth = parent.width / Main.GRID_SIZE;
+		int screenGridHeight = parent.height / Main.GRID_SIZE;
+		location = new GridCoordinate(tracker.getCoordinates().getGridX()
+				- screenGridWidth / 2, tracker.getCoordinates().getGridY()
+				- screenGridHeight / 2);
 	}
 
 	public boolean isNearLeftEdge(GridCoordinate coordinate, int distance,

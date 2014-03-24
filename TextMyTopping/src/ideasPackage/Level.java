@@ -25,7 +25,7 @@ public class Level
 	public void draw()
 	{
 		parent.background(0);
-		camera.update();
+		Main.getCamera().update();
 		sceneryGrid.draw();
 		collisionGrid.draw();
 	}
@@ -34,6 +34,11 @@ public class Level
 	{
 		sceneryGrid.setCamera(camera);
 		collisionGrid.setCamera(camera);
+	}
+	
+	public CollisionGrid getCollisionGrid()
+	{
+		return collisionGrid;
 	}
 	
 	

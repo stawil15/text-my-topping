@@ -1,5 +1,7 @@
 package ideasPackage;
 
+import processing.core.PApplet;
+
 public class CollisionGrid
 {
 	private Collidable collisionGrid[][];
@@ -11,7 +13,7 @@ public class CollisionGrid
 		collisionGrid = new Collidable[xEntities][yEntities];
 		helper = new GridHelper(collisionGrid, camera);
 	}
-	
+
 	public void setCamera(Camera camera)
 	{
 		this.camera = camera;
@@ -55,11 +57,20 @@ public class CollisionGrid
 
 		GridCoordinate coordinate = getNextCoordinate(entity);
 
+		
 		if (getEntityAt(coordinate) != null)
 		{
+			if (entity.getClass() == PlayerCharacter.class)
+			{
+				if (getEntityAt(coordinate).getClass()==Door.class)
+				{
+					doInteraction(getEntityAt(coordinate), 0);
+				}
+			}
 			return false;
 		}
-		
+
+
 		if (!isValidPosition(coordinate))
 		{
 			return false;
@@ -74,8 +85,7 @@ public class CollisionGrid
 		{
 			return null;
 		}
-		GridCoordinate coordinate = new GridCoordinate(entity.getCoordinates()
-				.getGridX(), entity.getCoordinates().getGridY());
+		GridCoordinate coordinate = new GridCoordinate(entity.getCoordinates().getGridX(), entity.getCoordinates().getGridY());
 
 		switch (entity.getDirection())
 		{
@@ -115,8 +125,8 @@ public class CollisionGrid
 		{
 			if (entityToInteractWith.getClass() == NonPlayerCharacter.class && entity.getClass() == PlayerCharacter.class)
 			{
-				NonPlayerCharacter npc = (NonPlayerCharacter)(entityToInteractWith);
-				PlayerCharacter player = (PlayerCharacter)(entity);
+				NonPlayerCharacter npc = (NonPlayerCharacter) (entityToInteractWith);
+				PlayerCharacter player = (PlayerCharacter) (entity);
 				npc.setDirection(player.getOppositeDirection());
 			}
 			entityToInteractWith.doInteract(interactionId);
@@ -139,22 +149,85 @@ public class CollisionGrid
 
 	private boolean isValidPosition(int xPosition, int yPosition)
 	{
-		return (xPosition >= 0 && xPosition < collisionGrid.length
-				&& yPosition >= 0 && yPosition < collisionGrid[0].length);
+		return (xPosition >= 0 && xPosition < collisionGrid.length && yPosition >= 0 && yPosition < collisionGrid[0].length);
 	}
-	
+
 	public int getGridWidth()
 	{
 		return collisionGrid.length;
 	}
-	
+
 	public int getGridHeight()
 	{
 		return collisionGrid[0].length;
 	}
-	
+
 	public void addDuplicateObject(Drawable entity)
 	{
 		helper.addDuplicate(entity);
+	}
+
+	public void setPlayerAtDoorFromLevel(String fromLevel)
+	{
+		// Find the door's location
+		Door door = null;
+		for (int x = 0; x < collisionGrid.length; x++)
+		{
+			for (int y = 0; y < collisionGrid[0].length; y++)
+			{
+				if (collisionGrid[x][y] != null && collisionGrid[x][y].getClass() == Door.class)
+				{
+
+					Door doorToCheck = (Door)collisionGrid[x][y];
+					if (doorToCheck.getToLevel().equals(fromLevel))
+					{
+						door = doorToCheck;
+					}
+				}
+			}
+		}
+		
+		if (door==null)
+		{
+			return;
+		}
+		
+		PlayerCharacter player = Main.getPlayer();
+		GridCoordinate newPlayerCoordinates = new GridCoordinate(door.getCoordinates().getGridX(), door.getCoordinates().getGridY());
+		switch (door.getDirection())
+		{
+		case Character.DIRECTION_UP:
+			newPlayerCoordinates.decrementY();
+			break;
+		case Character.DIRECTION_RIGHT:
+			newPlayerCoordinates.incrementX();
+			break;
+		case Character.DIRECTION_DOWN:
+			newPlayerCoordinates.incrementY();
+			break;
+		case Character.DIRECTION_LEFT:
+			newPlayerCoordinates.decrementX();
+			break;
+		}
+		
+		player.setCoordinates(newPlayerCoordinates);
+		player.setCollisionGrid(this);
+		camera.centerCameraAroundTracker();
+		player.setDirection(door.getDirection());
+		
+	}
+
+	public void removePlayerFromGrid()
+	{
+		for (int x = 0; x < collisionGrid.length; x++)
+		{
+			for (int y = 0; y < collisionGrid[0].length; y++)
+			{
+				if (collisionGrid[x][y] != null && collisionGrid[x][y] == Main.getPlayer())
+				{
+					collisionGrid[x][y] = null;
+				}
+			}
+		}
 	}
 }

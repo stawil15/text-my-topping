@@ -28,7 +28,7 @@ public class Main extends PApplet
 	private Level level;
 
 	// The camera is positioned in the top left corner
-	private Camera camera;
+	private static Camera camera;
 
 	//Music stuff. Uses Minim Library from Processing.
 	Minim minim;
@@ -80,15 +80,18 @@ public class Main extends PApplet
 	{
 		mainClass = this;
 		DialogManager.initializeDialogManager();
+		GUISystem.initialize();
+		LevelManager.initializeLevelManager(4,4);
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
-		LoadMap("megaSpriteMap.csv",10,4);
+		LevelManager.setActiveLevel("megaSpriteMap.csv", null);
+		//LoadMap("megaSpriteMap.csv",22,23);
 	}
 
 	public void draw()
 	{
-		level.draw();
+		LevelManager.drawActiveLevel();
 		GUISystem.draw();
 		
 		//FPS counter
@@ -235,7 +238,6 @@ public class Main extends PApplet
 					{
 						//Creates NPC dialog
 						npcDialog = DialogManager.getDialog(NPC[x][4]);
-						println("ASSINGNED: " + NPC[x][4]);
 					}
 					//Places NPC
 					NonPlayerCharacter testNPC = new NonPlayerCharacter(new GridCoordinate(Integer.parseInt(NPC[x][1])+xOffset, Integer.parseInt(NPC[x][2])+yOffset), 2, 1, "npc",collisionGrid, npcDialog, true);
@@ -250,7 +252,7 @@ public class Main extends PApplet
 		//Creates main character
 		mainCharacter = new PlayerCharacter(new GridCoordinate(charX+xOffset, charY+yOffset),
 				Character.DIRECTION_RIGHT, 8, "player", collisionGrid, true);
-		camera = new Camera(new GridCoordinate(0, 0), mainCharacter);
+		camera = new Camera(mainCharacter);
 
 		// This dialog shows at startup
 		TestDialog = new Dialog(
@@ -265,6 +267,21 @@ public class Main extends PApplet
 	public static PlayerCharacter getPlayer()
 	{
 		return mainCharacter;
+	}
+	
+	public static Camera getCamera()
+	{
+		return camera;
+	}
+	
+	public static void setCamera(Camera camera)
+	{
+		Main.camera = camera;
+	}
+	
+	public static void setPlayer(PlayerCharacter playerCharacter)
+	{
+		mainCharacter = playerCharacter;
 	}
 
 }

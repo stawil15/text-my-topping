@@ -169,5 +169,17 @@ public class PlayerCharacter extends Character implements KeyListener
 		if (canMove())
 			move(Character.DIRECTION_UP);
 	}
+	
+	public void setCoordinates(GridCoordinate coordinates)
+	{
+		this.coordinates = coordinates;
+		Main.getCamera().centerCameraAroundTracker();
+	}
+	
+	public void setCollisionGrid(CollisionGrid c)
+	{
+		c.addElement(coordinates, this);
+		collisionGrid = c;
+	}
 
 }
