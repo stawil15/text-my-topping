@@ -24,36 +24,8 @@ public class Main extends PApplet
 	public final static int SCREEN_HEIGHT = 768;
 	private static Main mainClass;
 
-	// Grids containing objects of the game
-	private Level level;
-
 	// The camera is positioned in the top left corner
 	private static Camera camera;
-
-	//Music stuff. Uses Minim Library from Processing.
-	Minim minim;
-	AudioPlayer Musicplayer;
-	
-	//Grid stuff
-	private CollisionGrid collisionGrid;
-	private SceneryGrid sceneryGrid;
-
-	// NPC stuff
-	private Dialog TestDialog;
-	private static PlayerCharacter mainCharacter;
-	@SuppressWarnings("unused")
-	private NonPlayerCharacter testNPC;
-	@SuppressWarnings("unused")
-	private NonPlayerCharacter testNPC2;
-
-	// Stuff stuff
-	private StaticObject tree;
-	private StaticObject fastTree;
-	private StaticObject invisibleWall;
-	private StaticObject cactus;
-	private StaticObject fastCactus;
-	private StaticObject snowTree;
-	private StaticObject fastSnowTree;
 
 	// Keyboard controls
 	public static int LEFT_KEY = KeyEvent.VK_LEFT;
@@ -63,12 +35,8 @@ public class Main extends PApplet
 	public static int SPACE_KEY = KeyEvent.VK_SPACE;
 	public static int SHIFT_KEY = KeyEvent.VK_SHIFT;
 	
-//	// stuff for start screen
-//	int buttonX, buttonY;
-//	int buttonWidth, buttonHeight;
-//	boolean buttonOver;
-//	PApplet parent;
 
+	private PlayerCharacter mainCharacter;
 	// Start Processing
 	public static void main(String args[])
 	{
@@ -112,7 +80,7 @@ public class Main extends PApplet
 
 	public static PlayerCharacter getPlayer()
 	{
-		return mainCharacter;
+		return Main.getMainObject().mainCharacter;
 	}
 	
 	public static Camera getCamera()
@@ -127,7 +95,7 @@ public class Main extends PApplet
 	
 	public static void setPlayer(PlayerCharacter playerCharacter)
 	{
-		mainCharacter = playerCharacter;
+		Main.getMainObject().mainCharacter = playerCharacter;
 	}
 
 }
