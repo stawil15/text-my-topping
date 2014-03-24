@@ -2,8 +2,8 @@ package ideasPackage;
 
 public class LevelCreator
 {
-	private SceneryObject grass, flower, sand, dflower, snow, sflower;
-	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree;
+	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor;
+	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock;
 
 	public LevelCreator()
 	{
@@ -23,6 +23,7 @@ public class LevelCreator
 		flower = new SceneryObject(null, "forest\\flower", 2, 20, sceneryGrid, false);
 		tree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 40, false);
 		fastTree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 4, false);
+		fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
 		invisibleWall = new StaticObject(null, collisionGrid, false);
 		cactus = new StaticObject(null, "desert\\tree", collisionGrid, 4, 40, false);
 		sand = new SceneryObject(null, "desert\\grass", 1, 20, sceneryGrid, false);
@@ -30,9 +31,9 @@ public class LevelCreator
 		snowTree = new StaticObject(null, "snow\\tree", collisionGrid, 4, 40, false);
 		snow = new SceneryObject(null, "snow\\grass", 1, 20, sceneryGrid, false);
 		sflower = new SceneryObject(null, "snow\\flower", 2, 20, sceneryGrid, false);
-
-		int gridWidth = Main.SCREEN_WIDTH / Main.GRID_SIZE;
-		int gridHeight = Main.SCREEN_HEIGHT / Main.GRID_SIZE;
+		cabin = new StaticObject(null, "forest\\cabin", collisionGrid, 1, 20, false);
+		woodFloor = new SceneryObject(null, "forest\\woodFloor", 1, 20, sceneryGrid, false);
+		woodBlock = new StaticObject(null, "forest\\woodBlock", collisionGrid, 1, 20, false);
 
 		for (int x = 0; x < map.length; x++)
 		{
@@ -50,80 +51,104 @@ public class LevelCreator
 
 	public void addGameObject(int id, CollisionGrid collisionGrid, SceneryGrid sceneryGrid, int x, int y, int xOffset, int yOffset)
 	{
+		GridCoordinate position = new GridCoordinate(x + xOffset, y+yOffset);
 		if (id == 9)
 		{
-			collisionGrid.addElement(new GridCoordinate(x + xOffset, y + yOffset), invisibleWall);
+			collisionGrid.addElement(position, invisibleWall);
+			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 1)
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), grass);
-			collisionGrid.addElement(new GridCoordinate(x + xOffset, y + yOffset), tree);
+			sceneryGrid.addSceneryObject(position, grass);
+			collisionGrid.addElement(position, tree);
 		}
 		else if (id == 2)
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), flower);
+			sceneryGrid.addSceneryObject(position, flower);
 		}
 		else if (id == 3)
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), grass);
-			collisionGrid.addElement(new GridCoordinate(x + xOffset, y + yOffset), fastTree);
-			fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
+			sceneryGrid.addSceneryObject(position, grass);
+			collisionGrid.addElement(position, fastTree);
 
 		}
 		else if (id == 5)
 		{
-			new Door(new GridCoordinate(x + xOffset, y + yOffset), collisionGrid, "redSpriteMap.csv", "megaSpriteMap.csv", Character.DIRECTION_LEFT);
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y+yOffset), grass);
+			new Door(position, collisionGrid, "redSpriteMap.csv", "megaSpriteMap.csv", Character.DIRECTION_LEFT);
+			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 6)
 		{
-			new Door(new GridCoordinate(x + xOffset, y + yOffset), collisionGrid, "megaSpriteMap.csv", "redSpriteMap.csv", Character.DIRECTION_RIGHT);
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y+yOffset), grass);
+			new Door(position, collisionGrid, "megaSpriteMap.csv", "redSpriteMap.csv", Character.DIRECTION_RIGHT);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 7)
+		{
+			collisionGrid.addElement(position, cabin);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 8)
+		{
+			new Door(position, collisionGrid, "megaSpriteMap.csv","cabin.csv", Character.DIRECTION_DOWN, "talkedToNPCInCabin", false, new Dialog(new String[] {"The door is locked."}));
 		}
 		else if (id == 11) // start desert
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), sand);
-			collisionGrid.addElement(new GridCoordinate(x + xOffset, y + yOffset), cactus);
+			sceneryGrid.addSceneryObject(position, sand);
+			collisionGrid.addElement(position, cactus);
 		}
 		else if (id == 12)
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), dflower);
+			sceneryGrid.addSceneryObject(position, dflower);
 		}
 		else if (id == 13)
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), sand);
-			collisionGrid.addElement(new GridCoordinate(x + xOffset, y + yOffset), fastCactus);
+			sceneryGrid.addSceneryObject(position, sand);
+			collisionGrid.addElement(position, fastCactus);
 			fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
 		}
 		else if (id == 21) // start snow
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), snow);
-			collisionGrid.addElement(new GridCoordinate(x + xOffset, y + yOffset), snowTree);
+			sceneryGrid.addSceneryObject(position, snow);
+			collisionGrid.addElement(position, snowTree);
 		}
 		else if (id == 22)
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), sflower);
+			sceneryGrid.addSceneryObject(position, sflower);
 		}
 		else if (id == 23)
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), snow);
-			collisionGrid.addElement(new GridCoordinate(x + xOffset, y + yOffset), fastSnowTree);
+			sceneryGrid.addSceneryObject(position, snow);
+			collisionGrid.addElement(position, fastSnowTree);
 			fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
 		}
 		else if (id == 20)
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), sand);
-			collisionGrid.addElement(new GridCoordinate(x + xOffset, y + yOffset), fastCactus);
+			sceneryGrid.addSceneryObject(position, sand);
+			collisionGrid.addElement(position, fastCactus);
 			fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
 		}
 		else if (id == 4)
 		{
-			new MoveableObject(new GridCoordinate(x + xOffset, y + yOffset), 0, 1, "rock", collisionGrid, true);
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), grass);
+			new MoveableObject(position, 0, 1, "rock", collisionGrid, true);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 30)
+		{
+			sceneryGrid.addSceneryObject(position, woodFloor);
+		}
+		else if (id == 31)
+		{
+			new Door(new GridCoordinate(x+xOffset, y+yOffset), collisionGrid, "cabin.csv","megaSpriteMap.csv", Character.DIRECTION_UP);
+			sceneryGrid.addSceneryObject(position, woodFloor);
+		}
+		else if (id == 32)
+		{
+			collisionGrid.addElement(position, woodBlock);
+
 		}
 		else
 		{
-			sceneryGrid.addSceneryObject(new GridCoordinate(x + xOffset, y + yOffset), grass);
+			sceneryGrid.addSceneryObject(position, grass);
 		}
 	}
 

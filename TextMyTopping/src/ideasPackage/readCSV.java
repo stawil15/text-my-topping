@@ -16,6 +16,8 @@ public class readCSV
 {
 	private final static String TYPE_DEFAULT_DIALOG = "Default";
 	private final static String TYPE_BRANCHING_DIALOG = "Branched";
+	private final static String TYPE_BOOLEAN_DIALOG = "Boolean";
+	private final static String TYPE_SETVALUE_DIALOG = "SetValue";
 	public final static String NULL_DIALOG = "null";
 
 	public int[][] readMapData(String filename)
@@ -30,10 +32,11 @@ public class readCSV
 		try
 		{
 			br = new BufferedReader(new FileReader(csvFileToRead));
-			line = br.readLine(); // Read first line
+			String songName = br.readLine(); // Read first line
+			MusicManager.addSong(filename, songName);
+			line = br.readLine();
 			String[] dimmensions = line.split(",");
-			
-			//First two positions in CSV contain array dimentions
+			//First two positions in CSV contain array dimensions
 			map = new int[Integer.parseInt(dimmensions[0])][Integer.parseInt(dimmensions[1])];
 
 			//Print for debugging
@@ -236,6 +239,24 @@ public class readCSV
 					}
 
 					DialogManager.addDialog(new BranchingDialog(null, choices, responses), dialogRow[1], dialogRow);
+				}
+				else if (dialogRow[0].equals(TYPE_BOOLEAN_DIALOG))
+				{
+					String variableName = dialogRow[2];
+					DialogManager.addDialog(new BooleanDialog(variableName), dialogRow[1], dialogRow);
+					DialogManager.setFalseDialog(dialogRow[3], dialogRow[1]);
+					DialogManager.setTrueDialog(dialogRow[4], dialogRow[1]);
+				}
+				else if (dialogRow[0].equals(TYPE_SETVALUE_DIALOG))
+				{
+					String variableName = dialogRow[2];
+					boolean value = Boolean.parseBoolean(dialogRow[3]);
+					DialogManager.addDialog(new ValueSetDialog(variableName, value), dialogRow[1], dialogRow);
+					if (dialogRow[4] != null && !dialogRow[4].equals(NULL_DIALOG))
+					{
+						DialogManager.setNextDialog(dialogRow[4], dialogRow[1]);
+						PApplet.println("Set next dialog of " + dialogRow[1] + " to: " + dialogRow[4]);
+					}
 				}
 
 			}

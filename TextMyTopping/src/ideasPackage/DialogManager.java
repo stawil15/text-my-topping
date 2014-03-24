@@ -49,7 +49,38 @@ public class DialogManager
 
 		} else
 		{
+
 			dialogs.get(id).setNextDialog(getDialog(nextId));
+		}
+	}
+	
+	public static void setTrueDialog(String trueId, String id)
+	{
+		if (!dialogs.containsKey(trueId))
+		{
+			DialogWithMissingInformation missing =  new DialogWithMissingInformation(getDialog(id), trueId, 1);
+			dialogsWithMissingInfo.add(missing);
+		}
+		else
+		{
+			BooleanDialog dialogToSet = (BooleanDialog)dialogs.get(id);
+			dialogToSet.setTrueDialog(getDialog(trueId));
+			PApplet.println("Set True Dialog");
+		}
+	}
+	
+	public static void setFalseDialog(String falseId, String id)
+	{
+		if (!dialogs.containsKey(falseId))
+		{
+			DialogWithMissingInformation missing =  new DialogWithMissingInformation(getDialog(id), falseId, 2);
+			dialogsWithMissingInfo.add(missing);
+		}
+		else
+		{
+			BooleanDialog dialogToSet = (BooleanDialog)dialogs.get(id);
+			dialogToSet.setFalseDialog(getDialog(falseId));
+			PApplet.println("Set False Dialog");
 		}
 	}
 	
@@ -67,10 +98,23 @@ public class DialogManager
 					dialogMissingInfo.getDialog().setNextDialog(dialogs.get(idToCheck));
 					toRemove.add(dialogMissingInfo);
 				}
-				else
+				else if (dialogMissingInfo.getDialog().getClass() == BranchingDialog.class)
 				{
 					((BranchingDialog)dialogMissingInfo.getDialog()).setNextDialog(dialogMissingInfo.getIndex(), dialogs.get(idToCheck));
 					toRemove.add(dialogMissingInfo);					
+				}
+				else if (dialogMissingInfo.getDialog().getClass() == BooleanDialog.class)
+				{
+					if (dialogMissingInfo.getIndex() == 1)
+					{
+						((BooleanDialog)dialogMissingInfo.getDialog()).setTrueDialog(dialogs.get(idToCheck));
+						toRemove.add(dialogMissingInfo);
+					}
+					else if (dialogMissingInfo.getIndex() == 2)
+					{
+						((BooleanDialog)dialogMissingInfo.getDialog()).setFalseDialog(dialogs.get(idToCheck));
+						toRemove.add(dialogMissingInfo);
+					}
 				}
 			}
 		}

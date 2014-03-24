@@ -65,6 +65,8 @@ public class LevelManager
 			activeLevel.getCollisionGrid().setPlayerAtDoorFromLevel(fromLevel);
 			activeLevel.setCamera(Main.getCamera());
 		}
+		
+		MusicManager.playSong(levelId);
 	}
 	
 	public static void drawActiveLevel()

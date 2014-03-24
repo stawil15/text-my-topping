@@ -1,0 +1,4 @@
+SetValue ,didNotTalk ,talkedToNPCInCabin ,true ,Cabin1_Line2
+Default ,didTalk ,I SAID GET OUT NOW OR IM CALLING\nTHE POLICE!
+Default ,Cabin1_Line2 ,WHAT ARE YOU DOING IN MY HOUSE\nGET OUT NOW!!!!!
+Boolean ,Cabin1_Line1 ,talkedToNPCInCabin ,didNotTalk ,didTalk

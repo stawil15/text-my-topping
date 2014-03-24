@@ -6,7 +6,9 @@ Default ,NPC2_Line2 ,You will be presented with choices\nUse the arrows to choos
 Branched ,NPC2_Line3 ,5 ,The first choice ,The second choice ,The third choice ,The fourth choice ,What?! Can you repeat that? ,NPC2_Choice1 ,NPC2_Choice2 ,NPC2_Choice3 ,NPC2_Choice4 ,NPC2_Line1
 Default ,NPC2_Choice1 ,The first choice 
 Default ,NPC2_Choice2 ,The second choice
-Default ,NPC2_Choice3 ,The third choice
+Boolean ,NPC2_Choice3 ,talkedToNPCInCabin ,NPC2_Choice3False ,NPC2_Choice3True
+Default ,NPC2_Choice3False ,The third choice
+Default ,NPC2_Choice3True ,Wow\c that guy in the cabin is really mad.\nApparentley someone broke into his house.
 Default ,NPC2_Choice4 ,The fourth choice\c prepare for another branch! ,NPC2_Line4
 Branched ,NPC2_Line4 ,2 ,This is a test ,and so is this ,NPC2_Choice21 ,NPC2_Choice22
 Default ,NPC2_Choice21 ,Sorry\c you failed the test :'(\nThe correct answer was 2.

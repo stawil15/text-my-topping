@@ -9,6 +9,7 @@ public class PlayerCharacter extends Character implements KeyListener
 	private boolean leftKeyDown, rightKeyDown, upKeyDown, downKeyDown;
 	public final static int MAIN_INTERACTION = 0;
 	public final static int SECONDARY_INTERACTION = 1;
+	public final static int BUMP_INTERACTION = 2;
 
 	public PlayerCharacter(GridCoordinate coordinates, int initialDirection, int animationFrames, String imageName,
 			CollisionGrid c, boolean addToGrid)

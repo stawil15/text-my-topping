@@ -8,6 +8,7 @@ public class Level
 	private SceneryGrid sceneryGrid;
 	private Camera camera;
 	PApplet parent;
+	private String bgmMusicName;
 	
 	public Level(CollisionGrid collisionGrid, SceneryGrid sceneryGrid, Camera camera, PApplet parent)
 	{
@@ -39,6 +40,11 @@ public class Level
 	public CollisionGrid getCollisionGrid()
 	{
 		return collisionGrid;
+	}
+	
+	public String getBgmMusicName()
+	{
+		return bgmMusicName;
 	}
 	
 	

@@ -67,22 +67,22 @@ public class GridHelper
 
 	public int getMinDrawX()
 	{
-		return max(0, camera.getLocation().getGridX() - 1);
+		return max(0, camera.getLocation().getGridX() - 2);
 	}
 
 	public int getMaxDrawX()
 	{
-		return min((camera.getLocation().getGridX() + Main.SCREEN_WIDTH / Main.GRID_SIZE) + 1, grid.length);
+		return min((camera.getLocation().getGridX() + Main.SCREEN_WIDTH / Main.GRID_SIZE) + 2, grid.length);
 	}
 
 	public int getMinDrawY()
 	{
-		return max(0, camera.getLocation().getGridY() - 1);
+		return max(0, camera.getLocation().getGridY() - 2);
 	}
 
 	public int getMaxDrawY()
 	{
-		return min((camera.getLocation().getGridY() + Main.SCREEN_HEIGHT / Main.GRID_SIZE) + 1, grid[0].length);
+		return min((camera.getLocation().getGridY() + Main.SCREEN_HEIGHT / Main.GRID_SIZE) + 2, grid[0].length);
 	}
 
 	public int min(int a, int b)

@@ -62,10 +62,7 @@ public class CollisionGrid
 		{
 			if (entity.getClass() == PlayerCharacter.class)
 			{
-				if (getEntityAt(coordinate).getClass()==Door.class)
-				{
-					doInteraction(getEntityAt(coordinate), 0);
-				}
+				doInteraction(getEntityAt(coordinate), PlayerCharacter.BUMP_INTERACTION);
 			}
 			return false;
 		}
@@ -82,6 +79,11 @@ public class CollisionGrid
 	public static GridCoordinate getNextCoordinate(Collidable entity)
 	{
 		if (entity == null)
+		{
+			return null;
+		}
+		
+		if (entity.getCoordinates() == null)
 		{
 			return null;
 		}
@@ -177,7 +179,6 @@ public class CollisionGrid
 			{
 				if (collisionGrid[x][y] != null && collisionGrid[x][y].getClass() == Door.class)
 				{
-
 					Door doorToCheck = (Door)collisionGrid[x][y];
 					if (doorToCheck.getToLevel().equals(fromLevel))
 					{

@@ -5,8 +5,8 @@ public class NonPlayerCharacter extends Character
 
 	private Dialog dialog;
 
-	public NonPlayerCharacter(GridCoordinate coordinates, int initialDirection, int animationFrames, String imageName,
-			CollisionGrid c, Dialog dialog, boolean addToGrid)
+	public NonPlayerCharacter(GridCoordinate coordinates, int initialDirection, int animationFrames, String imageName, CollisionGrid c, Dialog dialog,
+			boolean addToGrid)
 	{
 		super(coordinates, initialDirection, animationFrames, imageName, c, addToGrid);
 		this.dialog = dialog;
@@ -15,7 +15,10 @@ public class NonPlayerCharacter extends Character
 
 	public void doInteract(int interactionId)
 	{
-		dialog.showDialog();
+		if (interactionId == PlayerCharacter.MAIN_INTERACTION)
+		{
+			dialog.showDialog();
+		}
 	}
 
 }
