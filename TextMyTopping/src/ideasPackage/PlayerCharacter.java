@@ -10,6 +10,8 @@ public class PlayerCharacter extends Character implements KeyListener
 	public final static int MAIN_INTERACTION = 0;
 	public final static int SECONDARY_INTERACTION = 1;
 	public final static int BUMP_INTERACTION = 2;
+	
+	private int interactionNumber = -1;
 
 	public PlayerCharacter(GridCoordinate coordinates, int initialDirection, int animationFrames, String imageName,
 			CollisionGrid c, boolean addToGrid)
@@ -21,6 +23,7 @@ public class PlayerCharacter extends Character implements KeyListener
 	@Override
 	public void doInteract(int interactionId)
 	{
+		interactionNumber = -1;
 		if (!isMoving)
 		{
 			collisionGrid.doInteraction(this, interactionId);
@@ -57,6 +60,11 @@ public class PlayerCharacter extends Character implements KeyListener
 		} else if (upKeyDown)
 		{
 			keyUpDown();
+		}
+		
+		if (interactionNumber!=-1)
+		{
+			doInteract(interactionNumber);
 		}
 
 	}
@@ -124,15 +132,15 @@ public class PlayerCharacter extends Character implements KeyListener
 			}
 		}
 
-		if (!justClosedDialog && !GUISystem.showingDialog())
-			doInteract(MAIN_INTERACTION);
+		if (!justClosedDialog && GUISystem.allowMovement())
+			interactionNumber = MAIN_INTERACTION;
 	}
 
 	private void shiftKeyPressed()
 	{
 		if (!isMoving)
 		{
-			doInteract(SECONDARY_INTERACTION);
+			interactionNumber = SECONDARY_INTERACTION;
 		}
 	}
 

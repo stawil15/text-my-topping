@@ -11,20 +11,23 @@ public class GUISystem
 	private static Minim minim;
 	private final static int FRAMES_BETWEEN_SOUND = 2;
 	private static int framesNotPlayed = 0;
+	private static boolean doingTransition = false;
 	public static void initialize()
+
+	
 	{
 		minim = new Minim(Main.getMainObject());
 		audioPlayer = minim.loadFile("data/audio/textbloop.mp3");
 	}
 
-	public static boolean showingDialog()
+	public static boolean allowMovement()
 	{
-		return (currentDialog != null);
+		return (currentDialog == null && !doingTransition);
 	}
 
-	public static void draw()
+	public static void  draw()
 	{
-		if (showingDialog())
+		if (currentDialog != null)
 		{
 			currentDialog.drawDialog();
 		}
@@ -42,6 +45,11 @@ public class GUISystem
 			currentDialog.advanceText();
 		}
 	}
+	
+	public static boolean showingDialog()
+	{
+		return (currentDialog != null);
+	}
 
 	public static void playDialogSound()
 	{
@@ -55,6 +63,16 @@ public class GUISystem
 		{
 			audioPlayer.play();
 		}
+	}
+	
+	public static void setDoingTransition(boolean state)
+	{
+		doingTransition = state;
+	}
+	
+	public static boolean doingTransition()
+	{
+		return doingTransition;
 	}
 
 }

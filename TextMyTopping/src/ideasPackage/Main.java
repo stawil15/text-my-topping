@@ -57,7 +57,7 @@ public class Main extends PApplet
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Use Arrow Keys To Move");
-		LevelManager.setActiveLevel("megaSpriteMap.csv", null);
+		LevelManager.setActiveLevel("megaSpriteMap.csv", null, -1);
 		//LoadMap("megaSpriteMap.csv",22,23);
 	}
 
@@ -96,6 +96,13 @@ public class Main extends PApplet
 	public static void setPlayer(PlayerCharacter playerCharacter)
 	{
 		Main.getMainObject().mainCharacter = playerCharacter;
+	}
+	
+	public static int[] getPixels()
+	{
+		getMainObject().loadPixels();
+		return getMainObject().pixels;
+
 	}
 
 }

@@ -357,7 +357,7 @@ public class Character implements Collidable
 	
 	protected boolean canMove()
 	{
-		return !GUISystem.showingDialog();
+		return GUISystem.allowMovement();
 	}
 	
 	public void finishedMoving()

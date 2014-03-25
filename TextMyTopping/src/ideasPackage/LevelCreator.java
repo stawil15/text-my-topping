@@ -74,12 +74,12 @@ public class LevelCreator
 		}
 		else if (id == 5)
 		{
-			new Door(position, collisionGrid, "redSpriteMap.csv", "megaSpriteMap.csv", Character.DIRECTION_LEFT);
+			new Door(position, collisionGrid, "redSpriteMap.csv", "megaSpriteMap.csv", Character.DIRECTION_LEFT, false);
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 6)
 		{
-			new Door(position, collisionGrid, "megaSpriteMap.csv", "redSpriteMap.csv", Character.DIRECTION_RIGHT);
+			new Door(position, collisionGrid, "megaSpriteMap.csv", "redSpriteMap.csv", Character.DIRECTION_RIGHT, false);
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 7)
@@ -89,7 +89,7 @@ public class LevelCreator
 		}
 		else if (id == 8)
 		{
-			new Door(position, collisionGrid, "megaSpriteMap.csv","cabin.csv", Character.DIRECTION_DOWN, "talkedToNPCInCabin", false, new Dialog(new String[] {"The door is locked."}));
+			new Door(position, collisionGrid, "megaSpriteMap.csv","cabin.csv", Character.DIRECTION_DOWN, "talkedToNPCInCabin", false, true, new Dialog(new String[] {"The door is locked."}));
 		}
 		else if (id == 11) // start desert
 		{
@@ -138,7 +138,7 @@ public class LevelCreator
 		}
 		else if (id == 31)
 		{
-			new Door(new GridCoordinate(x+xOffset, y+yOffset), collisionGrid, "cabin.csv","megaSpriteMap.csv", Character.DIRECTION_UP);
+			new Door(new GridCoordinate(x+xOffset, y+yOffset), collisionGrid, "cabin.csv","megaSpriteMap.csv", Character.DIRECTION_UP, true);
 			sceneryGrid.addSceneryObject(position, woodFloor);
 		}
 		else if (id == 32)
