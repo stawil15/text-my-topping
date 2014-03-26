@@ -1,6 +1,8 @@
-Default ,NPC1_Line3 ,Pages can be added in any order. 
-Default ,NPC1_Line1 ,This is the first page of the dialogue ,NPC1_Line2
-Default ,NPC1_Line2 ,This is a second page of the dialogue ,NPC1_Line3
+Boolean ,NPC4_Line1 ,hasWindAxe ,NPC4_getAxe ,NPC4_alreadyHasAxe
+Default ,NPC4_alreadyHasAxe ,You can use the axe to cut down\nwindy things! A miracle of science!
+Default ,NPC4_getAxe ,I don't need this old axe anymore.\nHere you go! ,NPC4_Line2
+SetValue ,NPC4_Line2 ,hasWindAxe ,true ,NPC4_Line3
+Default ,NPC4_Line3 ,You received the axe of the wind!
 Default ,NPC2_Line1 ,Here is a branching Dialog ,NPC2_Line2
 Default ,NPC2_Line2 ,You will be presented with choices\nUse the arrows to choose\nAnd press space to select ,NPC2_Line3
 Branched ,NPC2_Line3 ,5 ,The first choice ,The second choice ,The third choice ,The fourth choice ,What?! Can you repeat that? ,NPC2_Choice1 ,NPC2_Choice2 ,NPC2_Choice3 ,NPC2_Choice4 ,NPC2_Line1

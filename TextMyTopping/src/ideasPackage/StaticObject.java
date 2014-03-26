@@ -86,7 +86,7 @@ public class StaticObject implements Collidable
 	{
 		if (dialog!=null && interactionId == PlayerCharacter.MAIN_INTERACTION)
 		{
-			GUISystem.showDialog(dialog);
+			dialog.showDialog();
 		}
 	}
 

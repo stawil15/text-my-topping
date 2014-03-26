@@ -53,6 +53,7 @@ public class Main extends PApplet
 		MusicManager.initialize();
 		LevelManager.initializeLevelManager(4,4);
 		GlobalBooleanManager.initialize();
+		LevelCreator.initialize();
 		
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);

@@ -18,6 +18,7 @@ public class ValueSetDialog extends Dialog
 	@Override
 	public void showDialog()
 	{
+		PApplet.println("ON VALUE SET DIALOG!");
 		super.showDialog();
 		GlobalBooleanManager.setValue(variableName, value);
 		if (nextDialog != null)

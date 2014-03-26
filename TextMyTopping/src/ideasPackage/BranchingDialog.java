@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import processing.core.PApplet;
+
 public class BranchingDialog extends Dialog implements KeyListener
 {
 	// This type of dialog ends with a choice and allows it to branch
@@ -150,6 +152,13 @@ public class BranchingDialog extends Dialog implements KeyListener
 			}
 		}
 
+	}
+	
+	@Override
+	public void showDialog()
+	{
+		PApplet.println("Showing BRANCHING DIALOG!");
+		super.showDialog();
 	}
 
 	@Override

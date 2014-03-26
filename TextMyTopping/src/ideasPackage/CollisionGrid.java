@@ -145,7 +145,7 @@ public class CollisionGrid
 		helper.draw(collisionGrid);
 	}
 
-	private boolean isValidPosition(GridCoordinate coordinates)
+	public boolean isValidPosition(GridCoordinate coordinates)
 	{
 		if (coordinates == null)
 		{

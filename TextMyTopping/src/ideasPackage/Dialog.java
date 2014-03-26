@@ -57,6 +57,7 @@ public class Dialog
 
 	public void showDialog()
 	{
+		PApplet.println("SHOWING REGULAR DIALOG!");
 		GUISystem.showDialog(this);
 	}
 
@@ -113,6 +114,7 @@ public class Dialog
 				if (nextDialog != null)
 				{
 					GUISystem.showDialog(nextDialog);
+					nextDialog.showDialog();
 				}
 			}
 		} else

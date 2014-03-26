@@ -1,10 +1,29 @@
 package ideasPackage;
 
+import java.util.ArrayList;
+
 public class LevelCreator
 {
 	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor;
 	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock;
-
+	private static BooleanDialog destroyTree;
+	
+	public static void initialize()
+	{
+		destroyTree = new BooleanDialog("hasWindAxe");
+		ArrayList<String> choices = new ArrayList<String>();
+		choices.add("Yes.");
+		choices.add("No.");
+		ArrayList<Dialog> nextDialogs = new ArrayList<Dialog>();
+		DestroyCollidableDialog reallyDestroyTree = new DestroyCollidableDialog(); 
+		reallyDestroyTree.setNextDialog(new Dialog(new String[] {"You used the axe of the wind!"}));
+		nextDialogs.add(reallyDestroyTree);
+		nextDialogs.add(new Dialog(new String[] {"You put the axe away."}));
+		BranchingDialog askToDestroyTree = new BranchingDialog(new String[] {"Would you like to use the axe of the wind?"}, choices, nextDialogs);
+		destroyTree.setTrueDialog(askToDestroyTree);
+		destroyTree.setFalseDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
+	}
+	
 	public LevelCreator()
 	{
 
@@ -23,7 +42,7 @@ public class LevelCreator
 		flower = new SceneryObject(null, "forest\\flower", 2, 20, sceneryGrid, false);
 		tree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 40, false);
 		fastTree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 4, false);
-		fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
+		fastTree.setDialog(destroyTree);
 		invisibleWall = new StaticObject(null, collisionGrid, false);
 		cactus = new StaticObject(null, "desert\\tree", collisionGrid, 4, 40, false);
 		sand = new SceneryObject(null, "desert\\grass", 1, 20, sceneryGrid, false);
@@ -119,13 +138,13 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, snow);
 			collisionGrid.addElement(position, fastSnowTree);
-			fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
+			fastTree.setDialog(destroyTree);
 		}
 		else if (id == 20)
 		{
 			sceneryGrid.addSceneryObject(position, sand);
 			collisionGrid.addElement(position, fastCactus);
-			fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
+			fastTree.setDialog(destroyTree);
 		}
 		else if (id == 4)
 		{

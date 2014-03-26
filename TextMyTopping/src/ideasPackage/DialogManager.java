@@ -46,6 +46,11 @@ public class DialogManager
 		{
 			DialogWithMissingInformation missing =  new DialogWithMissingInformation(getDialog(id), nextId, -1);
 			dialogsWithMissingInfo.add(missing);
+			
+			if (getDialog(id).getClass() == ValueSetDialog.class)
+			{
+				PApplet.println("CANNO FIND NEXT DIALOG OF VALUE SET DIALOG TYPE!");
+			}
 
 		} else
 		{
