@@ -35,7 +35,9 @@ public class Main extends PApplet
 	public static int SPACE_KEY = KeyEvent.VK_SPACE;
 	public static int SHIFT_KEY = KeyEvent.VK_SHIFT;
 	public static PFont font;
+	private static float deltaTime = 1f;
 	
+
 
 	private PlayerCharacter mainCharacter;
 	// Start Processing
@@ -53,7 +55,7 @@ public class Main extends PApplet
 		DialogManager.initializeDialogManager();
 		GUISystem.initialize();
 		MusicManager.initialize();
-		LevelManager.initializeLevelManager(10,4);
+		LevelManager.initializeLevelManager(4,4);
 		GlobalBooleanManager.initialize();
 		LevelCreator.initialize();
 		
@@ -62,10 +64,11 @@ public class Main extends PApplet
 		frame.setTitle("Use Arrow Keys To Move");
 		LevelManager.setActiveLevel("megaSpriteMap.csv", null, -1);
 		//LoadMap("megaSpriteMap.csv",22,23);
+		frameRate(60);
 	}
 
 	public void draw()
-	{
+	{		
 		LevelManager.drawActiveLevel();
 		GUISystem.draw();
 		MusicManager.update();
@@ -73,6 +76,7 @@ public class Main extends PApplet
 		//FPS counter
 		fill(255);
 		text((int)(frameRate),10,20);
+		deltaTime = 60f/frameRate;
 	}
 
 	public static Main getMainObject()
@@ -106,6 +110,11 @@ public class Main extends PApplet
 		getMainObject().loadPixels();
 		return getMainObject().pixels;
 
+	}
+	
+	public static float getDeltaTime()
+	{
+		return deltaTime;
 	}
 
 }

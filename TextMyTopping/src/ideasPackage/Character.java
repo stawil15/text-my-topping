@@ -15,14 +15,13 @@ public class Character implements Collidable
 	private int currentDirection;
 	protected int animationIndex = 0;
 	protected GridCoordinate coordinates;
-	private int currentAnimationFrame;
+	private float currentAnimationFrame;
 	private int animationDuration = 3;
 	private float moveSpeed = 4f;
 	protected float offsetX = 0;
 	protected float offsetY = 0;
 	protected boolean isMoving = false;
 	private int animationFrames;
-
 	public final static int DIRECTION_UP = 0;
 	public final static int DIRECTION_RIGHT = 1;
 	public final static int DIRECTION_DOWN = 2;
@@ -136,7 +135,7 @@ public class Character implements Collidable
 
 	public float getMoveSpeed()
 	{
-		return moveSpeed;
+		return moveSpeed*Main.getDeltaTime();
 	}
 
 	public void setAnimationDuration(int duration)
@@ -203,7 +202,7 @@ public class Character implements Collidable
 		switch (currentDirection)
 		{
 		case DIRECTION_UP:
-			offsetY -= moveSpeed;
+			offsetY -= moveSpeed*Main.getDeltaTime();
 			if (offsetY <= 0)
 			{
 				isMoving = false;
@@ -212,7 +211,7 @@ public class Character implements Collidable
 			}
 			break;
 		case DIRECTION_RIGHT:
-			offsetX += moveSpeed;
+			offsetX += moveSpeed*Main.getDeltaTime();
 			if (offsetX >= 0)
 			{
 				isMoving = false;
@@ -221,7 +220,7 @@ public class Character implements Collidable
 			}
 			break;
 		case DIRECTION_DOWN:
-			offsetY += moveSpeed;
+			offsetY += moveSpeed*Main.getDeltaTime();
 			if (offsetY >= 0)
 			{
 				isMoving = false;
@@ -230,7 +229,7 @@ public class Character implements Collidable
 			}
 			break;
 		case DIRECTION_LEFT:
-			offsetX -= moveSpeed;
+			offsetX -= moveSpeed*Main.getDeltaTime();
 			if (offsetX <= 0)
 			{
 				isMoving = false;
@@ -251,8 +250,8 @@ public class Character implements Collidable
 			return;
 		}
 
-		currentAnimationFrame++;
-		if (currentAnimationFrame == animationDuration)
+		currentAnimationFrame+=Main.getDeltaTime();
+		if (currentAnimationFrame >= animationDuration)
 		{
 			animationIndex++;
 			animationIndex %= animationFrames;

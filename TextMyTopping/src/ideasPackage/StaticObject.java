@@ -11,7 +11,7 @@ public class StaticObject implements Collidable
 
 	private int animationIndex;
 	private int animationDuration;
-	private int currentAnimationFrame;
+	private float currentAnimationFrame;
 	private Dialog dialog;
 	private String imageName;
 	
@@ -64,7 +64,7 @@ public class StaticObject implements Collidable
 
 	private void updateAnimation()
 	{
-		currentAnimationFrame++;
+		currentAnimationFrame+=Main.getDeltaTime();
 		if (currentAnimationFrame >= animationDuration)
 		{
 			animationIndex++;

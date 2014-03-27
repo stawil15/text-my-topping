@@ -12,7 +12,7 @@ public class LevelManager
 	private static PImage transitionImageCurrentMap, transitionImageNextMap;
 	private static float transitionX = 0, transitionY = 0;
 	private static float transitionSpeed = 20f;
-	private static int fadeTimer = 0;
+	private static float fadeTimer = 0;
 	private final static int FRAMES_TO_FADE = 30;
 	
 	public static void initializeLevelManager(int charX, int charY)
@@ -109,7 +109,7 @@ public class LevelManager
 			{
 			case Character.DIRECTION_DOWN:
 				drawTransitionImages(transitionX, transitionY, transitionX, transitionY-Main.SCREEN_HEIGHT);
-				transitionY+=transitionSpeed;
+				transitionY+=transitionSpeed*Main.getDeltaTime();
 				if (transitionY >= Main.SCREEN_HEIGHT)
 				{
 					GUISystem.setDoingTransition(false);
@@ -120,7 +120,7 @@ public class LevelManager
 				break;
 			case Character.DIRECTION_LEFT:
 				drawTransitionImages(transitionX, transitionY, transitionX+Main.SCREEN_WIDTH, transitionY);
-				transitionX-=transitionSpeed;
+				transitionX-=transitionSpeed*Main.getDeltaTime();
 				if (transitionX <= -Main.SCREEN_WIDTH)
 				{
 					GUISystem.setDoingTransition(false);
@@ -131,7 +131,7 @@ public class LevelManager
 				break;
 			case Character.DIRECTION_UP:
 				drawTransitionImages(transitionX, transitionY, transitionX, transitionY+Main.SCREEN_HEIGHT);
-				transitionY-=transitionSpeed;
+				transitionY-=transitionSpeed*Main.getDeltaTime();
 				if (transitionY <= -Main.SCREEN_HEIGHT)
 				{
 					GUISystem.setDoingTransition(false);
@@ -141,7 +141,7 @@ public class LevelManager
 				break;
 			case Character.DIRECTION_RIGHT:
 				drawTransitionImages(transitionX, transitionY, transitionX-Main.SCREEN_WIDTH, transitionY);
-				transitionX+=transitionSpeed;
+				transitionX+=transitionSpeed*Main.getDeltaTime();
 				if (transitionX >= Main.SCREEN_WIDTH)
 				{
 					GUISystem.setDoingTransition(false);
@@ -150,7 +150,7 @@ public class LevelManager
 				}
 				break;
 			case Door.FADE_TRANSITION:
-				fadeTimer++;
+				fadeTimer+=Main.getDeltaTime();
 				Main.getMainObject().background(0);
 				if (fadeTimer < FRAMES_TO_FADE/2)
 				{

@@ -7,6 +7,7 @@ public class GridHelper
 	private Drawable[][] grid;
 	private Camera camera;
 	private HashSet<Drawable> duplicateDrawables;
+	private boolean drewPlayer = false;
 
 	public GridHelper(Drawable[][] grid, Camera camera)
 	{
@@ -23,6 +24,7 @@ public class GridHelper
 
 	public void draw(Drawable[][] grid)
 	{
+		drewPlayer = false;
 		if (camera != null)
 		{
 			int minDrawX = getMinDrawX();
@@ -51,7 +53,18 @@ public class GridHelper
 							}
 						} else
 						{
-							grid[x][y].draw(camera.getCameraOffsetX(), camera.getCameraOffsetY());
+							if (grid[x][y].getClass() == PlayerCharacter.class)
+							{
+								if (!drewPlayer)
+								{
+									drewPlayer = true;
+									grid[x][y].draw(camera.getCameraOffsetX(), camera.getCameraOffsetY());
+								}
+							} else
+							{
+								grid[x][y].draw(camera.getCameraOffsetX(), camera.getCameraOffsetY());
+							}
+
 						}
 
 					}

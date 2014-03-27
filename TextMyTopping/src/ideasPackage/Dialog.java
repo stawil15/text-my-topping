@@ -76,7 +76,7 @@ public class Dialog
 
 			if (!finishedDisplayingText)
 			{
-				currentPositionInText += dialogSpeed;
+				currentPositionInText += dialogSpeed*Main.getDeltaTime();
 				GUISystem.playDialogSound();
 			}
 

@@ -8,7 +8,7 @@ public class SceneryObject implements Drawable
 
 	private PImage[] sceneryImages;
 	protected GridCoordinate coordinates;
-	private int currentAnimationFrame;
+	private float currentAnimationFrame;
 	private int animationDuration;
 	private int animationIndex;
 	PApplet parent;
@@ -60,8 +60,8 @@ public class SceneryObject implements Drawable
 
 	public void updateAnimation()
 	{
-		currentAnimationFrame++;
-		if (currentAnimationFrame == animationDuration)
+		currentAnimationFrame+=Main.getDeltaTime();
+		if (currentAnimationFrame >= animationDuration)
 		{
 			currentAnimationFrame = 0;
 			animationIndex++;

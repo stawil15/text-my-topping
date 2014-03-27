@@ -15,7 +15,7 @@ public class MusicManager
 	private static String currentSong;
 	private final static int FRAMES_TO_FADE = 120;
 	private final static int SMALLEST_GAIN = -40;
-	private static int fadeTimer = FRAMES_TO_FADE;
+	private static float fadeTimer = FRAMES_TO_FADE;
 	private static String newLevel = "";
 
 	public static void initialize()
@@ -56,9 +56,9 @@ public class MusicManager
 		boolean doSwitch = false;
 		if (fadeTimer < FRAMES_TO_FADE)
 		{
-			fadeTimer++;
+			fadeTimer+=Main.getDeltaTime();
 			player.setGain((SMALLEST_GAIN*1.0f)/(FRAMES_TO_FADE)*fadeTimer);
-			if (fadeTimer == FRAMES_TO_FADE)
+			if (fadeTimer >= FRAMES_TO_FADE)
 			{
 				doSwitch = true;
 			}
