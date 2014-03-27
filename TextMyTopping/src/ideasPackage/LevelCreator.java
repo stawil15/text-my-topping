@@ -71,12 +71,8 @@ public class LevelCreator
 	public void addGameObject(int id, CollisionGrid collisionGrid, SceneryGrid sceneryGrid, int x, int y, int xOffset, int yOffset)
 	{
 		GridCoordinate position = new GridCoordinate(x + xOffset, y+yOffset);
-		if (id == 9)
-		{
-			collisionGrid.addElement(position, invisibleWall);
-			sceneryGrid.addSceneryObject(position, grass);
-		}
-		else if (id == 1)
+		
+		if (id == 1)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
 			collisionGrid.addElement(position, tree);
@@ -90,6 +86,11 @@ public class LevelCreator
 			sceneryGrid.addSceneryObject(position, grass);
 			collisionGrid.addElement(position, fastTree);
 
+		}
+		else if (id == 4)
+		{
+			new MoveableObject(position, 0, 1, "rock", collisionGrid, true);
+			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 5)
 		{
@@ -110,11 +111,18 @@ public class LevelCreator
 		{
 			new Door(position, collisionGrid, "megaSpriteMap.csv","cabin.csv", Character.DIRECTION_DOWN, "talkedToNPCInCabin", false, true, new Dialog(new String[] {"The door is locked."}));
 		}
-		else if (id == -1)
+		else if (id == 9)
+		{
+			collisionGrid.addElement(position, invisibleWall);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 10)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
-			new Hole(position,"forest\\hole",collisionGrid,true);
+			collisionGrid.addElement(position, fastTree);
+			fastTree.setDialog(new Dialog(new String[] { "[Tree intensifies]" }));
 		}
+		
 		else if (id == 11) // start desert
 		{
 			sceneryGrid.addSceneryObject(position, sand);
@@ -151,11 +159,7 @@ public class LevelCreator
 			collisionGrid.addElement(position, fastCactus);
 			fastTree.setDialog(destroyTree);
 		}
-		else if (id == 4)
-		{
-			new MoveableObject(position, 0, 1, "rock", collisionGrid, true);
-			sceneryGrid.addSceneryObject(position, grass);
-		}
+		
 		else if (id == 30)
 		{
 			sceneryGrid.addSceneryObject(position, woodFloor);
@@ -169,6 +173,11 @@ public class LevelCreator
 		{
 			collisionGrid.addElement(position, woodBlock);
 
+		}
+		else if (id == -1)
+		{
+			sceneryGrid.addSceneryObject(position, grass);
+			new Hole(position,"forest\\hole",collisionGrid,true);
 		}
 		else
 		{
