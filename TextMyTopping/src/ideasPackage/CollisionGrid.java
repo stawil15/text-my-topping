@@ -1,5 +1,6 @@
 package ideasPackage;
 
+import javazoom.jl.player.Player;
 import processing.core.PApplet;
 
 public class CollisionGrid
@@ -7,11 +8,13 @@ public class CollisionGrid
 	private Collidable collisionGrid[][];
 	private Camera camera;
 	private GridHelper helper;
+	private SceneryGrid correspondingSceneryGrid;
 
-	public CollisionGrid(int xEntities, int yEntities)
+	public CollisionGrid(int xEntities, int yEntities, SceneryGrid correspondingSceneryGrid)
 	{
 		collisionGrid = new Collidable[xEntities][yEntities];
 		helper = new GridHelper(collisionGrid, camera);
+		this.correspondingSceneryGrid = correspondingSceneryGrid;
 	}
 
 	public void setCamera(Camera camera)
@@ -65,9 +68,16 @@ public class CollisionGrid
 				if (getEntityAt(coordinate).getClass() != MoveableObject.class)
 					doInteraction(getEntityAt(coordinate), PlayerCharacter.BUMP_INTERACTION);
 			}
-			else
+			else if (entity.getClass() == MoveableObject.class)
 			{
-				
+				Collidable nextEntity = getEntityAt(getNextCoordinate(entity));
+				if (nextEntity != null && nextEntity.getClass() == Hole.class)
+				{
+					Hole hole = (Hole)nextEntity;
+					MoveableObject object = (MoveableObject)entity;
+					hole.fillWithMovableObject(object);
+					return true;
+				}
 			}
 			return false;
 		}
@@ -235,5 +245,10 @@ public class CollisionGrid
 				}
 			}
 		}
+	}
+	
+	public SceneryGrid getCorrespondingSceneryGrid()
+	{
+		return correspondingSceneryGrid;
 	}
 }

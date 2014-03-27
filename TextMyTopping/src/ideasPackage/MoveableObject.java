@@ -6,10 +6,15 @@ public class MoveableObject extends Character
 {
 
 	public boolean updatePlayerDirectionWhenFinishedMoving = false;
+	private boolean destroyOnMove = false;
+	private SceneryGrid sceneryGrid;
+	private SceneryHole sceneryHole;
+	private PImage holeImage;
 	public MoveableObject(GridCoordinate coordinates, int initialDirection, int animationFrames, String imageName,
 			CollisionGrid c, boolean addToGrid)
 	{
 		super(coordinates, initialDirection, animationFrames, imageName, c, "moveable", addToGrid);
+		holeImage = parent.loadImage("/data/sprites/moveable/" + imageName + "/inHole.png");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -57,5 +62,23 @@ public class MoveableObject extends Character
 	{
 		if (updatePlayerDirectionWhenFinishedMoving)
 			Main.getPlayer().setDirection(getOppositeDirection());
+		if (destroyOnMove)
+		{
+			collisionGrid.removeElementAt(coordinates);
+			sceneryHole.setMoveableImage(holeImage);
+		}
+	}
+	
+	public PImage getImage()
+	{
+		return getImageToDraw();
+	}
+	
+	public void setDestroyOnMove(SceneryGrid grid, SceneryHole hole)
+	{
+		destroyOnMove = true;
+		sceneryHole = hole;
+		sceneryGrid = grid;
+		
 	}
 }

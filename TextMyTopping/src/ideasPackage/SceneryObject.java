@@ -7,12 +7,26 @@ public class SceneryObject implements Drawable
 {
 
 	private PImage[] sceneryImages;
-	private GridCoordinate coordinates;
+	protected GridCoordinate coordinates;
 	private int currentAnimationFrame;
 	private int animationDuration;
 	private int animationIndex;
 	PApplet parent;
 	
+	protected SceneryObject(GridCoordinate coordinates, PImage image, SceneryGrid sceneryGrid, boolean addToGrid)
+	{
+		currentAnimationFrame = 0;
+		animationIndex = 0;
+		animationDuration = 20;
+		sceneryImages = new PImage[1];
+		sceneryImages[0] = image;
+		this.coordinates = coordinates;
+		if (addToGrid)
+		{
+			sceneryGrid.forceAddObject(coordinates, this);
+		}
+		parent = Main.getMainObject();
+	}
 	public SceneryObject(GridCoordinate coordinates, String imageName, int animationFrames, int animationDuration,
 			SceneryGrid sceneryGrid, boolean addToGrid)
 	{
@@ -41,6 +55,7 @@ public class SceneryObject implements Drawable
 		parent.image(sceneryImages[animationIndex], coordinates.getGridX() * Main.GRID_SIZE + cameraOffsetX,
 				coordinates.getGridY() * Main.GRID_SIZE + cameraOffsetY);
 		updateAnimation();
+		
 	}
 
 	public void updateAnimation()
@@ -70,5 +85,10 @@ public class SceneryObject implements Drawable
 		if (updateAnimation)
 			updateAnimation();
 
+	}
+	
+	public PImage getImage()
+	{
+		return sceneryImages[animationIndex];
 	}
 }

@@ -25,6 +25,11 @@ public class SceneryGrid
 			sceneryGrid[coordinates.getGridX()][coordinates.getGridY()] = entity;
 		}
 	}
+	
+	public void forceAddObject(GridCoordinate coordinates, SceneryObject entity)
+	{
+		sceneryGrid[coordinates.getGridX()][coordinates.getGridY()] = entity;
+	}
 
 	public void draw()
 	{
@@ -34,6 +39,11 @@ public class SceneryGrid
 	public void addDuplicateObject(Drawable entity)
 	{
 		helper.addDuplicate(entity);
+	}
+	
+	public SceneryObject getObjectAt(GridCoordinate coordinate)
+	{
+		return sceneryGrid[coordinate.getGridX()][coordinate.getGridY()];
 	}
 
 }

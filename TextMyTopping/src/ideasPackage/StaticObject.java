@@ -17,7 +17,7 @@ public class StaticObject implements Collidable
 	
 	private int interactionDurationTimer = 0;
 	private int previousAnimationDuration = 0;
-	private final static int SPECIAL_ANIMATION_DURATION = 120;
+	private final static int SPECIAL_ANIMATION_DURATION = 60;
 
 	public StaticObject(GridCoordinate coordinates, String imageName, CollisionGrid c, int animationFrames,
 			int anamationDuration, boolean addToGrid)
@@ -105,12 +105,16 @@ public class StaticObject implements Collidable
 			dialog.showDialog();
 		}
 		
-		if (imageName.contains("tree") || imageName.contains("cactus"))
+		if (imageName != null && (imageName.contains("tree") || imageName.contains("cactus")))
 		{
 			if (GlobalBooleanManager.getValue("hasWindAxe"))
 			{
 				this.animationDuration--;
-				interactionDurationTimer = SPECIAL_ANIMATION_DURATION;
+				interactionDurationTimer += SPECIAL_ANIMATION_DURATION;
+				if (interactionDurationTimer > SPECIAL_ANIMATION_DURATION*10)
+				{
+					interactionDurationTimer = SPECIAL_ANIMATION_DURATION*10;
+				}
 			}
 		}
 	}
@@ -125,5 +129,10 @@ public class StaticObject implements Collidable
 				updateAnimation();
 		}
 
+	}
+	
+	public PImage getImage()
+	{
+		return images[animationIndex];
 	}
 }

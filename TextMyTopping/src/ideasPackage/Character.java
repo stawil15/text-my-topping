@@ -334,7 +334,7 @@ public class Character implements Collidable
 
 	}
 
-	private PImage getImageToDraw()
+	protected PImage getImageToDraw()
 	{
 		PImage imageTodraw = null;
 		switch (currentDirection)

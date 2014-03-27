@@ -35,9 +35,9 @@ public class LevelCreator
 		readCSV maploader = new readCSV();
 		int[][] map = maploader.readMapData(levelName);
 		maploader.readDialogueData(levelName);
-		CollisionGrid collisionGrid = new CollisionGrid(map.length, map[0].length);
 		SceneryGrid sceneryGrid = new SceneryGrid(map.length, map[0].length);
-
+		CollisionGrid collisionGrid = new CollisionGrid(map.length, map[0].length, sceneryGrid);
+		
 		grass = new SceneryObject(null, "forest\\grass", 1, 20, sceneryGrid, false);
 		flower = new SceneryObject(null, "forest\\flower", 2, 20, sceneryGrid, false);
 		tree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 40, false);
@@ -109,6 +109,11 @@ public class LevelCreator
 		else if (id == 8)
 		{
 			new Door(position, collisionGrid, "megaSpriteMap.csv","cabin.csv", Character.DIRECTION_DOWN, "talkedToNPCInCabin", false, true, new Dialog(new String[] {"The door is locked."}));
+		}
+		else if (id == -1)
+		{
+			sceneryGrid.addSceneryObject(position, grass);
+			new Hole(position,"forest\\hole",collisionGrid,true);
 		}
 		else if (id == 11) // start desert
 		{
