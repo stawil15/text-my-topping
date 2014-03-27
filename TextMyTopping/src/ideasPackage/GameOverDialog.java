@@ -5,7 +5,7 @@ import processing.core.PImage;
 public class GameOverDialog extends Dialog
 {
 
-	private PImage gameOverImage;
+	protected PImage gameOverImage;
 	public GameOverDialog(String[] lines)
 	{
 		super(lines);

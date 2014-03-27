@@ -19,6 +19,7 @@ public class readCSV
 	private final static String TYPE_BOOLEAN_DIALOG = "Boolean";
 	private final static String TYPE_SETVALUE_DIALOG = "SetValue";
 	private final static String TYPE_GAMEOVER_DIALOG = "GameOver";
+	private final static String TYPE_GAMEWIN_DIALOG = "GameWin";
 	public final static String NULL_DIALOG = "null";
 
 	public int[][] readMapData(String filename)
@@ -262,6 +263,15 @@ public class readCSV
 				else if (dialogRow[0].equals(TYPE_GAMEOVER_DIALOG))
 				{
 					DialogManager.addDialog(new GameOverDialog(new String[] {dialogRow[2]}), dialogRow[1], dialogRow);
+					if (dialogRow[3] != null && !dialogRow[3].equals(NULL_DIALOG))
+					{
+						DialogManager.setNextDialog(dialogRow[3], dialogRow[1]);
+					}
+
+				}
+				else if (dialogRow[0].equals(TYPE_GAMEWIN_DIALOG))
+				{
+					DialogManager.addDialog(new GameWinDialog(new String[] {dialogRow[2]}), dialogRow[1], dialogRow);
 					if (dialogRow[3] != null && !dialogRow[3].equals(NULL_DIALOG))
 					{
 						DialogManager.setNextDialog(dialogRow[3], dialogRow[1]);

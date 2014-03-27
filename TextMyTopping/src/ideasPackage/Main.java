@@ -34,6 +34,7 @@ public class Main extends PApplet
 	public static int DOWN_KEY = KeyEvent.VK_DOWN;
 	public static int SPACE_KEY = KeyEvent.VK_SPACE;
 	public static int SHIFT_KEY = KeyEvent.VK_SHIFT;
+	public static PFont font;
 	
 
 	private PlayerCharacter mainCharacter;
@@ -47,11 +48,12 @@ public class Main extends PApplet
 	public void setup()
 	{
 		mainClass = this;
+		font = loadFont("data\\fonts\\MiniPower.vlw");
 		
 		DialogManager.initializeDialogManager();
 		GUISystem.initialize();
 		MusicManager.initialize();
-		LevelManager.initializeLevelManager(4,4);
+		LevelManager.initializeLevelManager(10,4);
 		GlobalBooleanManager.initialize();
 		LevelCreator.initialize();
 		

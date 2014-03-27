@@ -28,7 +28,7 @@ public class Dialog
 	{
 		parent = Main.getMainObject();
 		this.lines = lines;
-		dialogFont = parent.loadFont("data\\fonts\\MiniPower.vlw");
+		dialogFont = Main.font;
 		parent.textFont(dialogFont);
 		borderColor = parent.color(0);
 		textColor = parent.color(0);

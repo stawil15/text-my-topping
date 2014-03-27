@@ -5,7 +5,8 @@ Default ,NPC2_Line1 ,Here is a branching Dialog ,NPC2_Line2
 Default ,NPC2_Line2 ,You will be presented with choices\nUse the arrows to choose\nAnd press space to select ,NPC2_Line3
 Branched ,NPC2_Line3 ,5 ,The first choice ,The second choice ,The third choice ,The fourth choice ,What?! Can you repeat that? ,NPC2_Choice1 ,NPC2_Choice2 ,NPC2_Choice3 ,NPC2_Choice4 ,NPC2_Line1
 Default ,NPC2_Choice1 ,The first choice 
-Default ,NPC2_Choice2 ,The second choice
+Default ,NPC2_Choice2 ,Oh\c I found this phone one the ground.\nHere you go. ,NPC2_Choice2Line2
+GameWin ,NPC2_Choice2Line2 ,You found your phone!\nYou texted your friend "pickles", your \nfavorite pizza topping.
 Default ,NPC2_Choice3 ,The third choice
 Default ,NPC2_Choice4 ,The fourth choice\c prepare for another branch! ,NPC2_Line4
 Branched ,NPC2_Line4 ,2 ,This is a test ,and so is this ,NPC2_Choice21 ,NPC2_Choice22
