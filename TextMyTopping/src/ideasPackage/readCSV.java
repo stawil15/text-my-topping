@@ -18,6 +18,7 @@ public class readCSV
 	private final static String TYPE_BRANCHING_DIALOG = "Branched";
 	private final static String TYPE_BOOLEAN_DIALOG = "Boolean";
 	private final static String TYPE_SETVALUE_DIALOG = "SetValue";
+	private final static String TYPE_GAMEOVER_DIALOG = "GameOver";
 	public final static String NULL_DIALOG = "null";
 
 	public int[][] readMapData(String filename)
@@ -257,6 +258,15 @@ public class readCSV
 						DialogManager.setNextDialog(dialogRow[4], dialogRow[1]);
 						PApplet.println("Set next dialog of " + dialogRow[1] + " to: " + dialogRow[4]);
 					}
+				}
+				else if (dialogRow[0].equals(TYPE_GAMEOVER_DIALOG))
+				{
+					DialogManager.addDialog(new GameOverDialog(new String[] {dialogRow[2]}), dialogRow[1], dialogRow);
+					if (dialogRow[3] != null && !dialogRow[3].equals(NULL_DIALOG))
+					{
+						DialogManager.setNextDialog(dialogRow[3], dialogRow[1]);
+					}
+
 				}
 
 			}

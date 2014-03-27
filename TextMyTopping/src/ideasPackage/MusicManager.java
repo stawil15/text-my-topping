@@ -75,4 +75,11 @@ public class MusicManager
 			player.setGain(0);
 		}
 	}
+	
+	public static void playSongOnce(String song)
+	{
+		player.close();
+		player = minim.loadFile("data/audio/bgm/" + song);
+		player.play();
+	}
 }
