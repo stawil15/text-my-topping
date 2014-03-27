@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class LevelCreator
 {
 	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor;
-	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock;
+	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock,intenseTree;
 	private static BooleanDialog destroyTree;
 	
 	public static void initialize()
@@ -43,6 +43,7 @@ public class LevelCreator
 		tree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 40, false);
 		fastTree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 4, false);
 		fastTree.setDialog(destroyTree);
+		intenseTree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 4, false);
 		invisibleWall = new StaticObject(null, collisionGrid, false);
 		cactus = new StaticObject(null, "desert\\tree", collisionGrid, 4, 40, false);
 		sand = new SceneryObject(null, "desert\\grass", 1, 20, sceneryGrid, false);
@@ -119,8 +120,8 @@ public class LevelCreator
 		else if (id == 10)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
-			collisionGrid.addElement(position, fastTree);
-			fastTree.setDialog(new Dialog(new String[] { "[Tree intensifies]" }));
+			collisionGrid.addElement(position, intenseTree);
+			intenseTree.setDialog(new Dialog(new String[] { "[Tree intensifies]" }));
 		}
 		
 		else if (id == 11) // start desert
@@ -138,6 +139,12 @@ public class LevelCreator
 			collisionGrid.addElement(position, fastCactus);
 			fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
 		}
+		else if (id == 20)
+		{
+			sceneryGrid.addSceneryObject(position, sand);
+			collisionGrid.addElement(position, fastCactus);
+			fastTree.setDialog(destroyTree);
+		}
 		else if (id == 21) // start snow
 		{
 			sceneryGrid.addSceneryObject(position, snow);
@@ -153,13 +160,6 @@ public class LevelCreator
 			collisionGrid.addElement(position, fastSnowTree);
 			fastTree.setDialog(destroyTree);
 		}
-		else if (id == 20)
-		{
-			sceneryGrid.addSceneryObject(position, sand);
-			collisionGrid.addElement(position, fastCactus);
-			fastTree.setDialog(destroyTree);
-		}
-		
 		else if (id == 30)
 		{
 			sceneryGrid.addSceneryObject(position, woodFloor);
