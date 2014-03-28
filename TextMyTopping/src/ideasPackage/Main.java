@@ -1,6 +1,8 @@
 package ideasPackage;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
 import processing.core.*;
 import ddf.minim.*;
 
@@ -35,8 +37,9 @@ public class Main extends PApplet
 	public static int SPACE_KEY = KeyEvent.VK_SPACE;
 	public static int SHIFT_KEY = KeyEvent.VK_SHIFT;
 	public static PFont font;
-	private static float deltaTime = 1f;
-	
+	private static float timeMultiplier = 1f;
+	private boolean loaded = false;
+	private Dialog enterName;
 
 
 	private PlayerCharacter mainCharacter;
@@ -57,26 +60,63 @@ public class Main extends PApplet
 		MusicManager.initialize();
 		LevelManager.initializeLevelManager(4,4);
 		GlobalBooleanManager.initialize();
+		GlobalStringManager.initialize();
 		LevelCreator.initialize();
 		
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
-		frame.setTitle("Use Arrow Keys To Move");
-		LevelManager.setActiveLevel("megaSpriteMap.csv", null, -1);
+		frame.setTitle("Text My Topping");
+		
 		//LoadMap("megaSpriteMap.csv",22,23);
 		frameRate(60);
+		ArrayList<String> choices = new ArrayList<String>();
+		choices.add("Start Game");
+		choices.add("Exit");
+		MainMenu menu = new MainMenu(loadImage("/data/sprites/MainMenu.png"),choices);
+		
+		enterName = new Dialog(new String[] {"Hello good sir. What is your name?"});
+		
+		ValueSetStringDialog namePrompt = new ValueSetStringDialog("yourName", "What is your name?", "Enter a name.");
+		enterName.setNextDialog(namePrompt);
+		
+		Dialog welcomeDialog = new Dialog(new String[] {"Welcome, \\NAME!","Now, what is the name of your worst enemy?"});
+		ValueSetStringDialog enemyPrompt = new ValueSetStringDialog("enemyName", "What is the name of your worst enemy?", "Enter another name.");
+		welcomeDialog.setNextDialog(enemyPrompt);
+		Dialog explenationDialog = new Dialog(new String[] {"Well, as it turns out, \\ENEMY stole your\ncell phone."
+				+ " This happened as you were texting \nyour friend your favorite pizza topping.",
+				"Now, if you do not get your cell phone \nback, you may not get the topping \nyou wanted.", "It is your duty to"
+				+ " secure your \ncell phone and teach \\ENEMY who's boss."});
+		enemyPrompt.setNextDialog(explenationDialog);
+		
+		explenationDialog.setNextDialog(new Dialog(new String[] {"Use the arrow keys to move and press space\nto interact with things!"}));
+		
+		
+		
+		
+		namePrompt.setNextDialog(welcomeDialog);
+		menu.showDialog();
 	}
 
 	public void draw()
 	{		
-		LevelManager.drawActiveLevel();
+		if (!loaded && !GUISystem.showingDialog())
+		{
+			loaded = true;
+			GUISystem.setDoingTransition(true);
+			LevelManager.setActiveLevel("megaSpriteMap.csv", null, Character.DIRECTION_UP);
+			enterName.showDialog();
+			
+		}
+		else
+		{
+			LevelManager.drawActiveLevel();
+		}
 		GUISystem.draw();
 		MusicManager.update();
-		
 		//FPS counter
 		fill(255);
-		text((int)(frameRate),10,20);
-		deltaTime = 60f/frameRate;
+		//text((int)(frameRate),10,20);
+		timeMultiplier = 60f/frameRate;
 	}
 
 	public static Main getMainObject()
@@ -112,9 +152,9 @@ public class Main extends PApplet
 
 	}
 	
-	public static float getDeltaTime()
+	public static float getTimeMultiplier()
 	{
-		return deltaTime;
+		return timeMultiplier;
 	}
 
 }

@@ -11,8 +11,8 @@ public class BranchingDialog extends Dialog implements KeyListener
 	// This type of dialog ends with a choice and allows it to branch
 	// to other dialogs.
 	
-	private boolean atSelection; // Whether it is time to select a choice
-	private int currentSelection; // The current selection
+	protected boolean atSelection; // Whether it is time to select a choice
+	protected int currentSelection; // The current selection
 	private final static int SELECTION_LINES = 3; // How many lines to display while selecting
 	private int firstLine = 0; // Keeps track of which line to diplay
 
@@ -148,7 +148,6 @@ public class BranchingDialog extends Dialog implements KeyListener
 			if (event.getKeyCode() == KeyEvent.VK_SPACE)
 			{
 				selectChoice(currentSelection);
-
 			}
 		}
 
@@ -157,7 +156,6 @@ public class BranchingDialog extends Dialog implements KeyListener
 	@Override
 	public void showDialog()
 	{
-		PApplet.println("Showing BRANCHING DIALOG!");
 		super.showDialog();
 	}
 

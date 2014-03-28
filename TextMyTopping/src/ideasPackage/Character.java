@@ -135,7 +135,7 @@ public class Character implements Collidable
 
 	public float getMoveSpeed()
 	{
-		return moveSpeed*Main.getDeltaTime();
+		return moveSpeed*Main.getTimeMultiplier();
 	}
 
 	public void setAnimationDuration(int duration)
@@ -202,7 +202,7 @@ public class Character implements Collidable
 		switch (currentDirection)
 		{
 		case DIRECTION_UP:
-			offsetY -= moveSpeed*Main.getDeltaTime();
+			offsetY -= moveSpeed*Main.getTimeMultiplier();
 			if (offsetY <= 0)
 			{
 				isMoving = false;
@@ -211,7 +211,7 @@ public class Character implements Collidable
 			}
 			break;
 		case DIRECTION_RIGHT:
-			offsetX += moveSpeed*Main.getDeltaTime();
+			offsetX += moveSpeed*Main.getTimeMultiplier();
 			if (offsetX >= 0)
 			{
 				isMoving = false;
@@ -220,7 +220,7 @@ public class Character implements Collidable
 			}
 			break;
 		case DIRECTION_DOWN:
-			offsetY += moveSpeed*Main.getDeltaTime();
+			offsetY += moveSpeed*Main.getTimeMultiplier();
 			if (offsetY >= 0)
 			{
 				isMoving = false;
@@ -229,7 +229,7 @@ public class Character implements Collidable
 			}
 			break;
 		case DIRECTION_LEFT:
-			offsetX -= moveSpeed*Main.getDeltaTime();
+			offsetX -= moveSpeed*Main.getTimeMultiplier();
 			if (offsetX <= 0)
 			{
 				isMoving = false;
@@ -250,7 +250,7 @@ public class Character implements Collidable
 			return;
 		}
 
-		currentAnimationFrame+=Main.getDeltaTime();
+		currentAnimationFrame+=Main.getTimeMultiplier();
 		if (currentAnimationFrame >= animationDuration)
 		{
 			animationIndex++;

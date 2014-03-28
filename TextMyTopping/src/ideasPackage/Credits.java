@@ -40,7 +40,7 @@ public class Credits
 		buffer.textSize(56);
 		buffer.background(buffer.color(1,1,1,196));
 		buffer.text(credits,350,positionY);
-		positionY += textSpeed*Main.getDeltaTime();
+		positionY += textSpeed*Main.getTimeMultiplier();
 		buffer.endDraw();
 		buffer.loadPixels();
 		Main.getMainObject().image(buffer, 0, 430);

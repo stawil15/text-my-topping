@@ -41,12 +41,6 @@ public class readCSV
 			//First two positions in CSV contain array dimensions
 			map = new int[Integer.parseInt(dimmensions[0])][Integer.parseInt(dimmensions[1])];
 
-			//Print for debugging
-			System.out.println(dimmensions[0]);
-			System.out.println(dimmensions[1]);
-			System.out.println(Integer.parseInt(dimmensions[0]));
-			System.out.println(Integer.parseInt(dimmensions[1]));
-
 			//Makes the rest of the CSV into a 2D array
 			for (int i = 0; i < Integer.parseInt(dimmensions[1]); i++)
 			{
@@ -82,8 +76,6 @@ public class readCSV
 				}
 			}
 		}
-
-		System.out.println("Done reading CSV");
 		return map;
 	}
 
@@ -96,14 +88,12 @@ public class readCSV
 		String line = "";
 		String splitBy = " ,";
 
-		System.out.println("Started");
 
 		NPC = new String[getLinesInFile(csvFileToRead)][5];
 
 		try
 		{
 			br = new BufferedReader(new FileReader(csvFileToRead));
-			System.out.println("test");
 			int i = 0;
 
 			while (line != null)
@@ -126,9 +116,7 @@ public class readCSV
 					{
 						NPC[x][y] = NPC[x][y].replaceAll("\\\\n", "\n");
 					}
-					System.out.print(NPC[x][y] + " | ");
 				}
-				System.out.println();
 			}
 
 		} catch (FileNotFoundException e)
@@ -154,7 +142,6 @@ public class readCSV
 			}
 		}
 
-		System.out.println("Done reading CSV");
 		return NPC;
 	}
 
@@ -194,9 +181,7 @@ public class readCSV
 						rawDialogs[x][y] = rawDialogs[x][y].replaceAll("\\\\n", "\n");
 						rawDialogs[x][y] = rawDialogs[x][y].replaceAll("\\\\c", ",");
 					}
-					System.out.print(rawDialogs[x][y] + " | ");
 				}
-				System.out.println();
 			}
 
 		} catch (FileNotFoundException e)
@@ -230,12 +215,10 @@ public class readCSV
 					ArrayList<Dialog> responses = new ArrayList<Dialog>();
 
 					int numberOfOptions = Integer.parseInt(dialogRow[2]);
-					PApplet.println("NUM OF OPTIONS: " + numberOfOptions);
 
 					for (int optionIndex = 0; optionIndex < numberOfOptions; optionIndex++)
 					{
 						choices.add(dialogRow[3 + optionIndex]);
-						PApplet.println("Option " + numberOfOptions + ": " + dialogRow[3 + optionIndex]);
 						responses.add(DialogManager.getDialog(dialogRow[3 + numberOfOptions + optionIndex]));
 
 					}
@@ -253,11 +236,10 @@ public class readCSV
 				{
 					String variableName = dialogRow[2];
 					boolean value = Boolean.parseBoolean(dialogRow[3]);
-					DialogManager.addDialog(new ValueSetDialog(variableName, value), dialogRow[1], dialogRow);
+					DialogManager.addDialog(new ValueSetBooleanDialog(variableName, value), dialogRow[1], dialogRow);
 					if (dialogRow[4] != null && !dialogRow[4].equals(NULL_DIALOG))
 					{
 						DialogManager.setNextDialog(dialogRow[4], dialogRow[1]);
-						PApplet.println("Set next dialog of " + dialogRow[1] + " to: " + dialogRow[4]);
 					}
 				}
 				else if (dialogRow[0].equals(TYPE_GAMEOVER_DIALOG))

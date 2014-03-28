@@ -34,7 +34,6 @@ public class BooleanDialog extends Dialog
 	@Override
 	public void showDialog()
 	{
-		PApplet.println("SHOWING BOOLEAN DIALOG!");
 		if (GlobalBooleanManager.getValue(variableName))
 		{
 			if (trueDialog != null)

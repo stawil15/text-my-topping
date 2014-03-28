@@ -64,7 +64,7 @@ public class StaticObject implements Collidable
 
 	private void updateAnimation()
 	{
-		currentAnimationFrame+=Main.getDeltaTime();
+		currentAnimationFrame+=Main.getTimeMultiplier();
 		if (currentAnimationFrame >= animationDuration)
 		{
 			animationIndex++;

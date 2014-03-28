@@ -60,7 +60,7 @@ public class SceneryObject implements Drawable
 
 	public void updateAnimation()
 	{
-		currentAnimationFrame+=Main.getDeltaTime();
+		currentAnimationFrame+=Main.getTimeMultiplier();
 		if (currentAnimationFrame >= animationDuration)
 		{
 			currentAnimationFrame = 0;

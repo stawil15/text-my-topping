@@ -1,6 +1,5 @@
 package ideasPackage;
 
-
 import processing.core.*;
 
 public class Dialog
@@ -8,7 +7,7 @@ public class Dialog
 	protected String[] lines;
 	private PFont dialogFont;
 	protected Main parent;
-	//private Dialog nextDialog;
+	// private Dialog nextDialog;
 	protected static float dialogSpeed = .5f;
 	protected int currentDialogLine = 0;
 	protected float impatientPersonCharactersToAdvance = 5f;
@@ -24,6 +23,7 @@ public class Dialog
 	protected float currentPositionInText;
 	protected boolean finishedDisplayingText;
 	protected Dialog nextDialog;
+
 	public Dialog(String[] lines)
 	{
 		parent = Main.getMainObject();
@@ -57,26 +57,32 @@ public class Dialog
 
 	public void showDialog()
 	{
-		PApplet.println("SHOWING REGULAR DIALOG!");
 		GUISystem.showDialog(this);
+		if (lines != null && lines.length > 0)
+		{
+			for (int index = 0; index < lines.length; index++)
+			{
+				lines[index] = lines[index].replaceAll("\\\\NAME", GlobalStringManager.getString("yourName"));
+				lines[index] = lines[index].replaceAll("\\\\ENEMY", GlobalStringManager.getString("enemyName"));
+			}
+		}
 	}
 
 	public void drawDialog()
 	{
 
-		if (lines!=null && lines.length > 0)
+		if (lines != null && lines.length > 0)
 		{
 			float offsetX = (parent.width - width) / 2;
 			parent.stroke(borderColor);
 			parent.strokeWeight(2);
 			parent.fill(backgroundColor);
-			parent.rect(offsetX, parent.height - borderY - height, width,
-					height);
+			parent.rect(offsetX, parent.height - borderY - height, width, height);
 			parent.fill(textColor);
 
 			if (!finishedDisplayingText)
 			{
-				currentPositionInText += dialogSpeed*Main.getDeltaTime();
+				currentPositionInText += dialogSpeed * Main.getTimeMultiplier();
 				GUISystem.playDialogSound();
 			}
 
@@ -88,10 +94,8 @@ public class Dialog
 				finishedDisplayingText = true;
 			}
 
-
-			parent.text(lines[currentDialogLine].substring(0, subStringLength),
-					offsetX + offsetTextX, parent.height - borderY - height
-							+ offsetTextY);
+			parent.text(lines[currentDialogLine].substring(0, subStringLength), offsetX + offsetTextX, parent.height
+					- borderY - height + offsetTextY);
 		}
 	}
 
@@ -122,7 +126,7 @@ public class Dialog
 			currentPositionInText += impatientPersonCharactersToAdvance;
 		}
 	}
-	
+
 	public void setNextDialog(Dialog d)
 	{
 		nextDialog = d;

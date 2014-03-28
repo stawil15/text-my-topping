@@ -46,11 +46,6 @@ public class DialogManager
 		{
 			DialogWithMissingInformation missing =  new DialogWithMissingInformation(getDialog(id), nextId, -1);
 			dialogsWithMissingInfo.add(missing);
-			
-			if (getDialog(id).getClass() == ValueSetDialog.class)
-			{
-				PApplet.println("CANNO FIND NEXT DIALOG OF VALUE SET DIALOG TYPE!");
-			}
 
 		} else
 		{
@@ -70,7 +65,6 @@ public class DialogManager
 		{
 			BooleanDialog dialogToSet = (BooleanDialog)dialogs.get(id);
 			dialogToSet.setTrueDialog(getDialog(trueId));
-			PApplet.println("Set True Dialog");
 		}
 	}
 	
@@ -85,7 +79,6 @@ public class DialogManager
 		{
 			BooleanDialog dialogToSet = (BooleanDialog)dialogs.get(id);
 			dialogToSet.setFalseDialog(getDialog(falseId));
-			PApplet.println("Set False Dialog");
 		}
 	}
 	

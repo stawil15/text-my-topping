@@ -33,8 +33,7 @@ public class MusicManager
 				currentSong = songs.get(levelId);
 				newLevel = levelId;
 			}
-		}
-		else
+		} else
 		{
 			currentSong = songs.get(levelId);
 			minim = new Minim(Main.getMainObject());
@@ -56,8 +55,8 @@ public class MusicManager
 		boolean doSwitch = false;
 		if (fadeTimer < FRAMES_TO_FADE)
 		{
-			fadeTimer+=Main.getDeltaTime();
-			player.setGain((SMALLEST_GAIN*1.0f)/(FRAMES_TO_FADE)*fadeTimer);
+			fadeTimer += Main.getTimeMultiplier();
+			player.setGain((SMALLEST_GAIN * 1.0f) / (FRAMES_TO_FADE) * fadeTimer);
 			if (fadeTimer >= FRAMES_TO_FADE)
 			{
 				doSwitch = true;
@@ -75,11 +74,24 @@ public class MusicManager
 			player.setGain(0);
 		}
 	}
-	
+
 	public static void playSongOnce(String song)
 	{
-		player.close();
+		if (player.isPlaying())
+		{
+			player.close();
+		}
 		player = minim.loadFile("data/audio/bgm/" + song);
 		player.play();
+	}
+
+	public static void loopSong(String song)
+	{
+		if (player.isPlaying())
+		{
+			player.close();
+		}
+		player = minim.loadFile("data/audio/bgm/" + song);
+		player.loop();
 	}
 }
