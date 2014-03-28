@@ -199,7 +199,7 @@ public class LevelCreator
 		{
 			if (NPC[x][0] != null)
 			{
-				if (NPC[x][0].equals("NPC"))
+				if (NPC[x][0]!=null)
 				{
 					Dialog npcDialog = null;
 					if (NPC[x][4] != null && !NPC[x][4].equals(readCSV.NULL_DIALOG))
@@ -209,7 +209,7 @@ public class LevelCreator
 					}
 					// Places NPC
 					NonPlayerCharacter testNPC = new NonPlayerCharacter(new GridCoordinate(Integer.parseInt(NPC[x][1]) + xOffset, Integer.parseInt(NPC[x][2])
-							+ yOffset), 2, 1, "npc", collisionGrid, npcDialog, true);
+							+ yOffset), 2, 1, NPC[x][0], collisionGrid, npcDialog, true);
 				}
 			}
 		}
