@@ -139,6 +139,11 @@ public class LevelCreator
 			collisionGrid.addElement(position, fastCactus);
 			fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
 		}
+		else if (id == 14)
+		{
+			new MoveableObject(position, 0, 1, "rock", collisionGrid, true);
+			sceneryGrid.addSceneryObject(position, sand);
+		}
 		else if (id == 20)
 		{
 			sceneryGrid.addSceneryObject(position, sand);
@@ -159,6 +164,11 @@ public class LevelCreator
 			sceneryGrid.addSceneryObject(position, snow);
 			collisionGrid.addElement(position, fastSnowTree);
 			fastTree.setDialog(destroyTree);
+		}
+		else if (id == 24)
+		{
+			new MoveableObject(position, 0, 1, "rock", collisionGrid, true);
+			sceneryGrid.addSceneryObject(position, snow);
 		}
 		else if (id == 30)
 		{
