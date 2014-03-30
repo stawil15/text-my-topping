@@ -164,7 +164,7 @@ public class LevelCreator
 		}
 		else if (id == 17)
 		{
-			new Door(position, collisionGrid, "rockPuzzel.csv", "desserTransition.csv", Character.DIRECTION_DOWN, false);
+			new Door(position, collisionGrid, "rockPuzzel.csv", "forestpassage.csv", Character.DIRECTION_DOWN, false);
 			sceneryGrid.addSceneryObject(position, sand);
 		}
 		else if (id == 18)
