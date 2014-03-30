@@ -95,7 +95,9 @@ public class CollisionGrid
 			if (entity.getClass() == PlayerCharacter.class)
 			{
 				if (getEntityAt(coordinate).getClass() != MoveableObject.class)
+				{
 					doInteraction(getEntityAt(coordinate), PlayerCharacter.BUMP_INTERACTION);
+				}
 			} else if (entity.getClass() == MoveableObject.class)
 			{
 				Collidable nextEntity = getEntityAt(getNextCoordinate(entity));

@@ -21,23 +21,16 @@ public class PlayerCharacter extends Character implements KeyListener
 		parent.addKeyListener(this);
 	}
 
-	
-	// Interact on an object
-	private void doInteraction(int interactionId)
+	// Player character has no interaction because it is the thing doing all the
+	// interactions
+	@Override
+	public void doInteract(int interactionId)
 	{
 		interactionNumber = -1;
 		if (!isMoving)
 		{
 			collisionGrid.doInteraction(this, interactionId);
 		}
-	}
-	
-	// Player character has no interaction because it is the thing doing all the
-	// interactions
-	@Override
-	public void doInteract(int interactionId)
-	{
-
 	}
 
 	// Returns whether the player is moving
@@ -78,7 +71,7 @@ public class PlayerCharacter extends Character implements KeyListener
 		
 		if (interactionNumber!=-1)
 		{
-			doInteraction(interactionNumber);
+			doInteract(interactionNumber);
 		}
 
 	}
