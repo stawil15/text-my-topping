@@ -74,7 +74,7 @@ public class Main extends PApplet
 		choices.add("Exit");
 		MainMenu menu = new MainMenu(loadImage("/data/sprites/MainMenu.png"),choices);
 		
-		enterName = new Dialog(new String[] {"Hello good sir or madam! What is your name?\n(Press spacebar to continue)"});
+		enterName = new Dialog(new String[] {"Hello good sir or madam! \n(Press spacebar to continue)", "Wait a lovely day to be on a butterfly \ncatching expedition!", "What is your name?"});
 		
 		ValueSetStringDialog namePrompt = new ValueSetStringDialog("yourName", "What is your name?", "Enter a name.");
 		enterName.setNextDialog(namePrompt);
@@ -83,8 +83,8 @@ public class Main extends PApplet
 		ValueSetStringDialog enemyPrompt = new ValueSetStringDialog("enemyName", "What is the name of your worst enemy?", "Enter another name.");
 		welcomeDialog.setNextDialog(enemyPrompt);
 		Dialog explenationDialog = new Dialog(new String[] {"Well, as it turns out, \\ENEMY stole your\ncell phone."
-				+ " This happened as you were texting \nyour friend your favorite pizza topping.",
-				"Now, if you do not get your cell phone \nback, you may not get the topping \nyou wanted.", "It is your duty to"
+				+ " This happened as you were texting \nyour roommate your favorite pizza topping.", "You need to get it back before you return \nhome!", 
+				"your roommate has terrible choice in toppings. \nHe cannot be allowed to make such a decision \non his own!", "Now, if you do not get your cell phone \nback, you may not get the topping \nyou wanted.", "It is your duty to"
 				+ " secure your \ncell phone and teach \\ENEMY who's boss."});
 		enemyPrompt.setNextDialog(explenationDialog);
 		
