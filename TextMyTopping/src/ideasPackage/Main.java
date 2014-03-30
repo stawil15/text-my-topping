@@ -29,6 +29,9 @@ public class Main extends PApplet
 	// The camera is positioned in the top left corner
 	private static Camera camera;
 
+	// more stuff stuff
+	
+	
 	// Keyboard controls
 	public static int LEFT_KEY = KeyEvent.VK_LEFT;
 	public static int RIGHT_KEY = KeyEvent.VK_RIGHT;
@@ -88,7 +91,7 @@ public class Main extends PApplet
 				+ " secure your \ncell phone and teach \\ENEMY who's boss."});
 		enemyPrompt.setNextDialog(explenationDialog);
 		
-		explenationDialog.setNextDialog(new Dialog(new String[] {"Use the arrow keys to move and press space\nto interact with things!"}));
+		explenationDialog.setNextDialog(new Dialog(new String[] {"Use the arrow keys to move and press space\nto interact with things! Use shift to use special items!"}));
 		namePrompt.setNextDialog(welcomeDialog);
 		menu.showDialog();
 	}
