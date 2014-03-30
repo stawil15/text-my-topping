@@ -1,0 +1,8 @@
+Boolean ,didTalk 
+Default ,didTalk ,I told you once punk to leave me alone! \n*stabs you* ,gameOver
+GameOver ,gameOver ,The sketchy dude shanked you and robbed you. You have died.
+Default ,Sketchy_Dude ,Sketchy_Dude_Choice_1 ,Sketchy_Dude_Choice_2 ,Sketchy_Dude_Choice_1_1, Sketchy_Dude_Choice_2_1
+Default ,Sketchy_Dude_Choice_1_1 ,Ask about your phone ,Sketchy_Dude_Line_1
+Default ,Sketchy_Dude_Line_1 ,I don't know where your phone is \nbut if you ask me again somethin bad is gonna happen. ,setDidTalk
+SetValue ,didTalk ,true
+Default ,Sketchy_Dude_Choice_2_1 ,Leave guy alone.
