@@ -235,7 +235,7 @@ public class LevelCreator
 		} else if (id == 52)
 		{
 			new Door(position, collisionGrid, "puzzleTwo.csv", "puzzleOne.csv", Character.DIRECTION_RIGHT, false);
-			sceneryGrid.addSceneryObject(position, grass);
+			sceneryGrid.addSceneryObject(position, sand);
 		} else if (id == 53)
 		{
 			new Door(position, collisionGrid, "puzzleTwo.csv", "puzzleThree.csv", Character.DIRECTION_LEFT, false);
