@@ -8,12 +8,10 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.util.ArrayList;
 
-import javax.swing.text.rtf.RTFEditorKit;
-
-import processing.core.PApplet;
-
+// This class reads csv files and makes them meaningful
 public class readCSV
 {
+	// The types of dialogs that can be loaded dynamically
 	private final static String TYPE_DEFAULT_DIALOG = "Default";
 	private final static String TYPE_BRANCHING_DIALOG = "Branched";
 	private final static String TYPE_BOOLEAN_DIALOG = "Boolean";
@@ -23,6 +21,7 @@ public class readCSV
 	private final static String TYPE_DESTROYOBJECT_DIALOG = "Destroy";
 	public final static String NULL_DIALOG = "null";
 
+	// Read the map
 	public int[][] readMapData(String filename)
 	{
 
@@ -80,6 +79,7 @@ public class readCSV
 		return map;
 	}
 
+	// Read the NPC data
 	public String[][] readNPCData(String filename)
 	{
 
@@ -146,6 +146,7 @@ public class readCSV
 		return NPC;
 	}
 
+	// read all the dialogs
 	public void readDialogueData(String filename)
 	{
 		String csvFileToRead = "data/level/Dialog" + filename;
@@ -184,6 +185,8 @@ public class readCSV
 					}
 				}
 			}
+			
+			br.close();
 
 		} catch (FileNotFoundException e)
 		{
@@ -275,12 +278,14 @@ public class readCSV
 
 	}
 
+	// Returns how many liens are in a file
 	public int getLinesInFile(String filename)
 	{
 		try
 		{
 			LineNumberReader lnr = new LineNumberReader(new FileReader(new File(filename)));
 			lnr.skip(Long.MAX_VALUE);
+			lnr.close();
 			return lnr.getLineNumber() + 1;
 		} catch (FileNotFoundException e)
 		{

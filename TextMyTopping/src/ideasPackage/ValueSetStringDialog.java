@@ -5,6 +5,8 @@ import javax.swing.JOptionPane;
 public class ValueSetStringDialog extends Dialog
 {
 
+	// This type of dialog gets a piece of information from the user as a string.
+	// This is used when setting the name of the player and enemy
 	private String keyToAdd;
 	private String prompt;
 	private String windowTitle;
@@ -15,10 +17,10 @@ public class ValueSetStringDialog extends Dialog
 		this.keyToAdd = keyToAdd;
 		this.prompt = prompt;
 		this.windowTitle = windowTitle;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
+	// Gets the information from the user
 	public void showDialog()
 	{
 
@@ -29,6 +31,8 @@ public class ValueSetStringDialog extends Dialog
 			stringToAdd = JOptionPane.showInputDialog(Main.getMainObject(), prompt, windowTitle,
 					JOptionPane.QUESTION_MESSAGE);
 
+			// Values must not be null, and must be between 1 and 11 characters, and must not contain
+			// escape characters or they may be parsed incorrectly
 			if (stringToAdd == null)
 			{
 				JOptionPane.showMessageDialog(Main.getMainObject(), "You must enter something into the textbox.",

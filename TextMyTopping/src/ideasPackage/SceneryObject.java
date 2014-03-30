@@ -6,6 +6,10 @@ import processing.core.PImage;
 public class SceneryObject implements Drawable
 {
 
+	// An object of the class is drawn as a background to the collisionGrid
+	// (for example, grass and flowers are sceneryObjects, but cannot be 
+	// collided with). 
+	
 	private PImage[] sceneryImages;
 	protected GridCoordinate coordinates;
 	private float currentAnimationFrame;
@@ -13,6 +17,7 @@ public class SceneryObject implements Drawable
 	private int animationIndex;
 	PApplet parent;
 	
+	// Used for creating scenery hoels
 	protected SceneryObject(GridCoordinate coordinates, PImage image, SceneryGrid sceneryGrid, boolean addToGrid)
 	{
 		currentAnimationFrame = 0;
@@ -50,6 +55,7 @@ public class SceneryObject implements Drawable
 		}
 	}
 
+	// draw the sceneryobject
 	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
 		parent.image(sceneryImages[animationIndex], coordinates.getGridX() * Main.GRID_SIZE + cameraOffsetX,
@@ -58,6 +64,7 @@ public class SceneryObject implements Drawable
 		
 	}
 
+	// Update the animation
 	public void updateAnimation()
 	{
 		currentAnimationFrame+=Main.getTimeMultiplier();
@@ -73,11 +80,13 @@ public class SceneryObject implements Drawable
 		}
 	}
 
+	// Get the coordinates
 	public GridCoordinate getCoordinates()
 	{
 		return coordinates;
 	}
 
+	// Draw the sceneryObject at an exact location
 	@Override
 	public void drawAtExactly(float x, float y, boolean updateAnimation)
 	{
@@ -87,6 +96,7 @@ public class SceneryObject implements Drawable
 
 	}
 	
+	// Get the image of the sceneryObject
 	public PImage getImage()
 	{
 		return sceneryImages[animationIndex];

@@ -2,6 +2,8 @@ package ideasPackage;
 
 public class NonPlayerCharacter extends Character
 {
+	
+	// This class adds NPCS that you can have conversations with
 
 	private Dialog dialog;
 
@@ -13,6 +15,7 @@ public class NonPlayerCharacter extends Character
 
 	}
 
+	// Show the dialog and move the NPC so that they are facing the character
 	public void doInteract(int interactionId)
 	{
 		if (interactionId == PlayerCharacter.MAIN_INTERACTION)
