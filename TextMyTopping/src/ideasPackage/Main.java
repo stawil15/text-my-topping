@@ -37,7 +37,7 @@ public class Main extends PApplet
 	public static int UP_KEY = KeyEvent.VK_UP;
 	public static int DOWN_KEY = KeyEvent.VK_DOWN;
 	public static int SPACE_KEY = KeyEvent.VK_SPACE;
-	public static int SHIFT_KEY = KeyEvent.VK_SHIFT;
+	public static int CONTROL_KEY = KeyEvent.VK_CONTROL;
 	public static PFont font;
 	private static float timeMultiplier = 1f;
 	private boolean loaded = false;

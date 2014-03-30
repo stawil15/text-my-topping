@@ -101,9 +101,9 @@ public class PlayerCharacter extends Character implements KeyListener
 		{
 			spaceKeyPressed();
 		}
-		if (keyCode == Main.SHIFT_KEY)
+		if (keyCode == Main.CONTROL_KEY)
 		{
-			shiftKeyPressed();
+			controlKeyPressed();
 		}
 
 	}
@@ -147,7 +147,7 @@ public class PlayerCharacter extends Character implements KeyListener
 	}
 
 	// Action to perform when the shift key was pressed
-	private void shiftKeyPressed()
+	private void controlKeyPressed()
 	{
 		if (!isMoving)
 		{
