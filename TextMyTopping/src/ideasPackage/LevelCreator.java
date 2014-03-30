@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class LevelCreator
 {
 	// sets all the scenery for the game for the three different biomes the are in the game
-	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor;
+	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor, road, lamp, buildings;
 	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock,intenseTree;
 	private static BooleanDialog destroyTree;
 	
@@ -58,6 +58,9 @@ public class LevelCreator
 		cabin = new StaticObject(null, "forest\\cabin", collisionGrid, 1, 20, false);
 		woodFloor = new SceneryObject(null, "forest\\woodFloor", 1, 20, sceneryGrid, false);
 		woodBlock = new StaticObject(null, "forest\\woodBlock", collisionGrid, 1, 20, false);
+		road = new SceneryObject(null, "city\\road", 1, 20, sceneryGrid, false);
+		lamp = new SceneryObject(null, "city\\lamp", 1, 20, sceneryGrid, false);
+		buildings = new SceneryObject(null, "city\\buildings", 1, 20, sceneryGrid, false);
 
 		for (int x = 0; x < map.length; x++)
 		{
@@ -203,6 +206,23 @@ public class LevelCreator
 		{
 			collisionGrid.addEntity(position, woodBlock);
 
+		}
+		else if (id == 40) // start city
+		{
+			sceneryGrid.addSceneryObject(position, road);
+		}
+		else if (id == 41)
+		{
+			sceneryGrid.addSceneryObject(position, lamp);
+		}
+		else if (id == 42)
+		{
+			sceneryGrid.addSceneryObject(position, buildings);
+		}
+		else if (id == 43)
+		{
+			collisionGrid.addEntity(position, invisibleWall);
+			sceneryGrid.addSceneryObject(position, road);
 		}
 		else if (id == -1)
 		{
