@@ -275,6 +275,26 @@ public class LevelCreator
 			new Door(position, collisionGrid, "puzzleThree.csv", "puzzleTwo.csv", Character.DIRECTION_RIGHT, false);
 			sceneryGrid.addSceneryObject(position, grass);
 		}
+		else if (id == 55)
+		{
+			new Door(position, collisionGrid, "puzzleThree.csv", "puzzleFour.csv", Character.DIRECTION_LEFT, false);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 56)
+		{
+			new Door(position, collisionGrid, "puzzleFour.csv", "puzzleThree.csv", Character.DIRECTION_RIGHT, false);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 57)
+		{
+			new Door(position, collisionGrid, "puzzleFour.csv", "puzzleFive.csv", Character.DIRECTION_LEFT, false);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 58)
+		{
+			new Door(position, collisionGrid, "puzzleFive.csv", "puzzleFour.csv", Character.DIRECTION_RIGHT, false);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
 		else if (id == -1)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
