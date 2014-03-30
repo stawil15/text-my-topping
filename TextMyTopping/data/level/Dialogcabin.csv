@@ -2,7 +2,7 @@ Boolean ,didTalk ,didTalkTwice ,talkedOnce ,talkedTwice
 Default ,talkedTwice ,That's it your done!\n(He actually dials 911) ,gameOver
 GameOver ,gameOver ,The guy in the cabin called the police.\nYou have been arrested.\nRestart to continue.
 SetValue ,didNotTalk ,talkedToNPCInCabin ,true ,Cabin1_Line2
-Default ,talkedOnce ,I SAID GET OUT NOW OR IM CALLING\nTHE POLICE! ,setTalkedTwice
+Default ,talkedOnce ,I SAID GET OUT NOW OR IM CALLING\nTHE PARK RANGER! ,setTalkedTwice
 SetValue ,setTalkedTwice ,didTalkTwice ,true
 Default ,Cabin1_Line2 ,WHAT ARE YOU DOING IN MY HOUSE\nGET OUT NOW!!!!!
 Boolean ,Cabin1_Line1 ,talkedToNPCInCabin ,didNotTalk ,didTalk
