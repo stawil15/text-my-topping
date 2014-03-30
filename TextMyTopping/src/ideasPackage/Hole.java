@@ -12,7 +12,7 @@ public class Hole extends StaticObject implements Collidable
 	{
 		super(coordinates, imageName, collisionGrid, addToGrid);
 		this.collisionGrid = collisionGrid;
-		setDialog(new Dialog(new String[] {"This hole looks deep. Perhaps it can be \ncrossed if it is filled with a rock..."}));
+		setDialog(new Dialog(new String[] {"This pothole looks deep. Perhaps it can be \ncrossed if it is filled with a rock..."}));
 	}
 	
 	// The hole is filled and it is deleted, and a scenery hole is created in place
