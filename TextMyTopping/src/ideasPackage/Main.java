@@ -62,7 +62,7 @@ public class Main extends PApplet
 		DialogManager.initializeDialogManager();
 		GUISystem.initialize();
 		MusicManager.initialize();
-		LevelManager.initializeLevelManager(1,4);
+		LevelManager.initializeLevelManager(20,4);
 		GlobalBooleanManager.initialize();
 		GlobalStringManager.initialize();
 		LevelCreator.initialize();
