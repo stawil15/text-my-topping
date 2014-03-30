@@ -328,7 +328,7 @@ public class LevelCreator
 		else if (id == 65)
 		{
 			new Door(position, collisionGrid, "city.csv", "puzzleFive.csv", Character.DIRECTION_RIGHT, false);
-			sceneryGrid.addSceneryObject(position, snow);
+			sceneryGrid.addSceneryObject(position, road);
 			
 		}
 		else if (id == -1)
