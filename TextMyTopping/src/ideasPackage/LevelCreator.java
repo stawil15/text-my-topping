@@ -202,7 +202,25 @@ public class LevelCreator
 		{
 			collisionGrid.addEntity(position, woodBlock);
 
-		} else if (id == 40) // start city
+		} 
+		else if (id == 33)
+		{
+			sceneryGrid.addSceneryObject(position, grass);
+			collisionGrid.addEntity(position, sign);
+		}
+		else if (id == 34)
+		{
+			sceneryGrid.addSceneryObject(position, sand);
+			collisionGrid.addEntity(position, sign);
+			sign.setDialog(new Dialog(new String[] { "Welcome to Cleveland." }));
+			
+		} 
+		else if (id == 35)
+		{
+			sceneryGrid.addSceneryObject(position, snow);
+			collisionGrid.addEntity(position, sign);
+		} 
+		else if (id == 40) // start city
 		{
 			sceneryGrid.addSceneryObject(position, road);
 		} else if (id == 41)
@@ -220,7 +238,8 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, road);
 			collisionGrid.addEntity(position, sign);
-		} else if (id == 50)
+		} 
+		else if (id == 50)
 		{
 			new Door(position, collisionGrid, "puzzleOne.csv", "forestpassage.csv", Character.DIRECTION_RIGHT, false);
 			sceneryGrid.addSceneryObject(position, grass);
