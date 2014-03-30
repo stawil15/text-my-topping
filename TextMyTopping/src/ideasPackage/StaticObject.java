@@ -4,7 +4,7 @@ import processing.core.*;
 
 public class StaticObject implements Collidable
 {
-
+	// Static objects are objects that cannot be moved, but they can be collided with
 	private GridCoordinate coordinates;
 	private PImage images[];
 	private PApplet parent;
@@ -19,6 +19,7 @@ public class StaticObject implements Collidable
 	private int previousAnimationDuration = 0;
 	private final static int SPECIAL_ANIMATION_DURATION = 60;
 
+	// A different way of creating a static object with more parameters
 	public StaticObject(GridCoordinate coordinates, String imageName, CollisionGrid c, int animationFrames,
 			int anamationDuration, boolean addToGrid)
 	{
@@ -33,7 +34,8 @@ public class StaticObject implements Collidable
 		previousAnimationDuration = anamationDuration;
 
 	}
-
+	
+	// A different way of creating a static object with more parameters
 	public StaticObject(GridCoordinate coordinates, String imageName, CollisionGrid c, boolean addToGrid)
 	{
 		this(coordinates, c, addToGrid);
@@ -41,6 +43,7 @@ public class StaticObject implements Collidable
 		images[0] = parent.loadImage("\\data\\sprites\\scenery\\" + imageName + "\\" + 0 + ".png");
 	}
 
+	// Creats an invisible static object
 	public StaticObject(GridCoordinate coordinates, CollisionGrid c, boolean addToGrid)
 	{
 		this.coordinates = coordinates;
@@ -51,6 +54,7 @@ public class StaticObject implements Collidable
 		parent = Main.getMainObject();
 	}
 
+	// Draws the object
 	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
 		if (images != null)
@@ -62,6 +66,7 @@ public class StaticObject implements Collidable
 
 	}
 
+	// Updates the animation
 	private void updateAnimation()
 	{
 		currentAnimationFrame+=Main.getTimeMultiplier();
@@ -82,16 +87,19 @@ public class StaticObject implements Collidable
 		}
 	}
 
+	// Static objects have no direction
 	public int getDirection()
 	{
 		return 0;
 	}
 	
+	// Sets the dialog of the static object
 	public void setDialog(Dialog dialog)
 	{
 		this.dialog = dialog;
 	}
 
+	// Gets the coordinates
 	@Override
 	public GridCoordinate getCoordinates()
 	{
@@ -105,6 +113,8 @@ public class StaticObject implements Collidable
 			dialog.showDialog();
 		}
 		
+		// An easter egg if. If the user has the axe of the wind, they can make the animation period
+		// of trees and cactus faster to appear more windy. 
 		if (imageName != null && (imageName.contains("tree") || imageName.contains("cactus")))
 		{
 			if (GlobalBooleanManager.getValue("hasWindAxe"))
@@ -119,6 +129,7 @@ public class StaticObject implements Collidable
 		}
 	}
 
+	// Draws the static object at an exact location
 	@Override
 	public void drawAtExactly(float x, float y, boolean updateAnimation)
 	{
@@ -131,6 +142,7 @@ public class StaticObject implements Collidable
 
 	}
 	
+	// Gets the current image
 	public PImage getImage()
 	{
 		return images[animationIndex];

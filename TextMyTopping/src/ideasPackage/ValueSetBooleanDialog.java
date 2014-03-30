@@ -1,9 +1,8 @@
 package ideasPackage;
 
-import processing.core.PApplet;
-
 public class ValueSetBooleanDialog extends Dialog
 {
+	// This dialog type sets a global boolean to a sepcified value
 
 	private String variableName;
 	private boolean value;
@@ -16,6 +15,7 @@ public class ValueSetBooleanDialog extends Dialog
 	
 	
 	@Override
+	// Shows the dialog and sets the boolean
 	public void showDialog()
 	{
 		super.showDialog();

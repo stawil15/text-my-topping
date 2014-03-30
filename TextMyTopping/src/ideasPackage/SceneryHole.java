@@ -5,25 +5,28 @@ import processing.core.PImage;
 public class SceneryHole extends SceneryObject
 {
 
+	// An object of this class is drawn after an object is pushed into a hole. 
 	private PImage holeImage;
 	private PImage moveableImage;
 
 	public SceneryHole(GridCoordinate coordinates, PImage image, SceneryGrid sceneryGrid, boolean addToGrid)
 	{
 		super(coordinates, image, sceneryGrid, addToGrid);
-		// TODO Auto-generated constructor stub
 	}
 
+	// Set the image of the hole
 	public void setHoleImage(PImage holeImage)
 	{
 		this.holeImage = holeImage;
 	}
 
+	// Set the image of the moveable object
 	public void setMoveableImage(PImage moveableImage)
 	{
 		this.moveableImage = moveableImage;
 	}
 
+	// Draw the sceneryHole
 	@Override
 	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
