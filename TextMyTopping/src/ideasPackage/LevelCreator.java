@@ -274,11 +274,11 @@ public class LevelCreator
 		} else if (id == 53)
 		{
 			new Door(position, collisionGrid, "puzzleTwo.csv", "puzzleThree.csv", Character.DIRECTION_LEFT, false);
-			sceneryGrid.addSceneryObject(position, grass);
+			sceneryGrid.addSceneryObject(position, sand);
 		} else if (id == 54)
 		{
 			new Door(position, collisionGrid, "puzzleThree.csv", "puzzleTwo.csv", Character.DIRECTION_RIGHT, false);
-			sceneryGrid.addSceneryObject(position, grass);
+			sceneryGrid.addSceneryObject(position, snow);
 		} else if (id == 55)
 		{
 			new Door(position, collisionGrid, "puzzleThree.csv", "puzzleFour.csv", Character.DIRECTION_LEFT, false);
@@ -290,7 +290,7 @@ public class LevelCreator
 		} else if (id == 57)
 		{
 			new Door(position, collisionGrid, "puzzleFour.csv", "puzzleFive.csv", Character.DIRECTION_LEFT, false);
-			sceneryGrid.addSceneryObject(position, grass);
+			sceneryGrid.addSceneryObject(position, sand);
 		} else if (id == 58)
 		{
 			new Door(position, collisionGrid, "puzzleFive.csv", "puzzleFour.csv", Character.DIRECTION_RIGHT, false);
@@ -299,7 +299,7 @@ public class LevelCreator
 		else if (id == 59)
 		{
 			new Door(position, collisionGrid, "puzzleFive.csv", "city.csv", Character.DIRECTION_LEFT, false);
-			sceneryGrid.addSceneryObject(position, snow);
+			sceneryGrid.addSceneryObject(position, road);
 		}
 		else if (id == 60)
 		{
