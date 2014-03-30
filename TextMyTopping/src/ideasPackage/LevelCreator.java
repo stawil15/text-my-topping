@@ -190,7 +190,23 @@ public class LevelCreator
 		} else if (id == 25)
 		{
 			sceneryGrid.addSceneryObject(position, sand);
-		} else if (id == 30)
+		}
+		else if (id == 26)
+		{
+			new PushableOnlyObject(position, 0, 1, "rock", collisionGrid, true);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 27)
+		{
+			new PushableOnlyObject(position, 0, 1, "rock", collisionGrid, true);
+			sceneryGrid.addSceneryObject(position, sand);
+		}
+		else if (id == 28)
+		{
+			new PushableOnlyObject(position, 0, 1, "rock", collisionGrid, true);
+			sceneryGrid.addSceneryObject(position, snow);
+		}
+		else if (id == 30)
 		{
 			sceneryGrid.addSceneryObject(position, woodFloor);
 		} else if (id == 31)
