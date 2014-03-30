@@ -57,6 +57,8 @@ public class LevelCreator
 		sand = new SceneryObject(null, "desert\\grass", 1, 20, sceneryGrid, false);
 		dflower = new SceneryObject(null, "desert\\flower", 2, 20, sceneryGrid, false);
 		snowTree = new StaticObject(null, "snow\\tree", collisionGrid, 4, 40, false);
+		fastSnowTree = new StaticObject(null, "snow\\tree", collisionGrid, 4, 4, false);
+		fastSnowTree.setDialog(destroyTree);
 		snow = new SceneryObject(null, "snow\\grass", 1, 20, sceneryGrid, false);
 		sflower = new SceneryObject(null, "snow\\flower", 2, 20, sceneryGrid, false);
 		cabin = new StaticObject(null, "forest\\cabin", collisionGrid, 1, 20, false);
@@ -203,6 +205,11 @@ public class LevelCreator
 		{
 			new PushableOnlyObject(position, 0, 1, "slipRock", collisionGrid, true);
 			sceneryGrid.addSceneryObject(position, snow);
+		}
+		else if (id == 29)
+		{
+			sceneryGrid.addSceneryObject(position, snow);
+			collisionGrid.addEntity(position, fastSnowTree);
 		}
 		else if (id == 30)
 		{
