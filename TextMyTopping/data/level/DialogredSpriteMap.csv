@@ -2,6 +2,7 @@ Boolean ,NPC4_Line1 ,hasWindAxe ,NPC4_getAxe ,NPC4_alreadyHasAxe
 Default ,NPC4_alreadyHasAxe ,You can use the axe to cut down\nwindy things! A miracle of science! However\c \nit does nothing to intensifying things.
 Default ,NPC4_getAxe ,I don't need this old axe anymore.\nHere you go! ,NPC4_Line2
 SetValue ,NPC4_Line2 ,hasWindAxe ,true ,NPC4_Line3
-Default ,NPC4_Line3 ,You received the axe of the wind!
+Default ,NPC4_Line3 ,You received the axe of the wind! ,NPC4_Line4
+Default ,NPC4_Line4 ,You can use it to cut down fast tree /nor whatever. /nI don't care.
 Default ,NPC2_Line1 ,You haven't caught any butterflies yet? \nC'mon\c are you even trying? ,NPC2_Line2
 Default ,NPC2_Line2 ,At this rate you'll never be a \nmaster butterfly catcher!
