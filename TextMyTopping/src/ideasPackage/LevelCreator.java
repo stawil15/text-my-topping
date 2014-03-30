@@ -8,7 +8,7 @@ public class LevelCreator
 	// in the game
 	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor, road;
 	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock,
-			intenseTree, lamp, sign, buildings;
+			intenseTree, lamp, sign, buildings, car, carBlue;
 	private static BooleanDialog destroyTree;
 
 	// allows player to get an axe to chop down certain trees
@@ -68,6 +68,8 @@ public class LevelCreator
 		lamp = new StaticObject(null, "city\\lamp", collisionGrid, 1, 20, false);
 		buildings = new StaticObject(null, "city\\buildings", collisionGrid, 1, 20, false);
 		sign = new StaticObject(null, "city\\sign", collisionGrid, 1, 20, false);
+		car = new StaticObject(null, "city\\car", collisionGrid, 1, 20, false);
+		carBlue = new StaticObject(null, "city\\carBlue", collisionGrid, 1, 20, false);
 
 		for (int x = 0; x < map.length; x++)
 		{
@@ -302,7 +304,18 @@ public class LevelCreator
 		{
 			new Door(position, collisionGrid, "puzzleFive.csv", "puzzleFour.csv", Character.DIRECTION_RIGHT, false);
 			sceneryGrid.addSceneryObject(position, grass);
-		} else if (id == -1)
+		} 
+		else if (id == 60)
+		{
+			sceneryGrid.addSceneryObject(position, road);
+			collisionGrid.addEntity(position, car);
+		}
+		else if (id == 61)
+		{
+			sceneryGrid.addSceneryObject(position, road);
+			collisionGrid.addEntity(position, carBlue);
+		}
+		else if (id == -1)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
 			new Hole(position, "forest\\hole", collisionGrid, true);
