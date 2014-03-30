@@ -1,5 +1,7 @@
 package ideasPackage;
 
+import java.util.ArrayList;
+
 import javazoom.jl.player.Player;
 import processing.core.PApplet;
 
@@ -9,12 +11,21 @@ public class CollisionGrid
 	private Camera camera;
 	private GridHelper helper;
 	private SceneryGrid correspondingSceneryGrid;
+	private ArrayList<MoveableObject> moveableObjects;
+	private ArrayList<GridCoordinate> moveableObjectCoordinates;
+	private ArrayList<SceneryObject> originalSceneryObjects;
+	private ArrayList<Hole> originalHoles;
+	private boolean wasLoadedMoreThanOnce = false;
 
 	public CollisionGrid(int xEntities, int yEntities, SceneryGrid correspondingSceneryGrid)
 	{
 		collisionGrid = new Collidable[xEntities][yEntities];
 		helper = new GridHelper(collisionGrid, camera);
 		this.correspondingSceneryGrid = correspondingSceneryGrid;
+		moveableObjects = new ArrayList<MoveableObject>();
+		moveableObjectCoordinates = new ArrayList<GridCoordinate>();
+		originalSceneryObjects = new ArrayList<SceneryObject>();
+		originalHoles = new ArrayList<Hole>();
 	}
 
 	public void setCamera(Camera camera)
@@ -23,11 +34,24 @@ public class CollisionGrid
 		helper.setCamera(camera);
 	}
 
-	public void addElement(GridCoordinate coordinates, Collidable element)
+	public void addElement(GridCoordinate coordinates, Collidable entity)
 	{
 		if (isValidPosition(coordinates))
 		{
-			collisionGrid[coordinates.getGridX()][coordinates.getGridY()] = element;
+			collisionGrid[coordinates.getGridX()][coordinates.getGridY()] = entity;
+		}
+
+		if (entity != null && entity.getClass() == MoveableObject.class
+				&& !moveableObjects.contains((MoveableObject) entity))
+		{
+			moveableObjects.add((MoveableObject) entity);
+			moveableObjectCoordinates.add(new GridCoordinate(coordinates.getGridX(), coordinates.getGridY()));
+		}
+
+		if (entity != null && entity.getClass() == Hole.class)
+		{
+			originalHoles.add((Hole) entity);
+			originalSceneryObjects.add(correspondingSceneryGrid.getObjectAt(entity.getCoordinates()));
 		}
 	}
 
@@ -60,28 +84,25 @@ public class CollisionGrid
 
 		GridCoordinate coordinate = getNextCoordinate(entity);
 
-		
 		if (getEntityAt(coordinate) != null)
 		{
 			if (entity.getClass() == PlayerCharacter.class)
 			{
 				if (getEntityAt(coordinate).getClass() != MoveableObject.class)
 					doInteraction(getEntityAt(coordinate), PlayerCharacter.BUMP_INTERACTION);
-			}
-			else if (entity.getClass() == MoveableObject.class)
+			} else if (entity.getClass() == MoveableObject.class)
 			{
 				Collidable nextEntity = getEntityAt(getNextCoordinate(entity));
 				if (nextEntity != null && nextEntity.getClass() == Hole.class)
 				{
-					Hole hole = (Hole)nextEntity;
-					MoveableObject object = (MoveableObject)entity;
+					Hole hole = (Hole) nextEntity;
+					MoveableObject object = (MoveableObject) entity;
 					hole.fillWithMovableObject(object);
 					return true;
 				}
 			}
 			return false;
 		}
-
 
 		if (!isValidPosition(coordinate))
 		{
@@ -97,12 +118,13 @@ public class CollisionGrid
 		{
 			return null;
 		}
-		
+
 		if (entity.getCoordinates() == null)
 		{
 			return null;
 		}
-		GridCoordinate coordinate = new GridCoordinate(entity.getCoordinates().getGridX(), entity.getCoordinates().getGridY());
+		GridCoordinate coordinate = new GridCoordinate(entity.getCoordinates().getGridX(), entity.getCoordinates()
+				.getGridY());
 
 		switch (entity.getDirection())
 		{
@@ -140,7 +162,8 @@ public class CollisionGrid
 		Collidable entityToInteractWith = getEntityAt(getNextCoordinate(entity));
 		if (entityToInteractWith != null)
 		{
-			if (entityToInteractWith.getClass() == NonPlayerCharacter.class && entity.getClass() == PlayerCharacter.class)
+			if (entityToInteractWith.getClass() == NonPlayerCharacter.class
+					&& entity.getClass() == PlayerCharacter.class)
 			{
 				NonPlayerCharacter npc = (NonPlayerCharacter) (entityToInteractWith);
 				PlayerCharacter player = (PlayerCharacter) (entity);
@@ -194,7 +217,7 @@ public class CollisionGrid
 			{
 				if (collisionGrid[x][y] != null && collisionGrid[x][y].getClass() == Door.class)
 				{
-					Door doorToCheck = (Door)collisionGrid[x][y];
+					Door doorToCheck = (Door) collisionGrid[x][y];
 					if (doorToCheck.getToLevel().equals(fromLevel))
 					{
 						door = doorToCheck;
@@ -202,14 +225,15 @@ public class CollisionGrid
 				}
 			}
 		}
-		
-		if (door==null)
+
+		if (door == null)
 		{
 			return;
 		}
-		
+
 		PlayerCharacter player = Main.getPlayer();
-		GridCoordinate newPlayerCoordinates = new GridCoordinate(door.getCoordinates().getGridX(), door.getCoordinates().getGridY());
+		GridCoordinate newPlayerCoordinates = new GridCoordinate(door.getCoordinates().getGridX(), door
+				.getCoordinates().getGridY());
 		switch (door.getDirection())
 		{
 		case Character.DIRECTION_UP:
@@ -225,12 +249,12 @@ public class CollisionGrid
 			newPlayerCoordinates.decrementX();
 			break;
 		}
-		
+
 		player.setCoordinates(newPlayerCoordinates);
 		player.setCollisionGrid(this);
 		camera.centerCameraAroundTracker();
 		player.setDirection(door.getDirection());
-		
+
 	}
 
 	public void removePlayerFromGrid()
@@ -246,9 +270,45 @@ public class CollisionGrid
 			}
 		}
 	}
-	
+
 	public SceneryGrid getCorrespondingSceneryGrid()
 	{
 		return correspondingSceneryGrid;
+	}
+
+	public void resetCollisionGrid()
+	{
+		if (wasLoadedMoreThanOnce)
+		{
+			for (int index = 0; index < moveableObjects.size(); index++)
+			{
+				GridCoordinate originalCoordinates = moveableObjectCoordinates.get(index);
+				System.out.println("index " + index);
+				if (collisionGrid[originalCoordinates.getGridX()][originalCoordinates.getGridY()] == null)
+				{
+					removeElementAt(moveableObjects.get(index).getCoordinates());
+					moveableObjects.get(index).getCoordinates().setGridX(originalCoordinates.getGridX());
+					moveableObjects.get(index).getCoordinates().setGridY(originalCoordinates.getGridY());
+					moveableObjects.get(index).setDestroyOnMove(null);
+					collisionGrid[originalCoordinates.getGridX()][originalCoordinates.getGridY()] = moveableObjects
+							.get(index);
+				}
+			}
+
+			for (int index = 0; index < originalHoles.size(); index++)
+			{
+				GridCoordinate originalCoordinates = originalHoles.get(index).getCoordinates();
+				// Hole was removed
+				if (collisionGrid[originalCoordinates.getGridX()][originalCoordinates.getGridY()] == null)
+				{
+					collisionGrid[originalCoordinates.getGridX()][originalCoordinates.getGridY()] = originalHoles
+							.get(index);
+					correspondingSceneryGrid.forceAddObject(originalCoordinates, originalSceneryObjects.get(index));
+
+				}
+			}
+		}
+
+		wasLoadedMoreThanOnce = true;
 	}
 }

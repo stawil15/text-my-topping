@@ -7,9 +7,9 @@ public class MoveableObject extends Character
 
 	public boolean updatePlayerDirectionWhenFinishedMoving = false;
 	private boolean destroyOnMove = false;
-	private SceneryGrid sceneryGrid;
 	private SceneryHole sceneryHole;
 	private PImage holeImage;
+
 	public MoveableObject(GridCoordinate coordinates, int initialDirection, int animationFrames, String imageName,
 			CollisionGrid c, boolean addToGrid)
 	{
@@ -30,8 +30,7 @@ public class MoveableObject extends Character
 				move((Main.getPlayer()).getDirection());
 				Main.getPlayer().move(Main.getPlayer().getDirection());
 			}
-		} 
-		else if (interactionId == PlayerCharacter.SECONDARY_INTERACTION)
+		} else if (interactionId == PlayerCharacter.SECONDARY_INTERACTION)
 		{
 			setDirection(Main.getPlayer().getOppositeDirection());
 			Main.getPlayer().setDirection(getDirection());
@@ -40,20 +39,19 @@ public class MoveableObject extends Character
 			{
 				updatePlayerDirectionWhenFinishedMoving = true;
 				move((Main.getPlayer()).getDirection());
-			}
-			else
+			} else
 			{
 				Main.getPlayer().setDirection(Main.getPlayer().getOppositeDirection());
 			}
 
 		}
 	}
-	
-	@Override 
+
+	@Override
 	public boolean move(int direction)
 	{
 		boolean didMove = super.move(direction);
-		
+
 		return didMove;
 	}
 
@@ -68,17 +66,23 @@ public class MoveableObject extends Character
 			sceneryHole.setMoveableImage(holeImage);
 		}
 	}
-	
+
 	public PImage getImage()
 	{
 		return getImageToDraw();
 	}
-	
-	public void setDestroyOnMove(SceneryGrid grid, SceneryHole hole)
+
+	public void setDestroyOnMove(SceneryHole hole)
 	{
-		destroyOnMove = true;
-		sceneryHole = hole;
-		sceneryGrid = grid;
-		
+		if (hole != null)
+		{
+			destroyOnMove = true;
+			sceneryHole = hole;
+		} else
+		{
+			destroyOnMove = false;
+			sceneryHole = null;
+		}
+
 	}
 }

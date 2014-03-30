@@ -32,7 +32,7 @@ public class Hole extends StaticObject implements Collidable
 		
 		SceneryHole sceneryHole = new SceneryHole(getCoordinates(), sceneryImage, sceneryGrid, true);
 		sceneryHole.setHoleImage(getImage());
-		object.setDestroyOnMove(sceneryGrid, sceneryHole);
+		object.setDestroyOnMove(sceneryHole);
 
 	}
 

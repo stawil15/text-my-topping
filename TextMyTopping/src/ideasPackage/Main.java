@@ -89,10 +89,6 @@ public class Main extends PApplet
 		enemyPrompt.setNextDialog(explenationDialog);
 		
 		explenationDialog.setNextDialog(new Dialog(new String[] {"Use the arrow keys to move and press space\nto interact with things!"}));
-		
-		
-		
-		
 		namePrompt.setNextDialog(welcomeDialog);
 		menu.showDialog();
 	}
@@ -104,7 +100,7 @@ public class Main extends PApplet
 			loaded = true;
 			GUISystem.setDoingTransition(true);
 			LevelManager.setActiveLevel("megaSpriteMap.csv", null, Character.DIRECTION_UP);
-			enterName.showDialog();
+			//enterName.showDialog();
 			
 		}
 		else

@@ -74,12 +74,14 @@ public class LevelManager
 			Camera camera = new Camera(Main.getPlayer());
 			Main.setCamera(camera);
 			activeLevel.setCamera(camera);
+			activeLevel.getCollisionGrid().resetCollisionGrid();
 			activeLevel.draw();
 		} else
 		{
 			activeLevel.getCollisionGrid().setPlayerAtDoorFromLevel(fromLevel);
 			activeLevel.setCamera(Main.getCamera());
 			activeLevel.getCollisionGrid().removePlayerFromGrid();
+			activeLevel.getCollisionGrid().resetCollisionGrid();
 			activeLevel.draw();
 			activeLevel.getCollisionGrid().setPlayerAtDoorFromLevel(fromLevel);
 		}
