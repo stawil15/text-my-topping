@@ -62,7 +62,7 @@ public class Main extends PApplet
 		DialogManager.initializeDialogManager();
 		GUISystem.initialize();
 		MusicManager.initialize();
-		LevelManager.initializeLevelManager(20,4);
+		LevelManager.initializeLevelManager(4,4);
 		GlobalBooleanManager.initialize();
 		GlobalStringManager.initialize();
 		LevelCreator.initialize();
@@ -109,7 +109,7 @@ public class Main extends PApplet
 		{
 			loaded = true;
 			GUISystem.setDoingTransition(true);
-			LevelManager.setActiveLevel("megaSpriteMap.csv", null, Character.DIRECTION_UP);
+			LevelManager.setActiveLevel("city.csv", null, Character.DIRECTION_UP);
 			enterName.showDialog();
 			
 		}
