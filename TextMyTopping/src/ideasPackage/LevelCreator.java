@@ -149,6 +149,21 @@ public class LevelCreator
 			new MoveableObject(position, 0, 1, "rock", collisionGrid, true);
 			sceneryGrid.addSceneryObject(position, sand);
 		}
+		else if (id == 15)
+		{
+			new Door(position, collisionGrid, "redSpriteMap.csv", "rockPuzzel.csv", Character.DIRECTION_LEFT, false);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 16)
+		{
+			new Door(position, collisionGrid, "rockPuzzel.csv", "redSpriteMap.csv", Character.DIRECTION_RIGHT, false);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
+		else if (id == 17)
+		{
+			new Door(position, collisionGrid, "megaSpriteMap.csv", "redSpriteMap.csv", Character.DIRECTION_RIGHT, false);
+			sceneryGrid.addSceneryObject(position, grass);
+		}
 		else if (id == 20)
 		{
 			sceneryGrid.addSceneryObject(position, sand);
