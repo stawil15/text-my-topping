@@ -25,6 +25,7 @@ public class DestroyCollidableDialog extends Dialog
 		if (nextDialog != null)
 		{
 			nextDialog.showDialog();
+			System.out.println("HERE"); 
 		}
 	}
 

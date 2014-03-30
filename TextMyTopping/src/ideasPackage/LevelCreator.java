@@ -192,28 +192,23 @@ public class LevelCreator
 		} else if (id == 25)
 		{
 			sceneryGrid.addSceneryObject(position, sand);
-		}
-		else if (id == 26)
+		} else if (id == 26)
 		{
 			new PushableOnlyObject(position, 0, 1, "slipRock", collisionGrid, true);
 			sceneryGrid.addSceneryObject(position, grass);
-		}
-		else if (id == 27)
+		} else if (id == 27)
 		{
 			new PushableOnlyObject(position, 0, 1, "slipRock", collisionGrid, true);
 			sceneryGrid.addSceneryObject(position, sand);
-		}
-		else if (id == 28)
+		} else if (id == 28)
 		{
 			new PushableOnlyObject(position, 0, 1, "slipRock", collisionGrid, true);
 			sceneryGrid.addSceneryObject(position, snow);
-		}
-		else if (id == 29)
+		} else if (id == 29)
 		{
 			sceneryGrid.addSceneryObject(position, snow);
 			collisionGrid.addEntity(position, fastSnowTree);
-		}
-		else if (id == 30)
+		} else if (id == 30)
 		{
 			sceneryGrid.addSceneryObject(position, woodFloor);
 		} else if (id == 31)
@@ -225,26 +220,22 @@ public class LevelCreator
 		{
 			collisionGrid.addEntity(position, woodBlock);
 
-		} 
-		else if (id == 33)
+		} else if (id == 33)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
 			collisionGrid.addEntity(position, sign);
 			sign.setDialog(new Dialog(new String[] { "GNOMES MOVE THE ROCKS BACK WHEN YOU \nAREN'T LOOKING!" }));
-		}
-		else if (id == 34)
+		} else if (id == 34)
 		{
 			sceneryGrid.addSceneryObject(position, sand);
 			collisionGrid.addEntity(position, sign);
 			sign.setDialog(new Dialog(new String[] { "Welcome to Cleveland." }));
-			
-		} 
-		else if (id == 35)
+
+		} else if (id == 35)
 		{
 			sceneryGrid.addSceneryObject(position, snow);
 			collisionGrid.addEntity(position, sign);
-		}
-		else if (id == 40) // start city
+		} else if (id == 40) // start city
 		{
 			sceneryGrid.addSceneryObject(position, road);
 		} else if (id == 41)
@@ -263,8 +254,7 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, road);
 			collisionGrid.addEntity(position, sign);
-		}
-		else if (id == 50)
+		} else if (id == 50)
 		{
 			new Door(position, collisionGrid, "puzzleOne.csv", "forestpassage.csv", Character.DIRECTION_RIGHT, false);
 			sceneryGrid.addSceneryObject(position, grass);
@@ -319,16 +309,15 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, grass);
 			new Hole(position, "forest\\hole", collisionGrid, true);
-		}else if (id == -2)
+		} else if (id == -2)
 		{
 			sceneryGrid.addSceneryObject(position, sand);
 			new Hole(position, "forest\\hole", collisionGrid, true);
-		}else if (id == -3)
+		} else if (id == -3)
 		{
 			sceneryGrid.addSceneryObject(position, snow);
 			new Hole(position, "forest\\hole", collisionGrid, true);
-		}
-		else
+		} else
 		{
 			sceneryGrid.addSceneryObject(position, grass);
 		}

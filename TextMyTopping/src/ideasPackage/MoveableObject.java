@@ -15,8 +15,8 @@ public class MoveableObject extends Character
 			CollisionGrid c, boolean addToGrid)
 	{
 		super(coordinates, initialDirection, animationFrames, imageName, c, "moveable", addToGrid);
+		System.out.println("HERE!");
 		holeImage = parent.loadImage("/data/sprites/moveable/" + imageName + "/inHole.png");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
