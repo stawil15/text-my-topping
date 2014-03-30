@@ -165,17 +165,17 @@ public class LevelCreator
 		else if (id == 17)
 		{
 			new Door(position, collisionGrid, "rockPuzzel.csv", "forestpassage.csv", Character.DIRECTION_DOWN, false);
-			sceneryGrid.addSceneryObject(position, sand);
+			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 18)
 		{
 			new Door(position, collisionGrid, "forestpassage.csv", "rockPuzzel.csv", Character.DIRECTION_UP, false);
-			sceneryGrid.addSceneryObject(position, sand);
+			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 19)
 		{
 			new Door(position, collisionGrid, "forestpassage.csv", "puzzleOne.csv", Character.DIRECTION_LEFT, false);
-			sceneryGrid.addSceneryObject(position, sand);
+			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 20)
 		{
@@ -240,8 +240,8 @@ public class LevelCreator
 		}
 		else if (id == 50)
 		{
-			new Door(position, collisionGrid, "puzzleOne.csv", "forestpassage.csv", Character.DIRECTION_LEFT, false);
-			sceneryGrid.addSceneryObject(position, sand);
+			new Door(position, collisionGrid, "puzzleOne.csv", "forestpassage.csv", Character.DIRECTION_RIGHT, false);
+			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == -1)
 		{
