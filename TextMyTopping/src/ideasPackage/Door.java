@@ -2,6 +2,7 @@ package ideasPackage;
 
 public class Door implements Collidable
 {
+	// This class links levels to other levels
 	private String fromLevel, toLevel;
 	private GridCoordinate coordinates;
 	private int direction;
@@ -11,6 +12,8 @@ public class Door implements Collidable
 	private boolean fadeTransition;
 	public final static int FADE_TRANSITION = 5;
 	
+	// Create the door with a required variable to be in a certain state. The dialog is shown when the 
+	// state is not the same as the requriedValue.
 	public Door(GridCoordinate coordinates, CollisionGrid collisionGrid, String fromLevel, String toLevel, int direction, String variableName, boolean requiredValue, boolean fadeTransition, Dialog d)
 	{
 		this(coordinates, collisionGrid, fromLevel, toLevel, direction, fadeTransition);
@@ -19,6 +22,7 @@ public class Door implements Collidable
 		this.requiredValue  = requiredValue;
 	}
 	
+	// Creates a door that always works
 	public Door(GridCoordinate coordinates, CollisionGrid collisionGrid, String fromLevel, String toLevel, int direction, boolean fadeTranisition)
 	{
 		this.fromLevel = fromLevel;
@@ -29,6 +33,7 @@ public class Door implements Collidable
 		this.fadeTransition = fadeTranisition;
 	}
 
+	// Here for Collidable implementation
 	@Override
 	public void drawAtExactly(float x, float y, boolean updateAnimation)
 	{
@@ -36,6 +41,7 @@ public class Door implements Collidable
 		
 	}
 
+	// Return the coordinates of the door
 	@Override
 	public GridCoordinate getCoordinates()
 	{
@@ -49,12 +55,15 @@ public class Door implements Collidable
 		
 	}
 
+	// Returns the direction that the player is to be placed when they come through the door
 	@Override
 	public int getDirection()
 	{
 		return direction;
 	}
 
+	// Does the interaction. If the requiredValue is equal to the value in the boolean manager, then the door can be accessed. 
+	// Otherwise, the dialog is shown why the player is not allowed through the door.
 	@Override
 	public void doInteract(int interactionId)
 	{
@@ -76,11 +85,13 @@ public class Door implements Collidable
 		
 	}
 	
+	// Get the fromLevel
 	public String getFromLevel()
 	{
 		return fromLevel;
 	}
-	
+
+	// Get the toLevel
 	public String getToLevel()
 	{
 		return toLevel;

@@ -2,9 +2,6 @@ package ideasPackage;
 
 import java.util.ArrayList;
 
-import javazoom.jl.player.Player;
-import processing.core.PApplet;
-
 /*
  * This class creates a grid of collidable objects in which they can collide with each other. 
  */
@@ -82,6 +79,8 @@ public class CollisionGrid
 		return returnedElement;
 	}
 
+	// Returns whether an entity is able to move. Does an interaction if the entity is a palyerCharacter
+	// or sets the a hole to be filled if the object is a moveable object and the next entity is a hole
 	private boolean canElementMove(Collidable entity)
 	{
 		if (entity == null)
@@ -119,6 +118,7 @@ public class CollisionGrid
 		return true;
 	}
 
+	// Get the coordinate next position of an entity based on their direction
 	public static GridCoordinate getNextCoordinate(Collidable entity)
 	{
 		if (entity == null)
@@ -151,6 +151,7 @@ public class CollisionGrid
 		return coordinate;
 	}
 
+	// Moves an element
 	public boolean moveElement(Collidable entity)
 	{
 		if (canElementMove(entity))
@@ -164,6 +165,7 @@ public class CollisionGrid
 		}
 	}
 
+	// does an interaction of an entity and the next entity
 	public void doInteraction(Collidable entity, int interactionId)
 	{
 		Collidable entityToInteractWith = getEntityAt(getNextCoordinate(entity));
@@ -180,11 +182,13 @@ public class CollisionGrid
 		}
 	}
 
+	// Draws the entire grid
 	public void draw()
 	{
 		helper.draw(collisionGrid);
 	}
 
+	// Returns whether a position is valid, meaning that it is within bounds and empty.
 	public boolean isValidPosition(GridCoordinate coordinates)
 	{
 		if (coordinates == null)
@@ -193,27 +197,33 @@ public class CollisionGrid
 		}
 		return isValidPosition(coordinates.getGridX(), coordinates.getGridY());
 	}
-
+	
+	// Another way to call isValidPosition
 	private boolean isValidPosition(int xPosition, int yPosition)
 	{
 		return (xPosition >= 0 && xPosition < collisionGrid.length && yPosition >= 0 && yPosition < collisionGrid[0].length);
 	}
 
+	// gets the width of the grid in terms of the number of objects that can fit on a row
 	public int getGridWidth()
 	{
 		return collisionGrid.length;
 	}
 
+	// gets the height of the grid in terms of the number of objects that can fit in a column
 	public int getGridHeight()
 	{
 		return collisionGrid[0].length;
 	}
 
+	// Adds a duplicate object that can help save memory by not creating a new object for 
+	// every single location
 	public void addDuplicateObject(Drawable entity)
 	{
 		helper.addDuplicate(entity);
 	}
 
+	// Sets the player character near a door from a level
 	public void setPlayerAtDoorFromLevel(String fromLevel)
 	{
 		// Find the door's location
@@ -264,6 +274,7 @@ public class CollisionGrid
 
 	}
 
+	// Remove the palyer from the grid
 	public void removePlayerFromGrid()
 	{
 		for (int x = 0; x < collisionGrid.length; x++)
@@ -278,11 +289,13 @@ public class CollisionGrid
 		}
 	}
 
+	// Get the scenery grid that corresponds to the collision grid
 	public SceneryGrid getCorrespondingSceneryGrid()
 	{
 		return correspondingSceneryGrid;
 	}
 
+	// Reset all the holes and moveable objects
 	public void resetCollisionGrid()
 	{
 		if (wasLoadedMoreThanOnce)

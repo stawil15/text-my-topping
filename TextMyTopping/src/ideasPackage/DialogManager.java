@@ -3,24 +3,28 @@ package ideasPackage;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import processing.core.PApplet;
-
+/*
+ * This class manages all the dialogs that are loaded in through csv files
+ */
 public class DialogManager
 {
 	private static ArrayList<DialogWithMissingInformation> dialogsWithMissingInfo;
 	private static Hashtable<String, Dialog> dialogs;
 
+	// Initialize the necessary objects
 	public static void initializeDialogManager()
 	{
 		dialogs = new Hashtable<String, Dialog>();
 		dialogsWithMissingInfo = new ArrayList<DialogWithMissingInformation>();
 	}
 
+	// Get the dialog from a string
 	public static Dialog getDialog(String id)
 	{
 		return dialogs.get(id);
 	}
 
+	// Add a dialog from a string
 	public static Dialog addDialog(Dialog dialog, String id, String[] rawRow)
 	{
 		dialogs.put(id, dialog);
@@ -40,6 +44,7 @@ public class DialogManager
 		return getDialog(id);
 	}
 
+	// Set the next dialog of some dialog
 	public static void setNextDialog(String nextId, String id)
 	{
 		if (!dialogs.containsKey(nextId))
@@ -54,6 +59,7 @@ public class DialogManager
 		}
 	}
 	
+	// Set the true condition dialog of a boolean dialog
 	public static void setTrueDialog(String trueId, String id)
 	{
 		if (!dialogs.containsKey(trueId))
@@ -68,6 +74,7 @@ public class DialogManager
 		}
 	}
 	
+	// Set the false condition dialog of a boolean dialog
 	public static void setFalseDialog(String falseId, String id)
 	{
 		if (!dialogs.containsKey(falseId))
@@ -82,6 +89,7 @@ public class DialogManager
 		}
 	}
 	
+	// Check to see if any missing dialogs were added. If so, set the next dialog of the missing dialog
 	public static void checkDialogs()
 	{
 		ArrayList<DialogWithMissingInformation> toRemove = new ArrayList<DialogWithMissingInformation>();

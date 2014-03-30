@@ -1,8 +1,9 @@
 package ideasPackage;
 
 import processing.core.PGraphics;
-import processing.core.PImage;
-
+/*
+ * This class draws the credits that are shown at the end of the game. 
+ */
 public class Credits
 {
 	private String credits;
@@ -33,6 +34,7 @@ public class Credits
 		buffer = Main.getMainObject().createGraphics(CREDITS_WIDTH, CREDITS_HEIGHT);
 	}
 	
+	// Draws the credits
 	public void draw()
 	{
 		buffer.beginDraw();

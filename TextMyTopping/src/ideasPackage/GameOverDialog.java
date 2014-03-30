@@ -5,6 +5,8 @@ import processing.core.PImage;
 public class GameOverDialog extends Dialog
 {
 
+	// This dialog is shown when the player looses. Sad music plays and an image is overlayed
+	// on the top of the screen. 
 	protected PImage gameOverImage;
 	public GameOverDialog(String[] lines)
 	{
@@ -13,12 +15,15 @@ public class GameOverDialog extends Dialog
 		nextDialog = this;
 	}
 	
+	// Show the dialog
 	@Override
 	public void showDialog()
 	{
 		super.showDialog();
 		MusicManager.playSongOnce("Gameover.mp3");
 	}
+	
+	// Draw the dialog
 	@Override
 	public void drawDialog()
 	{
@@ -26,6 +31,7 @@ public class GameOverDialog extends Dialog
 		super.drawDialog();
 	}
 	
+	// Advance the text if the user wants to
 	@Override
 	public void advanceText()
 	{
