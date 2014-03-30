@@ -43,7 +43,7 @@ public class CollisionGrid
 			collisionGrid[coordinates.getGridX()][coordinates.getGridY()] = entity;
 		}
 
-		if (entity != null && entity.getClass() == MoveableObject.class
+		if (entity != null && entity instanceof MoveableObject
 				&& !moveableObjects.contains((MoveableObject) entity))
 		{
 			moveableObjects.add((MoveableObject) entity);
@@ -94,11 +94,11 @@ public class CollisionGrid
 		{
 			if (entity.getClass() == PlayerCharacter.class)
 			{
-				if (getEntityAt(coordinate).getClass() != MoveableObject.class)
+				if (!(getEntityAt(coordinate) instanceof MoveableObject))
 				{
 					doInteraction(getEntityAt(coordinate), PlayerCharacter.BUMP_INTERACTION);
 				}
-			} else if (entity.getClass() == MoveableObject.class)
+			} else if (entity instanceof MoveableObject)
 			{
 				Collidable nextEntity = getEntityAt(getNextCoordinate(entity));
 				if (nextEntity != null && nextEntity.getClass() == Hole.class)
