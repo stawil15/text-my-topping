@@ -107,7 +107,7 @@ public class Main extends PApplet
 		{
 			loaded = true;
 			GUISystem.setDoingTransition(true);
-			LevelManager.setActiveLevel("city.csv", null, Character.DIRECTION_UP);
+			LevelManager.setActiveLevel("megaSpriteMap.csv", null, Character.DIRECTION_UP);
 			//enterName.showDialog();
 			
 		}
