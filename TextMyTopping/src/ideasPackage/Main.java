@@ -96,7 +96,7 @@ public class Main extends PApplet
 				+ " secure your \ncell phone and teach \\ENEMY who's boss."});
 		enemyPrompt.setNextDialog(explenationDialog);
 		
-		explenationDialog.setNextDialog(new Dialog(new String[] {"Use the arrow keys to move and press space\nto interact with things! Use shift to pull items!"}));
+		explenationDialog.setNextDialog(new Dialog(new String[] {"Use the arrow keys to move and press space\nto interact with things! Use CTRL to pull \nitems!"}));
 		namePrompt.setNextDialog(welcomeDialog);
 		menu.showDialog();
 	}
@@ -108,8 +108,8 @@ public class Main extends PApplet
 		{
 			loaded = true;
 			GUISystem.setDoingTransition(true);
-			LevelManager.setActiveLevel("city.csv", null, Character.DIRECTION_UP);
-			//enterName.showDialog();
+			LevelManager.setActiveLevel("megaSpriteMap.csv", null, Character.DIRECTION_UP);
+			enterName.showDialog();
 			
 		}
 		else
