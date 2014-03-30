@@ -23,7 +23,7 @@ Default ,npc3CityLine2 ,I have been trapped in this area for years!\nI got lost 
 Default ,npc3CityLine3 ,As a token of my appreciation, I hereby grant\nyou the title\n"\NAME\c the Butterfly Master"! ,npc3CityLine4
 Default ,npc3CityLine4 ,Here\c take this net. I am sure it will\ncome in use!
 Default ,npc3doesHaveNet ,You can use the net on butterflies!\nI wonder if anyone will remember who I was...
-Default ,evilGuy ,\ENEMY:I am going to catch this\nbutterfly all by myself and I\nwill be the hero! ,evilGuy2
-Default ,evilGuy2 ,Butterfly:NO ONE CAN CATCH ME!\nI'LL SHOW YOU! ,evilGuy3
+Default ,evilGuy ,\ENEMY: I am going to catch this\nbutterfly all by myself and I\nwill be the hero! ,evilGuy2
+Default ,evilGuy2 ,Butterfly: NO ONE CAN CATCH ME!\nI'LL SHOW YOU! ,evilGuy3
 Destroy ,evilGuy3 ,evilGuy4
 Default ,evilGuy4 ,\ENEMY was eaten by\nthe master butterfly.

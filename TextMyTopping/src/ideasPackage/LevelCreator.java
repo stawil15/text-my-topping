@@ -6,7 +6,7 @@ public class LevelCreator
 {
 	// sets all the scenery for the game for the three different biomes the are
 	// in the game
-	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor, road;
+	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor, road,cellPhone;
 	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock,
 			intenseTree, lamp, sign, buildings, car, carBlue;
 	private static BooleanDialog destroyTree;
@@ -70,6 +70,7 @@ public class LevelCreator
 		sign = new StaticObject(null, "city\\sign", collisionGrid, 1, 20, false);
 		car = new StaticObject(null, "city\\car", collisionGrid, 1, 20, false);
 		carBlue = new StaticObject(null, "city\\carBlue", collisionGrid, 1, 20, false);
+		cellPhone = new SceneryObject(null, "city\\cellPhone",1, 20, sceneryGrid, false);
 
 		for (int x = 0; x < map.length; x++)
 		{
@@ -295,6 +296,11 @@ public class LevelCreator
 			new Door(position, collisionGrid, "puzzleFive.csv", "puzzleFour.csv", Character.DIRECTION_RIGHT, false);
 			sceneryGrid.addSceneryObject(position, grass);
 		} 
+		else if (id == 59)
+		{
+			new Door(position, collisionGrid, "puzzleFive.csv", "city.csv", Character.DIRECTION_LEFT, false);
+			sceneryGrid.addSceneryObject(position, snow);
+		}
 		else if (id == 60)
 		{
 			sceneryGrid.addSceneryObject(position, road);
@@ -304,6 +310,26 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, road);
 			collisionGrid.addEntity(position, carBlue);
+		}
+		else if (id == 62)
+		{
+			sceneryGrid.addSceneryObject(position, snow);
+			collisionGrid.addEntity(position, car);
+		}
+		else if (id == 63)
+		{
+			sceneryGrid.addSceneryObject(position, snow);
+			collisionGrid.addEntity(position, carBlue);
+		}
+		else if (id == 64)
+		{
+			sceneryGrid.addSceneryObject(position, cellPhone);
+		}
+		else if (id == 65)
+		{
+			new Door(position, collisionGrid, "city.csv", "puzzleFive.csv", Character.DIRECTION_RIGHT, false);
+			sceneryGrid.addSceneryObject(position, snow);
+			
 		}
 		else if (id == -1)
 		{
