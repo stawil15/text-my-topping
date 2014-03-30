@@ -72,7 +72,8 @@ public class LevelCreator
 
 		return createdLevel;
 	}
-
+	
+	// uses id to put the correct object in the correct position
 	public void addGameObject(int id, CollisionGrid collisionGrid, SceneryGrid sceneryGrid, int x, int y, int xOffset, int yOffset)
 	{
 		GridCoordinate position = new GridCoordinate(x + xOffset, y+yOffset);
@@ -198,7 +199,8 @@ public class LevelCreator
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 	}
-
+	
+	// gets the NPCs location from a .csv file and adds them to the correct location and gets the dialog
 	public void addNPCs(readCSV maploader, String mapName, int xOffset, int yOffset, CollisionGrid collisionGrid)
 	{
 		String[][] NPC = maploader.readNPCData("NPC" + mapName); // naming
