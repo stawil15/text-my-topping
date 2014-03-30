@@ -16,6 +16,7 @@ public class LevelManager
 	private static float transitionSpeed = 20f;
 	private static float fadeTimer = 0;
 	private final static int FRAMES_TO_FADE = 30;
+	private static String activeLevelString = "";
 
 	// Initialize our level manager with an initial starting point of the character
 	public static void initializeLevelManager(int charX, int charY)
@@ -50,6 +51,7 @@ public class LevelManager
 	public static void setActiveLevel(String levelId, String fromLevel, int direction)
 	{
 		LevelManager.direction = direction;
+		activeLevelString = levelId;
 		boolean addMainCharacterForFirstTime = false;
 
 		GUISystem.setDoingTransition(true);
@@ -187,6 +189,11 @@ public class LevelManager
 	{
 		Main.getMainObject().image(transitionImageCurrentMap, currentMapX, currentMapY);
 		Main.getMainObject().image(transitionImageNextMap, nextMapX, nextMapY);
+	}
+	
+	public static String getActiveLevelString()
+	{
+		return activeLevelString;
 	}
 
 }
