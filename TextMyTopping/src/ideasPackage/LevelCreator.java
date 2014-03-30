@@ -164,8 +164,18 @@ public class LevelCreator
 		}
 		else if (id == 17)
 		{
-			new Door(position, collisionGrid, "megaSpriteMap.csv", "redSpriteMap.csv", Character.DIRECTION_DOWN, false);
-			sceneryGrid.addSceneryObject(position, grass);
+			new Door(position, collisionGrid, "rockPuzzel.csv", "desserTransition.csv", Character.DIRECTION_DOWN, false);
+			sceneryGrid.addSceneryObject(position, sand);
+		}
+		else if (id == 18)
+		{
+			new Door(position, collisionGrid, "forestpassage.csv", "rockPuzzel.csv", Character.DIRECTION_UP, false);
+			sceneryGrid.addSceneryObject(position, sand);
+		}
+		else if (id == 19)
+		{
+			new Door(position, collisionGrid, "forestpassage.csv", "puzzleOne.csv", Character.DIRECTION_LEFT, false);
+			sceneryGrid.addSceneryObject(position, sand);
 		}
 		else if (id == 20)
 		{
@@ -192,6 +202,10 @@ public class LevelCreator
 		{
 			new MoveableObject(position, 0, 1, "rock", collisionGrid, true);
 			sceneryGrid.addSceneryObject(position, snow);
+		}
+		else if (id == 25)
+		{
+			sceneryGrid.addSceneryObject(position, sand);
 		}
 		else if (id == 30)
 		{
@@ -223,6 +237,11 @@ public class LevelCreator
 		{
 			collisionGrid.addEntity(position, invisibleWall);
 			sceneryGrid.addSceneryObject(position, road);
+		}
+		else if (id == 50)
+		{
+			new Door(position, collisionGrid, "puzzleOne.csv", "forestpassage.csv", Character.DIRECTION_LEFT, false);
+			sceneryGrid.addSceneryObject(position, sand);
 		}
 		else if (id == -1)
 		{
