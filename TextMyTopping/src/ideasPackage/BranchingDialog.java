@@ -27,6 +27,7 @@ public class BranchingDialog extends Dialog implements KeyListener
 		this.nextDialogs = nextDialogs;
 	}
 
+	// Draws the dialog
 	@Override
 	public void drawDialog()
 	{
@@ -43,7 +44,10 @@ public class BranchingDialog extends Dialog implements KeyListener
 			parent.rect(offsetX, parent.height - borderY - height, width,
 					height);
 			
-			// Decide on which text to display
+			// Decide on which text to display based on how the 
+			// user has selected the text. Make sure to scroll the
+			// text down or up if the user is at a selection off
+			// the screen.
 			parent.fill(textColor);
 			String textToDisplay = "";
 
@@ -87,6 +91,8 @@ public class BranchingDialog extends Dialog implements KeyListener
 		}
 	}
 
+	// Advance the text. This is not really used and was initially added when
+	// branching dialogs actually had text associated with them. 
 	@Override
 	public void advanceText()
 	{
@@ -109,6 +115,7 @@ public class BranchingDialog extends Dialog implements KeyListener
 		}
 	}
 
+	// Actually select the choice
 	public void selectChoice(int choice)
 	{
 		GUISystem.showDialog(null);
@@ -123,6 +130,7 @@ public class BranchingDialog extends Dialog implements KeyListener
 		}
 	}
 
+	// What to do when the user presses a key. Part of the KeyListener implementation.
 	@Override
 	public void keyPressed(KeyEvent event)
 	{
@@ -153,36 +161,41 @@ public class BranchingDialog extends Dialog implements KeyListener
 
 	}
 	
+	// Show the dialog
 	@Override
 	public void showDialog()
 	{
 		super.showDialog();
 	}
 
+	// Used for KeyListener implementation
 	@Override
 	public void keyReleased(KeyEvent event)
 	{
-		// TODO Auto-generated method stub
-
+	
 	}
 
+	
+	// Used for KeyListener implementation
 	@Override
 	public void keyTyped(KeyEvent event)
 	{
-		// TODO Auto-generated method stub
 
 	}
 	
+	// Gets the dialogs that may be chosen from
 	public ArrayList<Dialog> getNextDialogs()
 	{
 		return nextDialogs;
 	}
 	
+	// Sets a particular index of to next dialog
 	public void setNextDialog(int index, Dialog d)
 	{
 		nextDialogs.set(index, d);
 	}
 
+	// An integer minimum function
 	private int min(int a, int b)
 	{
 		if (a < b)

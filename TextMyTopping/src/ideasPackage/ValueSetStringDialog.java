@@ -33,9 +33,9 @@ public class ValueSetStringDialog extends Dialog
 			{
 				JOptionPane.showMessageDialog(Main.getMainObject(), "You must enter something into the textbox.",
 						"Error", JOptionPane.ERROR_MESSAGE);
-			} else if (!(stringToAdd.length() > 0 && stringToAdd.length() < 10))
+			} else if (!(stringToAdd.length() > 0 && stringToAdd.length() <= 11))
 			{
-				JOptionPane.showMessageDialog(Main.getMainObject(), "Enter a length between 1 and 10 characters.",
+				JOptionPane.showMessageDialog(Main.getMainObject(), "Enter a length between 1 and 11 characters.",
 						"Error", JOptionPane.ERROR_MESSAGE);
 			} else if (stringToAdd.contains("\\"))
 			{

@@ -1,5 +1,6 @@
 package ideasPackage;
 
+// This interface dictates properties all collidable objects must have
 public interface Collidable extends Drawable
 {
 	public GridCoordinate getCoordinates();

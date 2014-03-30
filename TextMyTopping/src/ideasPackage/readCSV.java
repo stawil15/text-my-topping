@@ -20,6 +20,7 @@ public class readCSV
 	private final static String TYPE_SETVALUE_DIALOG = "SetValue";
 	private final static String TYPE_GAMEOVER_DIALOG = "GameOver";
 	private final static String TYPE_GAMEWIN_DIALOG = "GameWin";
+	private final static String TYPE_DESTROYOBJECT_DIALOG = "Destroy";
 	public final static String NULL_DIALOG = "null";
 
 	public int[][] readMapData(String filename)
@@ -259,6 +260,14 @@ public class readCSV
 						DialogManager.setNextDialog(dialogRow[3], dialogRow[1]);
 					}
 
+				}
+				else if (dialogRow[0].equals(TYPE_DESTROYOBJECT_DIALOG))
+				{
+					DialogManager.addDialog(new DestroyCollidableDialog(),dialogRow[1],dialogRow);
+					if (dialogRow[2] != null && !dialogRow[2].equals(NULL_DIALOG))
+					{
+						DialogManager.setNextDialog(dialogRow[2], dialogRow[1]);
+					}
 				}
 
 			}

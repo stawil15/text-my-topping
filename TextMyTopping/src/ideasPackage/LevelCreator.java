@@ -80,7 +80,7 @@ public class LevelCreator
 		if (id == 1)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
-			collisionGrid.addElement(position, tree);
+			collisionGrid.addEntity(position, tree);
 		}
 		else if (id == 2)
 		{
@@ -89,7 +89,7 @@ public class LevelCreator
 		else if (id == 3)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
-			collisionGrid.addElement(position, fastTree);
+			collisionGrid.addEntity(position, fastTree);
 
 		}
 		else if (id == 4)
@@ -109,7 +109,7 @@ public class LevelCreator
 		}
 		else if (id == 7)
 		{
-			collisionGrid.addElement(position, cabin);
+			collisionGrid.addEntity(position, cabin);
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 8)
@@ -118,20 +118,20 @@ public class LevelCreator
 		}
 		else if (id == 9)
 		{
-			collisionGrid.addElement(position, invisibleWall);
+			collisionGrid.addEntity(position, invisibleWall);
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 10)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
-			collisionGrid.addElement(position, intenseTree);
+			collisionGrid.addEntity(position, intenseTree);
 			intenseTree.setDialog(new Dialog(new String[] { "[Tree intensifies]" }));
 		}
 		
 		else if (id == 11) // start desert
 		{
 			sceneryGrid.addSceneryObject(position, sand);
-			collisionGrid.addElement(position, cactus);
+			collisionGrid.addEntity(position, cactus);
 		}
 		else if (id == 12)
 		{
@@ -140,7 +140,7 @@ public class LevelCreator
 		else if (id == 13)
 		{
 			sceneryGrid.addSceneryObject(position, sand);
-			collisionGrid.addElement(position, fastCactus);
+			collisionGrid.addEntity(position, fastCactus);
 			fastTree.setDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
 		}
 		else if (id == 14)
@@ -151,13 +151,13 @@ public class LevelCreator
 		else if (id == 20)
 		{
 			sceneryGrid.addSceneryObject(position, sand);
-			collisionGrid.addElement(position, fastCactus);
+			collisionGrid.addEntity(position, fastCactus);
 			fastTree.setDialog(destroyTree);
 		}
 		else if (id == 21) // start snow
 		{
 			sceneryGrid.addSceneryObject(position, snow);
-			collisionGrid.addElement(position, snowTree);
+			collisionGrid.addEntity(position, snowTree);
 		}
 		else if (id == 22)
 		{
@@ -166,7 +166,7 @@ public class LevelCreator
 		else if (id == 23)
 		{
 			sceneryGrid.addSceneryObject(position, snow);
-			collisionGrid.addElement(position, fastSnowTree);
+			collisionGrid.addEntity(position, fastSnowTree);
 			fastTree.setDialog(destroyTree);
 		}
 		else if (id == 24)
@@ -185,7 +185,7 @@ public class LevelCreator
 		}
 		else if (id == 32)
 		{
-			collisionGrid.addElement(position, woodBlock);
+			collisionGrid.addEntity(position, woodBlock);
 
 		}
 		else if (id == -1)

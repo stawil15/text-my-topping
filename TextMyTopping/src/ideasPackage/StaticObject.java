@@ -45,7 +45,7 @@ public class StaticObject implements Collidable
 	{
 		this.coordinates = coordinates;
 		if (addToGrid)
-			c.addElement(coordinates, this);
+			c.addEntity(coordinates, this);
 		else
 			c.addDuplicateObject(this);
 		parent = Main.getMainObject();

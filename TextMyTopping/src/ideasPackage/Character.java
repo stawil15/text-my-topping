@@ -7,6 +7,10 @@ import processing.core.*;
 
 public class Character implements Collidable
 {
+	/*
+	 * This class creates a generic character that can move
+	 */
+	
 	private PImage[] charLeftImages;
 	private PImage[] charRightImages;
 	private PImage[] charUpImages;
@@ -30,6 +34,7 @@ public class Character implements Collidable
 	private ArrayList<InventoryItem> items;
 	protected CollisionGrid collisionGrid;
 
+	// This constructor is used for characters with one image.
 	protected Character(GridCoordinate coordinates, int initialDirection,
 			int animationFrames, String imageName, CollisionGrid c, String folderName, boolean addToGrid)
 	{
@@ -48,22 +53,17 @@ public class Character implements Collidable
 
 		for (int index = 0; index < charRightImages.length; index++)
 		{
-			charUpImages[index] = parent.loadImage("data\\sprites\\" + folderName +  "\\"
-					+ imageName + "\\" + index + ".png");
+			charUpImages[index] = charRightImages[index];
 		}
 
 		for (int index = 0; index < charRightImages.length; index++)
 		{
-			charDownImages[index] = parent
-					.loadImage("data\\sprites\\" + folderName +  "\\" + imageName
-							+ "\\" + index + ".png");
+			charDownImages[index] = charRightImages[index];
 		}
 
 		for (int index = 0; index < charLeftImages.length; index++)
 		{
-			charLeftImages[index] = parent
-					.loadImage("data\\sprites\\" + folderName +  "\\" + imageName
-							+ "\\" + index + ".png");
+			charLeftImages[index] = charRightImages[index];
 		}
 
 		this.coordinates = coordinates;
@@ -71,7 +71,7 @@ public class Character implements Collidable
 		this.animationFrames = animationFrames;
 		
 		if (addToGrid)
-			c.addElement(coordinates, this);
+			c.addEntity(coordinates, this);
 		else
 			c.addDuplicateObject(this);
 		
@@ -79,6 +79,7 @@ public class Character implements Collidable
 		items = new ArrayList<>();
 	}
 	
+	// Regular constructor
 	public Character(GridCoordinate coordinates, int initialDirection,
 			int animationFrames, String imageName, CollisionGrid c, boolean addToGrid)
 	{
@@ -120,29 +121,27 @@ public class Character implements Collidable
 		this.animationFrames = animationFrames;
 		
 		if (addToGrid)
-			c.addElement(coordinates, this);
+			c.addEntity(coordinates, this);
 		else
 			c.addDuplicateObject(this);
 		
 		collisionGrid = c;
 		items = new ArrayList<>();
 	}
-
-	public void setMoveSpeed(float speed)
-	{
-		this.moveSpeed = speed;
-	}
-
+	
+	// Gets the moves speed of the character
 	public float getMoveSpeed()
 	{
 		return moveSpeed*Main.getTimeMultiplier();
 	}
 
+	// Set how long the duration of one frame should be animated
 	public void setAnimationDuration(int duration)
 	{
 		animationDuration = duration;
 	}
 
+	// Draw the character
 	public void draw(float cameraOffsetX, float cameraOffsetY)
 	{
 		PImage imageTodraw = getImageToDraw();
@@ -156,6 +155,8 @@ public class Character implements Collidable
 					* Main.GRID_SIZE + offsetY + cameraOffsetY);
 	}
 
+	// Move the character in a direction. Returns whether the movement
+	// was successful or not. 
 	public boolean move(int direction)
 	{
 		boolean didMove = false;
@@ -194,6 +195,8 @@ public class Character implements Collidable
 		return didMove;
 	}
 
+	// Update the offset of the character, or the distance relative to their
+	// position on the grid in pixels. 
 	private void updateOffset()
 	{
 		if (!isMoving)
@@ -241,6 +244,7 @@ public class Character implements Collidable
 
 	}
 
+	// Update the animation of the character
 	private void updateAnimation()
 	{
 		if (!isMoving)
@@ -259,16 +263,19 @@ public class Character implements Collidable
 		}
 	}
 
+	// Unused
 	public void giveItem(InventoryItem item)
 	{
 		items.add(item);
 	}
 
+	// Sets the direction of the character
 	public void setDirection(int direction)
 	{
 		currentDirection = direction;
 	}
 
+	// Unused
 	public InventoryItem takeAwayItem(InventoryItem item)
 	{
 		if (!items.contains(item))
@@ -282,27 +289,32 @@ public class Character implements Collidable
 		}
 	}
 
+	// Interaction is the character. 
 	public void doInteract(int interactionId)
 	{
 		// Do nothing
 	}
 
+	// get the collision grid
 	public CollisionGrid getCollisionGrid()
 	{
 		return collisionGrid;
 	}
 
+	// Get the direction of the character
 	public int getDirection()
 	{
 		return currentDirection;
 	}
 
+	//Get the coordinates of the character
 	@Override
 	public GridCoordinate getCoordinates()
 	{
 		return coordinates;
 	}
 
+	// Get the opposite direction of character
 	public int getOppositeDirection()
 	{
 		switch (currentDirection)
@@ -319,6 +331,7 @@ public class Character implements Collidable
 		return -1;
 	}
 
+	// Draw the character at an exact position on the screen
 	@Override
 	public void drawAtExactly(float x, float y, boolean updateAnimation)
 	{
@@ -333,6 +346,7 @@ public class Character implements Collidable
 
 	}
 
+	// Get the image that should be drawn
 	protected PImage getImageToDraw()
 	{
 		PImage imageTodraw = null;
@@ -354,11 +368,13 @@ public class Character implements Collidable
 		return imageTodraw;
 	}
 	
+	// Return whether the character should be allowed to move or not
 	protected boolean canMove()
 	{
 		return GUISystem.allowMovement();
 	}
 	
+	// Called when movement is finished.
 	public void finishedMoving()
 	{
 		// Can be overridden in child classes, (ex: MoveableObject)

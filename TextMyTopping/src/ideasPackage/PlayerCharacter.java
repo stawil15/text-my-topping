@@ -187,7 +187,7 @@ public class PlayerCharacter extends Character implements KeyListener
 	
 	public void setCollisionGrid(CollisionGrid c)
 	{
-		c.addElement(coordinates, this);
+		c.addEntity(coordinates, this);
 		collisionGrid = c;
 	}
 

@@ -2,6 +2,10 @@ package ideasPackage;
 
 import processing.core.*;
 
+/* 
+ * The camera keeps track of the PlayerCharacter on the screen such that the camera is in the
+ * top left corner and the player is always visible, near the center of the screen. 
+ */
 public class Camera
 {
 	private GridCoordinate location;
@@ -21,17 +25,21 @@ public class Camera
 		centerCameraAroundTracker();
 	}
 
+	// Get the location of the camera
 	public GridCoordinate getLocation()
 	{
 		return location;
 	}
 
+	// Update the camera to see if the player has moved
 	public void update()
 	{
+		// Get the collisionGrid of the tracker
 		collisionGrid = tracker.getCollisionGrid();
 		int screenGridWidth = parent.width / Main.GRID_SIZE;
 		int screenGridHeight = parent.height / Main.GRID_SIZE;
 
+		// See if the tracker is moving and if it is, check which direction
 		GridCoordinate nextCoordinate = null;
 		if (tracker.isMoving())
 		{
@@ -74,18 +82,21 @@ public class Camera
 			movingRight = false;
 		}
 
+		// If we are at the top of the grid, do not move up
 		if (location.getGridX() < 0)
 		{
 			location.setGridX(0);
 			movingLeft = false;
 		}
 
+		// If we are all the way left, do not move left
 		if (location.getGridY() < 0)
 		{
 			location.setGridY(0);
 			movingUp = false;
 		}
 
+		// If we are all the way right, do not move right
 		if (location.getGridX() + screenGridWidth > collisionGrid
 				.getGridWidth())
 		{
@@ -93,6 +104,7 @@ public class Camera
 			movingRight = false;
 		}
 
+		// If we are all the way down, do not move down
 		if (location.getGridY() + screenGridHeight > collisionGrid
 				.getGridHeight())
 		{
@@ -100,6 +112,7 @@ public class Camera
 			movingDown = false;
 		}
 
+		// Move the camera if we determined we should move
 		if (movingUp)
 		{
 			updateOffset(Character.DIRECTION_UP);
@@ -137,6 +150,7 @@ public class Camera
 		}
 	}
 
+	// Updates the offset, or the cameras relative position to its location on the grid
 	public void updateOffset(int direction)
 	{
 		switch (direction)
@@ -176,6 +190,7 @@ public class Camera
 		}
 	}
 	
+	// Makes sure the player is visible when a map is loaded
 	public void centerCameraAroundTracker()
 	{
 		int screenGridWidth = parent.width / Main.GRID_SIZE;
@@ -185,12 +200,14 @@ public class Camera
 				- screenGridHeight / 2);
 	}
 
+	// Determine if the player is near the left edge
 	public boolean isNearLeftEdge(GridCoordinate coordinate, int distance,
 			int screenGridWidth)
 	{
 		return (coordinate.getGridX() - location.getGridX() < distance);
 	}
 
+	// Determine if the player is near the right edge
 	public boolean isNearRightEdge(GridCoordinate coordinate, int distance,
 			int screenGridWidth)
 	{
@@ -198,6 +215,7 @@ public class Camera
 				- distance);
 	}
 
+	// Determine if the player is near the bottom edge
 	public boolean isNearBottomEdge(GridCoordinate coordinate, int distance,
 			int screenGridHeight)
 	{
@@ -205,18 +223,21 @@ public class Camera
 				- distance);
 	}
 
+	// Determine if the player is near the top edge
 	public boolean isNearTopEdge(GridCoordinate coordinate, int distance,
 			int screenGridHeight)
 	{
 		return (coordinate.getGridY() - location.getGridY() < distance);
 	}
 
-	public float getCameraOffsetX()
+	// Gets the x offset relative to the point (0,0)
+	public float getAbsoluteCameraOffsetX()
 	{
 		return -(location.getGridX() * Main.GRID_SIZE + offsetXLeft + offsetXRight);
 	}
 
-	public float getCameraOffsetY()
+	// Gets the y offset relative to the point (0,0)
+	public float getAbsoluteCameraOffsetY()
 	{
 		return -(location.getGridY() * Main.GRID_SIZE + offsetYUp + offsetYDown);
 	}

@@ -44,12 +44,12 @@ public class GridHelper
 							if (!updatedAnimations.contains(grid[x][y]))
 							{
 								updatedAnimations.add(grid[x][y]);
-								grid[x][y].drawAtExactly(x * Main.GRID_SIZE + camera.getCameraOffsetX(), y
-										* Main.GRID_SIZE + camera.getCameraOffsetY(), true);
+								grid[x][y].drawAtExactly(x * Main.GRID_SIZE + camera.getAbsoluteCameraOffsetX(), y
+										* Main.GRID_SIZE + camera.getAbsoluteCameraOffsetY(), true);
 							} else
 							{
-								grid[x][y].drawAtExactly(x * Main.GRID_SIZE + camera.getCameraOffsetX(), y
-										* Main.GRID_SIZE + camera.getCameraOffsetY(), false);
+								grid[x][y].drawAtExactly(x * Main.GRID_SIZE + camera.getAbsoluteCameraOffsetX(), y
+										* Main.GRID_SIZE + camera.getAbsoluteCameraOffsetY(), false);
 							}
 						} else
 						{
@@ -58,11 +58,11 @@ public class GridHelper
 								if (!drewPlayer)
 								{
 									drewPlayer = true;
-									grid[x][y].draw(camera.getCameraOffsetX(), camera.getCameraOffsetY());
+									grid[x][y].draw(camera.getAbsoluteCameraOffsetX(), camera.getAbsoluteCameraOffsetY());
 								}
 							} else
 							{
-								grid[x][y].draw(camera.getCameraOffsetX(), camera.getCameraOffsetY());
+								grid[x][y].draw(camera.getAbsoluteCameraOffsetX(), camera.getAbsoluteCameraOffsetY());
 							}
 
 						}

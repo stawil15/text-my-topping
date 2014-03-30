@@ -62,7 +62,7 @@ public class MoveableObject extends Character
 			Main.getPlayer().setDirection(getOppositeDirection());
 		if (destroyOnMove)
 		{
-			collisionGrid.removeElementAt(coordinates);
+			collisionGrid.removeEntitytAt(coordinates);
 			sceneryHole.setMoveableImage(holeImage);
 		}
 	}

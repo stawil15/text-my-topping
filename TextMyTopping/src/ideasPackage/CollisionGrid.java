@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javazoom.jl.player.Player;
 import processing.core.PApplet;
 
+/*
+ * This class creates a grid of collidable objects in which they can collide with each other. 
+ */
 public class CollisionGrid
 {
 	private Collidable collisionGrid[][];
@@ -28,13 +31,15 @@ public class CollisionGrid
 		originalHoles = new ArrayList<Hole>();
 	}
 
+	// Sets the camera of the grid
 	public void setCamera(Camera camera)
 	{
 		this.camera = camera;
 		helper.setCamera(camera);
 	}
 
-	public void addElement(GridCoordinate coordinates, Collidable entity)
+	// add an element to the grid
+	public void addEntity(GridCoordinate coordinates, Collidable entity)
 	{
 		if (isValidPosition(coordinates))
 		{
@@ -55,6 +60,7 @@ public class CollisionGrid
 		}
 	}
 
+	// Get the entity at coordinates
 	public Collidable getEntityAt(GridCoordinate coordinates)
 	{
 		if (!isValidPosition(coordinates))
@@ -63,7 +69,8 @@ public class CollisionGrid
 		return collisionGrid[coordinates.getGridX()][coordinates.getGridY()];
 	}
 
-	public Collidable removeElementAt(GridCoordinate coordinates)
+	// This removes an entity at a certain location
+	public Collidable removeEntitytAt(GridCoordinate coordinates)
 	{
 		Collidable returnedElement = null;
 		if (isValidPosition(coordinates))
@@ -148,8 +155,8 @@ public class CollisionGrid
 	{
 		if (canElementMove(entity))
 		{
-			removeElementAt(entity.getCoordinates());
-			addElement(getNextCoordinate(entity), entity);
+			removeEntitytAt(entity.getCoordinates());
+			addEntity(getNextCoordinate(entity), entity);
 			return true;
 		} else
 		{
@@ -286,7 +293,7 @@ public class CollisionGrid
 				System.out.println("index " + index);
 				if (collisionGrid[originalCoordinates.getGridX()][originalCoordinates.getGridY()] == null)
 				{
-					removeElementAt(moveableObjects.get(index).getCoordinates());
+					removeEntitytAt(moveableObjects.get(index).getCoordinates());
 					moveableObjects.get(index).getCoordinates().setGridX(originalCoordinates.getGridX());
 					moveableObjects.get(index).getCoordinates().setGridY(originalCoordinates.getGridY());
 					moveableObjects.get(index).setDestroyOnMove(null);

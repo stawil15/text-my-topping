@@ -24,7 +24,7 @@ public class Door implements Collidable
 		this.fromLevel = fromLevel;
 		this.toLevel = toLevel;
 		this.coordinates = coordinates;
-		collisionGrid.addElement(coordinates, this);
+		collisionGrid.addEntity(coordinates, this);
 		this.direction = direction;
 		this.fadeTransition = fadeTranisition;
 	}
