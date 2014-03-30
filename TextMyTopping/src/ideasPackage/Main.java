@@ -68,18 +68,19 @@ public class Main extends PApplet
 		LevelCreator.initialize();
 		
 		// Used for debugging/testing
-		GlobalStringManager.addString("yourName", "Your Name");
-		GlobalStringManager.addString("enemyName", "Enemy Name");
-		GlobalBooleanManager.setValue("hasWindAxe", true);
+		//GlobalStringManager.addString("yourName", "Your Name");
+		//GlobalStringManager.addString("enemyName", "Enemy Name");
+		//GlobalBooleanManager.setValue("hasWindAxe", true);
+		//GlobalBooleanManager.setValue("hadGnomeTalk", true);
 		
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setTitle("Text My Topping");
-		
-		//LoadMap("megaSpriteMap.csv",22,23);
 		frameRate(60);
+		
 		ArrayList<String> choices = new ArrayList<String>();
 		choices.add("Start Game");
+		choices.add("Help");
 		choices.add("Exit");
 		MainMenu menu = new MainMenu(loadImage("/data/sprites/MainMenu.png"),choices);
 		

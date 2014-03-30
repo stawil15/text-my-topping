@@ -1,0 +1,7 @@
+Boolean ,P4_1L1 ,hadGnomeTalk ,P4_1L2 ,P4_1L3
+Default ,P4_1L2 ,Do I know you?
+Default ,P4_1L3 ,Ow wow it's \NAME!!\nMy friend Mr. Gnomeman told me all about you!\nAren't gnomes so mysterious? ,P4_1L4
+Default ,P4_1L4 ,Want to hear a secret? ,P4_1L5
+Branched ,P4_1L5 ,2 ,Yes ,Maybe ,P4_1L6 ,P4_1L6
+Default ,P4_1L6 ,Mr. Gnomeman is actually a gnome!\nHe comes up with these conspiracy theories\nto throw everyone off his trail! 
+Default ,P4_2L1 ,The climate in this area is weird.\nIt goes from forest to desert to snow all in\nfew miles!

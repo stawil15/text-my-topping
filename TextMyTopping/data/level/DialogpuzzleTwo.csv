@@ -1,0 +1,9 @@
+Default ,P2_1L1 ,I have a phone but I am unwilling to share it\nwith a butterfly peasant like yourself.\nHmph...
+Boolean ,P2_2L1 ,hadGnomeTalk ,P2_2L2 ,P2_2L6
+Default ,P2_2L2 ,Have you ever seen any gnomes? ,P2_2L3
+Branched ,P2_2L3 ,2 ,This one time my roommate and I... ,Nope. ,P2_2L3_Yes ,P2_2L3_No
+Default ,P2_2L3_Yes ,LIAR! ,P2_2L2
+SetValue ,P2_2L3_No ,hadGnomeTalk ,true ,P2_2L4
+Default ,P2_2L4 ,Neither have I! I set up cameras\c but\ntaking a picture of a gnome is like taking\na picture of a dark refrigerator. ,P2_2L5
+Default ,P2_2L5 ,The light always seems to come on...
+Default ,P2_2L6 ,Good luck on your expedition!\nMay the gnomes serve you well!
