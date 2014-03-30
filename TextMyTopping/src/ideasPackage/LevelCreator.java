@@ -151,17 +151,17 @@ public class LevelCreator
 		}
 		else if (id == 15)
 		{
-			new Door(position, collisionGrid, "redSpriteMap.csv", "rockPuzzel.csv", Character.DIRECTION_LEFT, false);
+			new Door(position, collisionGrid, "redSpriteMap.csv", "rockPuzzel.csv", Character.DIRECTION_RIGHT, false);
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 16)
 		{
-			new Door(position, collisionGrid, "rockPuzzel.csv", "redSpriteMap.csv", Character.DIRECTION_RIGHT, false);
+			new Door(position, collisionGrid, "rockPuzzel.csv", "redSpriteMap.csv", Character.DIRECTION_LEFT, false);
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 17)
 		{
-			new Door(position, collisionGrid, "megaSpriteMap.csv", "redSpriteMap.csv", Character.DIRECTION_RIGHT, false);
+			new Door(position, collisionGrid, "megaSpriteMap.csv", "redSpriteMap.csv", Character.DIRECTION_DOWN, false);
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 20)
