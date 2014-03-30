@@ -6,15 +6,14 @@ import java.util.ArrayList;
 import processing.core.*;
 import ddf.minim.*;
 
-// Eric Mustee
-// 2/28/2014
-// This package contains ideas on how we think things can
-// be implemented. 
-
-// In Character and MovementIdea, I have an idea how we
-// can move a character across the screen, as well as
-// some basic ideas on how to animate the characters
-// movements.
+/* Eric Mustee, Saeed Tawil, Graham Jenkins, David Clifford 
+ * 2/28/2014 - 3/30/2014
+ * Text My Topping is a game of dexterity where the player
+ * must complete certain puzzles and talk to the correct
+ * people to win. The goal of the game is to get a stolen
+ * cell phone back that your worst enemy has taken from 
+ * you. 
+ */
 
 public class Main extends PApplet
 {
