@@ -241,7 +241,7 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, snow);
 			collisionGrid.addEntity(position, sign);
-		} 
+		}
 		else if (id == 40) // start city
 		{
 			sceneryGrid.addSceneryObject(position, road);
@@ -261,7 +261,7 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, road);
 			collisionGrid.addEntity(position, sign);
-		} 
+		}
 		else if (id == 50)
 		{
 			new Door(position, collisionGrid, "puzzleOne.csv", "forestpassage.csv", Character.DIRECTION_RIGHT, false);
@@ -306,7 +306,16 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, grass);
 			new Hole(position, "forest\\hole", collisionGrid, true);
-		} else
+		}else if (id == -2)
+		{
+			sceneryGrid.addSceneryObject(position, sand);
+			new Hole(position, "forest\\hole", collisionGrid, true);
+		}else if (id == -3)
+		{
+			sceneryGrid.addSceneryObject(position, snow);
+			new Hole(position, "forest\\hole", collisionGrid, true);
+		}
+		else
 		{
 			sceneryGrid.addSceneryObject(position, grass);
 		}

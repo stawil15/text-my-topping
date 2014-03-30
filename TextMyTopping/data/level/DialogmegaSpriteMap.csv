@@ -16,3 +16,7 @@ Default ,NPC2_Choice22 ,Yay\c you passed!\nThese dialogs seem to go on forever a
 Branched ,NPC2_Line5 ,2 ,Yes ,No ,NPC2_Choice22 ,NPC2_Choice31
 Default ,NPC2_Choice31 , Okay, bye!
 Default ,NPC5_Line1 ,Hey \NAME.\nI think \ENEMY is wrong for stealing\nyour phone.
+Default ,NPC3_Line4 ,I've seen some slippery ones that I \ncouldn't pull though.
+Default ,NPC3_Line3 ,And you can pull them with "Control" \nor "Command" I hear ,NPC3_Line4
+Default ,NPC3_Line2 ,You can push them by pressing "space" \nWhatever that means. ,NPC3_Line3
+Default ,NPC3_Line1 ,You see that boulder? ,NPC3_Line2
