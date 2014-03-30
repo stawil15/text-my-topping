@@ -1,5 +1,6 @@
 Boolean ,NPC4_Line1 ,hasWindAxe ,NPC4_getAxe ,NPC4_alreadyHasAxe
-Default ,NPC4_alreadyHasAxe ,You can use the axe to cut down\nwindy things! A miracle of science! However\c \nit does nothing to intensifying things.
+Default ,NPC4_alreadyHasAxe2 ,However\c it does nothing to intensifying \nthings... \nOr regular things...
+Default ,NPC4_alreadyHasAxe ,You can use the axe to cut down\nwindy things! A miracle of science! ,NPC4_alreadyHasAxe2
 Default ,NPC4_getAxe ,I don't need this old axe anymore.\nHere you go! ,NPC4_Line2
 SetValue ,NPC4_Line2 ,hasWindAxe ,true ,NPC4_Line3
 Default ,NPC4_Line3 ,You received the axe of the wind! ,NPC4_Line4
