@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class LevelCreator
 {
+	// sets all the scenery for the game for the three different biomes the are in the game
 	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor;
 	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock,intenseTree;
 	private static BooleanDialog destroyTree;
 	
+	// allows player to get an axe to chop down certain trees
 	public static void initialize()
 	{
 		destroyTree = new BooleanDialog("hasWindAxe");
@@ -28,7 +30,9 @@ public class LevelCreator
 	{
 
 	}
-
+	
+	// starts to read from a .csv file to load new maps
+	//also sets up all scenery with an ID for calling the images from the correct folder
 	public Level createFromCsv(String levelName)
 	{
 
