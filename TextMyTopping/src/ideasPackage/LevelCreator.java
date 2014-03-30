@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class LevelCreator
 {
 	// sets all the scenery for the game for the three different biomes the are in the game
-	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor, road, lamp, buildings;
-	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock,intenseTree;
+	private SceneryObject grass, flower, sand, dflower, snow, sflower, woodFloor, road;
+	private StaticObject tree, fastTree, invisibleWall, cactus, fastCactus, snowTree, fastSnowTree, cabin, woodBlock, intenseTree, lamp, sign, buildings;
 	private static BooleanDialog destroyTree;
-	
+
 	// allows player to get an axe to chop down certain trees
 	public static void initialize()
 	{
@@ -25,12 +25,12 @@ public class LevelCreator
 		destroyTree.setTrueDialog(askToDestroyTree);
 		destroyTree.setFalseDialog(new Dialog(new String[] { "It's really windy right here.\nIn this exact spot." }));
 	}
-	
+
 	public LevelCreator()
 	{
 
 	}
-	
+
 	// starts to read from a .csv file to load new maps
 	//also sets up all scenery with an ID for calling the images from the correct folder
 	public Level createFromCsv(String levelName)
@@ -41,7 +41,7 @@ public class LevelCreator
 		maploader.readDialogueData(levelName);
 		SceneryGrid sceneryGrid = new SceneryGrid(map.length, map[0].length);
 		CollisionGrid collisionGrid = new CollisionGrid(map.length, map[0].length, sceneryGrid);
-		
+
 		grass = new SceneryObject(null, "forest\\grass", 1, 20, sceneryGrid, false);
 		flower = new SceneryObject(null, "forest\\flower", 2, 20, sceneryGrid, false);
 		tree = new StaticObject(null, "forest\\tree", collisionGrid, 4, 40, false);
@@ -59,8 +59,9 @@ public class LevelCreator
 		woodFloor = new SceneryObject(null, "forest\\woodFloor", 1, 20, sceneryGrid, false);
 		woodBlock = new StaticObject(null, "forest\\woodBlock", collisionGrid, 1, 20, false);
 		road = new SceneryObject(null, "city\\road", 1, 20, sceneryGrid, false);
-		lamp = new SceneryObject(null, "city\\lamp", 1, 20, sceneryGrid, false);
-		buildings = new SceneryObject(null, "city\\buildings", 1, 20, sceneryGrid, false);
+		lamp = new StaticObject(null, "city\\lamp", collisionGrid, 20, 1, false);
+		buildings = new StaticObject(null, "city\\buildings", collisionGrid, 20, 1, false);
+		sign = new StaticObject(null, "city\\sign", collisionGrid, 20, 1, false);
 
 		for (int x = 0; x < map.length; x++)
 		{
@@ -75,12 +76,12 @@ public class LevelCreator
 
 		return createdLevel;
 	}
-	
+
 	// uses id to put the correct object in the correct position
 	public void addGameObject(int id, CollisionGrid collisionGrid, SceneryGrid sceneryGrid, int x, int y, int xOffset, int yOffset)
 	{
 		GridCoordinate position = new GridCoordinate(x + xOffset, y+yOffset);
-		
+
 		if (id == 1)
 		{
 			sceneryGrid.addSceneryObject(position, grass);
@@ -131,7 +132,7 @@ public class LevelCreator
 			collisionGrid.addEntity(position, intenseTree);
 			intenseTree.setDialog(new Dialog(new String[] { "[Tree intensifies]" }));
 		}
-		
+
 		else if (id == 11) // start desert
 		{
 			sceneryGrid.addSceneryObject(position, sand);
@@ -227,16 +228,22 @@ public class LevelCreator
 		}
 		else if (id == 41)
 		{
-			sceneryGrid.addSceneryObject(position, lamp);
+			sceneryGrid.addSceneryObject(position, road);
+			collisionGrid.addEntity(position, lamp);
 		}
 		else if (id == 42)
 		{
-			sceneryGrid.addSceneryObject(position, buildings);
+			collisionGrid.addEntity(position, buildings);
 		}
 		else if (id == 43)
 		{
 			collisionGrid.addEntity(position, invisibleWall);
 			sceneryGrid.addSceneryObject(position, road);
+		}
+		else if (id == 44)
+		{
+			sceneryGrid.addSceneryObject(position, road);
+			collisionGrid.addEntity(position, sign);
 		}
 		else if (id == 50)
 		{
@@ -253,18 +260,18 @@ public class LevelCreator
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 	}
-	
+
 	// gets the NPCs location from a .csv file and adds them to the correct location and gets the dialog
 	public void addNPCs(readCSV maploader, String mapName, int xOffset, int yOffset, CollisionGrid collisionGrid)
 	{
 		String[][] NPC = maploader.readNPCData("NPC" + mapName); // naming
-																	// convention
-																	// will
-																	// allow us
-																	// to add
-																	// "NPC" to
-																	// name
-																	// variable.
+		// convention
+		// will
+		// allow us
+		// to add
+		// "NPC" to
+		// name
+		// variable.
 		for (int x = 0; x < NPC.length; x++)
 		{
 			if (NPC[x][0] != null)
