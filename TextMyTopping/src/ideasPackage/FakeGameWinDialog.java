@@ -18,6 +18,7 @@ public class FakeGameWinDialog extends Dialog
 		@Override
 		public void showDialog()
 		{
+			MusicManager.playSongOnce("ending.mp3");
 			super.showDialog();
 		}
 		
@@ -37,6 +38,18 @@ public class FakeGameWinDialog extends Dialog
 			if (!finishedDisplayingText)
 			{
 				currentPositionInText += impatientPersonCharactersToAdvance;
+			}
+			else
+			{
+				MusicManager.loopSong("OnettTheme.mp3");
+				if (nextDialog!=null)
+				{
+					nextDialog.showDialog();
+				}
+				else
+				{
+					GUISystem.showDialog(null);
+				}
 			}
 		}
 }
