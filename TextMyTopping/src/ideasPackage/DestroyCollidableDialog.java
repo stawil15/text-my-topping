@@ -18,7 +18,6 @@ public class DestroyCollidableDialog extends Dialog
 	{
 		CollisionGrid collisionGrid = Main.getPlayer().getCollisionGrid();
 		GridCoordinate nextGridCoordinate = CollisionGrid.getNextCoordinate(Main.getPlayer());
-		Main.score +=1000;
 		if (nextGridCoordinate != null && collisionGrid.isValidPosition(nextGridCoordinate))
 		{
 			collisionGrid.removeEntitytAt(nextGridCoordinate);

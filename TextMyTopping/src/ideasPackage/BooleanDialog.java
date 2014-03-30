@@ -24,7 +24,6 @@ public class BooleanDialog extends Dialog
 	public void setTrueDialog(Dialog d)
 	{
 		trueDialog = d;
-		Main.score += 1000;
 	}
 
 	// Sets which dialog to go to when false

@@ -20,8 +20,6 @@ public class Hole extends StaticObject implements Collidable
 	{
 		SceneryGrid sceneryGrid = collisionGrid.getCorrespondingSceneryGrid();
 		
-		Main.score+=500;
-		
 		PImage sceneryImage = sceneryGrid.getObjectAt(getCoordinates()).getImage();		
 		SceneryHole sceneryHole = new SceneryHole(getCoordinates(), sceneryImage, sceneryGrid, true);
 		sceneryHole.setHoleImage(getImage());
