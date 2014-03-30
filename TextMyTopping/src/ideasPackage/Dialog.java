@@ -32,7 +32,7 @@ public class Dialog
 		parent.textFont(dialogFont);
 		borderColor = parent.color(0);
 		textColor = parent.color(0);
-		backgroundColor = parent.color(200, 200, 200, 100);
+		backgroundColor = parent.color(200, 200, 200, 200);
 	}
 
 	public void setBorderColor(int color)

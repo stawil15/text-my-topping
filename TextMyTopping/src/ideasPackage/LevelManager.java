@@ -115,7 +115,6 @@ public class LevelManager
 
 		if (GUISystem.doingTransition())
 		{
-			// System.out.println("X: " + transitionX + " Y:" + transitionY);
 			switch (direction)
 			{
 			case Character.DIRECTION_DOWN:

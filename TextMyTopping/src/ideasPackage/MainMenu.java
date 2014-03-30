@@ -2,6 +2,8 @@ package ideasPackage;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import processing.core.PImage;
 
 // This class generates a main menu that the user can select
@@ -34,6 +36,17 @@ public class MainMenu extends BranchingDialog
 			GUISystem.showDialog(null);
 		}
 		else if (choice == 1)
+		{
+			atSelection = true;
+			JOptionPane.showMessageDialog(Main.getMainObject(), "Use the arrow keys to move, and press SPACE to perform\n"
+															  + "interactions. You can interact with rocks and other nonplayer\n"
+															  + "characters. You can press CONTROL to pull some rocks\n"
+															  + "backwards. Have fun!","How to play",JOptionPane.INFORMATION_MESSAGE);
+			GUISystem.showDialog(this);
+			
+			
+		}
+		else if (choice == 2)
 		{
 			System.exit(0);
 		}

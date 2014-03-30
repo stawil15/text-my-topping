@@ -305,7 +305,6 @@ public class CollisionGrid
 			for (int index = 0; index < moveableObjects.size(); index++)
 			{
 				GridCoordinate originalCoordinates = moveableObjectCoordinates.get(index);
-				System.out.println("index " + index);
 				if (collisionGrid[originalCoordinates.getGridX()][originalCoordinates.getGridY()] == null)
 				{
 					removeEntitytAt(moveableObjects.get(index).getCoordinates());

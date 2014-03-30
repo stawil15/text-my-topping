@@ -9,8 +9,8 @@ Default ,butterfly1 ,MMM\c \ENEMY was tasty.\nYou look tasty too!
 Boolean ,butterflyNoNet ,talkedToButterfly ,didNotTalkButterfly ,didTalkButterfly
 Default ,butterflyNet ,Only a true butterfly master can catch me.\nWhat's that you say? ,catchButterfly
 Destroy ,catchButterfly ,catchButterfly2
-Default ,catchButterfly2 ,You will pay one day for this\n\NAME\c the Butterfly Master! ,catchButterfly3
-Default ,catchButterfly3 ,It appears that \ENEMY\ndropped the phone before the master\nbutterfly ate him. ,catchButterfly4
+Default ,catchButterfly2 ,You will pay one day for this\n\NAME\c the True Butterfly Master! ,catchButterfly3
+Default ,catchButterfly3 ,It appears that \ENEMY\ndropped your phone before the master\nbutterfly ate them. ,catchButterfly4
 Default ,catchButterfly4 ,What is your favorite pizza topping? ,catchButterfly5
 SetString ,catchButterfly5 ,topping ,What is your favorite topping? ,Text Your Topping ,catchButterfly6
 GameWin ,catchButterfly6 ,You got your phone back!\nYou texted your friend\n"\TOPPING"\c your favorite pizza topping!
@@ -20,8 +20,8 @@ Default ,npc2CityDialog ,That butterfly is eating everything!\nWhat a pretty for
 Boolean ,npc3CityDialog ,hasNet ,npc3doesNotHaveNet ,npc3doesHaveNet
 SetValue ,npc3doesNotHaveNet ,hasNet ,true ,npc3CityLine2
 Default ,npc3CityLine2 ,I have been trapped in this area for years!\nI got lost in the forest one day and could\nnever find my way back. ,npc3CityLine3
-Default ,npc3CityLine3 ,As a token of my appreciation, I hereby grant\nyou the title\n"\NAME\c the Butterfly Master"! ,npc3CityLine4
-Default ,npc3CityLine4 ,Here\c take this net. I am sure it will\ncome in use!
+Default ,npc3CityLine3 ,As a token of my appreciation, I hereby grant\nyou the title\n"\NAME\c the True Butterfly Master"! ,npc3CityLine4
+Default ,npc3CityLine4 ,Here\c take this net. I am sure it will\ncome in handy!
 Default ,npc3doesHaveNet ,You can use the net on butterflies!\nI wonder if anyone will remember who I was...
 Default ,evilGuy ,\ENEMY: I am going to catch this\nbutterfly all by myself and I\nwill be the hero! ,evilGuy2
 Default ,evilGuy2 ,Butterfly: NO ONE CAN CATCH ME!\nI'LL SHOW YOU! ,evilGuy3

@@ -67,7 +67,6 @@ public class Door implements Collidable
 	@Override
 	public void doInteract(int interactionId)
 	{
-		System.out.println("HERE!");
 		if ((interactionId == PlayerCharacter.MAIN_INTERACTION || interactionId == PlayerCharacter.BUMP_INTERACTION) && GlobalBooleanManager.getValue(variableName) == requiredValue)
 		{
 			if (!fadeTransition)
