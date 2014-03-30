@@ -20,6 +20,7 @@ public class readCSV
 	private final static String TYPE_GAMEWIN_DIALOG = "GameWin";
 	private final static String TYPE_DESTROYOBJECT_DIALOG = "Destroy";
 	private final static String TYPE_SETSTRING_DIALOG = "SetString";
+	private final static String TYPE_FAKEGAMEWIN_DIALOG = "FakeGameWin";
 	public final static String NULL_DIALOG = "null";
 
 	// Read the map
@@ -279,6 +280,14 @@ public class readCSV
 					if (dialogRow[5] != null && !dialogRow[5].equals(NULL_DIALOG))
 					{
 						DialogManager.setNextDialog(dialogRow[5], dialogRow[1]);
+					}
+				}
+				else if (dialogRow[0].equals(TYPE_FAKEGAMEWIN_DIALOG))
+				{
+					DialogManager.addDialog(new FakeGameWinDialog(new String[] {dialogRow[2]}), dialogRow[1], dialogRow);
+					if (dialogRow[3] != null && !dialogRow[3].equals(NULL_DIALOG))
+					{
+						DialogManager.setNextDialog(dialogRow[3], dialogRow[1]);
 					}
 				}
 

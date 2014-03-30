@@ -1,10 +1,8 @@
-Default ,NPC1_Line3 ,Pages can be added in any order. 
-Default ,NPC1_Line1 ,This is the first page of the dialogue ,NPC1_Line2
-Default ,NPC1_Line2 ,This is a second page of the dialogue ,NPC1_Line3
-Default ,NPC2_Line1 ,Here is a branching Dialog ,NPC2_Line2
-Default ,NPC2_Line2 ,You will be presented with choices\nUse the arrows to choose\nAnd press space to select ,NPC2_Line6
-Default ,NPC2_Line6 ,Where do butterflies sleep? ,NPC2_Line3
-Branched ,NPC2_Line3 ,5 ,Trees. ,caterpillows! ,shaking trees? ,Give me another? ,What?! Can you repeat that? ,NPC2_Choice1 ,NPC2_Choice2 ,NPC2_Choice3 ,NPC2_Choice4 ,NPC2_Line6
+Default ,NPC1_Line3 ,Aren't butterflies wonderful? 
+Default ,NPC1_Line1 ,I hear that only true butterfly masters\ncan catch master butterflies! ,NPC1_Line2
+Default ,NPC1_Line2 ,Only \ENEMY is a master, but some say\nhe's not a true master. ,NPC1_Line3
+Default ,NPC2_Line1 ,Where do butterflies sleep? ,NPC2_Line3
+Branched ,NPC2_Line3 ,5 ,Trees. ,caterpillows! ,shaking trees? ,Give me another question! ,What?! Can you repeat that? ,NPC2_Choice1 ,NPC2_Choice2 ,NPC2_Choice3 ,NPC2_Choice4 ,NPC2_Line1
 Default ,NPC2_Choice1 ,I wish it were that simple! 
 Default ,NPC2_Choice2 ,Oh, hehe.\c I found this phone one the ground.\nHere you go. ,NPC2_Choice2Line2
 GameWin ,NPC2_Choice2Line2 ,You found your phone!\nYou texted your roommate "pickles", your \nfavorite pizza topping.

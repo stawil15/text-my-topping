@@ -1,5 +1,5 @@
-butterfly ,9 ,6 ,noMovement ,butterflyDialog
-npc ,4 ,3 ,noMovement ,npc1CityDialog
-npc2 ,9 ,3 ,noMovement ,npc2CityDialog
-npc3 ,8 ,6 ,noMovement ,evilGuy
-npc2 ,12 ,12 ,noMovement ,npc3CityDialog
+butterfly ,11 ,6 ,noMovement ,butterflyDialog
+npc ,6 ,3 ,noMovement ,npc1CityDialog
+npc2 ,11 ,3 ,noMovement ,npc2CityDialog
+npc3 ,10 ,6 ,noMovement ,evilGuy
+npc2 ,14 ,12 ,noMovement ,npc3CityDialog
