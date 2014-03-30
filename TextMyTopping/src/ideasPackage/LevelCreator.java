@@ -290,13 +290,13 @@ public class LevelCreator
 	public void addNPCs(readCSV maploader, String mapName, int xOffset, int yOffset, CollisionGrid collisionGrid)
 	{
 		String[][] NPC = maploader.readNPCData("NPC" + mapName); // naming
-		// convention
-		// will
-		// allow us
-		// to add
-		// "NPC" to
-		// name
-		// variable.
+																	// convention
+																	// will
+																	// allow us
+																	// to add
+																	// "NPC" to
+																	// name
+																	// variable.
 		for (int x = 0; x < NPC.length; x++)
 		{
 			if (NPC[x][0] != null)
