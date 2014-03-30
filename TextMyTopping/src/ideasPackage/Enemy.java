@@ -16,6 +16,7 @@ public class Enemy extends Character
 	public void doInteract()
 	{
 		// might want to change this to attacking
+		
 	}
 	
 	public void pathFinding(GridCoordinate playerCoordinates)
@@ -25,6 +26,8 @@ public class Enemy extends Character
 		// A* would be a start
 		// GridCoordinate playerLocation =
 		playerCoordinates = getCoordinates();
+		//Path newPath;
+		//newPath(this.getCoordinates(), playerCoordinates);
 		
 		//float playerX = PlayerCharacter.getOffsetX();
 		
