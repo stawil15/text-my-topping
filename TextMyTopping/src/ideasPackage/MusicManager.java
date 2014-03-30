@@ -1,14 +1,12 @@
 package ideasPackage;
 
-import java.awt.print.Paper;
 import java.util.Hashtable;
-
-import processing.core.PApplet;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
 public class MusicManager
 {
+	// This class manages all the music in the game, and either plays or loops songs
 	private static Hashtable<String, String> songs;
 	private static Minim minim;
 	private static AudioPlayer player;
@@ -18,11 +16,13 @@ public class MusicManager
 	private static float fadeTimer = FRAMES_TO_FADE;
 	private static String newLevel = "";
 
+	// Initialize our hashtable
 	public static void initialize()
 	{
 		songs = new Hashtable<String, String>();
 	}
 
+	// Plays the song associated with a levelId
 	public static void playSong(String levelId)
 	{
 		if (player != null && player.isPlaying())
@@ -44,11 +44,13 @@ public class MusicManager
 
 	}
 
+	// Add a song to associate with a levelId
 	public static void addSong(String levelId, String songName)
 	{
 		songs.put(levelId, songName);
 	}
 
+	// Update is used for fading music when switching levels
 	public static void update()
 	{
 
@@ -75,6 +77,7 @@ public class MusicManager
 		}
 	}
 
+	// Play a song exactly once. The song is not associated with any level. 
 	public static void playSongOnce(String song)
 	{
 		if (player.isPlaying())
@@ -85,6 +88,7 @@ public class MusicManager
 		player.play();
 	}
 
+	// Loop a song that is not associated with a level.
 	public static void loopSong(String song)
 	{
 		if (player.isPlaying())

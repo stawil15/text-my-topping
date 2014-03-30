@@ -4,7 +4,8 @@ import processing.core.PImage;
 
 public class MoveableObject extends Character
 {
-
+	// This class creates the rock that can be moved into a hole by the player. The rock
+	// extends character because character already has nice movement built in.
 	public boolean updatePlayerDirectionWhenFinishedMoving = false;
 	private boolean destroyOnMove = false;
 	private SceneryHole sceneryHole;
@@ -19,6 +20,9 @@ public class MoveableObject extends Character
 	}
 
 	@Override
+	
+	// if the user does a main interaction (the space key), then 
+	// the rock is pushed. The secondary interaction pulls the rock. 
 	public void doInteract(int interactionId)
 	{
 		if (interactionId == PlayerCharacter.MAIN_INTERACTION)
@@ -47,6 +51,7 @@ public class MoveableObject extends Character
 		}
 	}
 
+	// Does the movement
 	@Override
 	public boolean move(int direction)
 	{
@@ -55,6 +60,8 @@ public class MoveableObject extends Character
 		return didMove;
 	}
 
+	// Destroy the object when its finished moving if its been marked for
+	// destruction
 	@Override
 	public void finishedMoving()
 	{
@@ -67,11 +74,14 @@ public class MoveableObject extends Character
 		}
 	}
 
+	// get the current drawn image
 	public PImage getImage()
 	{
 		return getImageToDraw();
 	}
 
+	// Mark the object for destruction, or reset it by setting
+	// the hole to null
 	public void setDestroyOnMove(SceneryHole hole)
 	{
 		if (hole != null)
