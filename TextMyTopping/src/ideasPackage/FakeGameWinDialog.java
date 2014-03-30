@@ -4,6 +4,9 @@ import processing.core.PImage;
 
 public class FakeGameWinDialog extends Dialog
 {
+	
+	// This class creates a realistic looking end game screen
+	// but it is in fact fake.
 
 	private PImage gameWinImage;
 	private Credits credits;
