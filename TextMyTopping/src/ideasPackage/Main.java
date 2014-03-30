@@ -25,6 +25,8 @@ public class Main extends PApplet
 	public final static int SCREEN_HEIGHT = 768;
 	private static Main mainClass;
 
+	public static int score;
+	
 	// The camera is positioned in the top left corner
 	private static Camera camera;
 
@@ -55,6 +57,9 @@ public class Main extends PApplet
 	// Setup everything
 	public void setup()
 	{
+		
+		score = 0;
+		
 		mainClass = this;
 		font = loadFont("data\\fonts\\MiniPower.vlw");
 		
@@ -120,7 +125,7 @@ public class Main extends PApplet
 		MusicManager.update();
 		//FPS counter
 		fill(255);
-		//text((int)(frameRate),10,20);
+		text(score,10,20);
 		timeMultiplier = 60f/frameRate;
 	}
 
