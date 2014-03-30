@@ -64,6 +64,7 @@ public class Dialog
 			{
 				lines[index] = lines[index].replaceAll("\\\\NAME", GlobalStringManager.getString("yourName"));
 				lines[index] = lines[index].replaceAll("\\\\ENEMY", GlobalStringManager.getString("enemyName"));
+				lines[index] = lines[index].replaceAll("\\\\TOPPING", GlobalStringManager.getString("topping"));
 			}
 		}
 	}

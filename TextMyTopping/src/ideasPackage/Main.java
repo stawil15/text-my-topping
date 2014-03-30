@@ -61,7 +61,7 @@ public class Main extends PApplet
 		DialogManager.initializeDialogManager();
 		GUISystem.initialize();
 		MusicManager.initialize();
-		LevelManager.initializeLevelManager(3,3);
+		LevelManager.initializeLevelManager(1,4);
 		GlobalBooleanManager.initialize();
 		GlobalStringManager.initialize();
 		LevelCreator.initialize();
@@ -69,6 +69,7 @@ public class Main extends PApplet
 		// Used for debugging/testing
 		GlobalStringManager.addString("yourName", "Your Name");
 		GlobalStringManager.addString("enemyName", "Enemy Name");
+		GlobalBooleanManager.setValue("hasWindAxe", true);
 		
 		// Set the screen size and title
 		size(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -107,7 +108,7 @@ public class Main extends PApplet
 		{
 			loaded = true;
 			GUISystem.setDoingTransition(true);
-			LevelManager.setActiveLevel("megaSpriteMap.csv", null, Character.DIRECTION_UP);
+			LevelManager.setActiveLevel("city.csv", null, Character.DIRECTION_UP);
 			//enterName.showDialog();
 			
 		}
