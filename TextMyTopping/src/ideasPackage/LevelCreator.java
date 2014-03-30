@@ -193,17 +193,17 @@ public class LevelCreator
 		}
 		else if (id == 26)
 		{
-			new PushableOnlyObject(position, 0, 1, "rock", collisionGrid, true);
+			new PushableOnlyObject(position, 0, 1, "slipRock", collisionGrid, true);
 			sceneryGrid.addSceneryObject(position, grass);
 		}
 		else if (id == 27)
 		{
-			new PushableOnlyObject(position, 0, 1, "rock", collisionGrid, true);
+			new PushableOnlyObject(position, 0, 1, "slipRock", collisionGrid, true);
 			sceneryGrid.addSceneryObject(position, sand);
 		}
 		else if (id == 28)
 		{
-			new PushableOnlyObject(position, 0, 1, "rock", collisionGrid, true);
+			new PushableOnlyObject(position, 0, 1, "slipRock", collisionGrid, true);
 			sceneryGrid.addSceneryObject(position, snow);
 		}
 		else if (id == 30)
@@ -223,7 +223,7 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, grass);
 			collisionGrid.addEntity(position, sign);
-			sign.setDialog(new Dialog(new String[] { "GNOMES MOVE THE ROCKS BACK WHEN \nYOU AREN'T LOOKING" }));
+			sign.setDialog(new Dialog(new String[] { "GNOMES MOVE THE ROCKS BACK WHEN YOU \nAREN'T LOOKING!" }));
 		}
 		else if (id == 34)
 		{
