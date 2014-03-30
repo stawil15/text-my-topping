@@ -181,8 +181,6 @@ public class LevelCreator
 		} else if (id == 23)
 		{
 			sceneryGrid.addSceneryObject(position, snow);
-			collisionGrid.addEntity(position, fastSnowTree);
-			fastTree.setDialog(destroyTree);
 		} else if (id == 24)
 		{
 			new MoveableObject(position, 0, 1, "rock", collisionGrid, true);
@@ -242,11 +240,12 @@ public class LevelCreator
 			sceneryGrid.addSceneryObject(position, road);
 		} else if (id == 41)
 		{
-			sceneryGrid.addSceneryObject(position, road);
+			sceneryGrid.addSceneryObject(position, snow);
 			collisionGrid.addEntity(position, lamp);
 		} else if (id == 42)
 		{
 			collisionGrid.addEntity(position, buildings);
+			sceneryGrid.addSceneryObject(position, snow);
 		} else if (id == 43)
 		{
 			collisionGrid.addEntity(position, invisibleWall);
