@@ -91,7 +91,7 @@ public class Main extends PApplet
 				+ " secure your \ncell phone and teach \\ENEMY who's boss."});
 		enemyPrompt.setNextDialog(explenationDialog);
 		
-		explenationDialog.setNextDialog(new Dialog(new String[] {"Use the arrow keys to move and press space\nto interact with things! Use shift to use special items!"}));
+		explenationDialog.setNextDialog(new Dialog(new String[] {"Use the arrow keys to move and press space\nto interact with things! Use shift to pull items!"}));
 		namePrompt.setNextDialog(welcomeDialog);
 		menu.showDialog();
 	}
