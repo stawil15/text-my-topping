@@ -53,6 +53,7 @@ public class Main extends PApplet
 
 	}
 
+	// Setup everything
 	public void setup()
 	{
 		mainClass = this;
@@ -96,6 +97,7 @@ public class Main extends PApplet
 		menu.showDialog();
 	}
 
+	// draw everything
 	public void draw()
 	{		
 		if (!loaded && !GUISystem.showingDialog())
@@ -118,32 +120,38 @@ public class Main extends PApplet
 		timeMultiplier = 60f/frameRate;
 	}
 
+	// get the main object 
 	public static Main getMainObject()
 	{
 		return mainClass;
 	}
 
 
+	// Get the player character
 	public static PlayerCharacter getPlayer()
 	{
 		return Main.getMainObject().mainCharacter;
 	}
 	
+	// Get the camera
 	public static Camera getCamera()
 	{
 		return camera;
 	}
 	
+	// Set the camera
 	public static void setCamera(Camera camera)
 	{
 		Main.camera = camera;
 	}
 	
+	// Set the player
 	public static void setPlayer(PlayerCharacter playerCharacter)
 	{
 		Main.getMainObject().mainCharacter = playerCharacter;
 	}
 	
+	// get the pixels that are currently being drawn to screen
 	public static int[] getPixels()
 	{
 		getMainObject().loadPixels();
@@ -151,6 +159,9 @@ public class Main extends PApplet
 
 	}
 	
+	// Returns the value the animation speed and movement speed should be
+	// multiplied by to ensure that everything moves at the same speed
+	// regardless of the framerate. 
 	public static float getTimeMultiplier()
 	{
 		return timeMultiplier;

@@ -6,6 +6,8 @@ import processing.core.PImage;
 
 public class LevelManager
 {
+	// This class manages levels and transitions between levels
+	
 	private static Hashtable<String, Level> levelTable;
 	private static Level activeLevel;
 	private static int charX, charY, direction = -1;
@@ -15,6 +17,7 @@ public class LevelManager
 	private static float fadeTimer = 0;
 	private final static int FRAMES_TO_FADE = 30;
 
+	// Initialize our level manager with an initial starting point of the character
 	public static void initializeLevelManager(int charX, int charY)
 	{
 		levelTable = new Hashtable<String, Level>();
@@ -24,6 +27,7 @@ public class LevelManager
 		transitionImageNextMap = new PImage(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 	}
 
+	// Get a level from a string
 	public static Level getLevel(String levelId)
 	{
 		if (levelTable.containsKey(levelId))
@@ -36,11 +40,13 @@ public class LevelManager
 		}
 	}
 
+	// add a level with a certain string
 	public static void addLevel(Level level, String levelID)
 	{
 		levelTable.put(levelID, level);
 	}
 
+	// Set the active level and get the transition images
 	public static void setActiveLevel(String levelId, String fromLevel, int direction)
 	{
 		LevelManager.direction = direction;
@@ -97,6 +103,7 @@ public class LevelManager
 		MusicManager.playSong(levelId);
 	}
 
+	// Draws the active level, and transitions if there is a transition going on. 
 	public static void drawActiveLevel()
 	{
 		if (activeLevel != null)
@@ -175,6 +182,7 @@ public class LevelManager
 		}
 	}
 
+	// Draws the two transition images
 	private static void drawTransitionImages(float currentMapX, float currentMapY, float nextMapX, float nextMapY)
 	{
 		Main.getMainObject().image(transitionImageCurrentMap, currentMapX, currentMapY);

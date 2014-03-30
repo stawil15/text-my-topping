@@ -2,6 +2,10 @@ package ideasPackage;
 
 import processing.core.PImage;
 
+/*
+ * This class shows the game win scene where the credits are rolled and happy
+ * music plays
+ */
 public class GameWinDialog extends Dialog
 {
 	protected PImage gameWinImage;
@@ -16,12 +20,15 @@ public class GameWinDialog extends Dialog
 
 
 	
+	// Show the dialog
 	@Override
 	public void showDialog()
 	{
 		super.showDialog();
 		MusicManager.playSongOnce("ending.mp3");
 	}
+	
+	// Draw the dialog
 	@Override
 	public void drawDialog()
 	{
@@ -30,6 +37,7 @@ public class GameWinDialog extends Dialog
 		credits.draw();
 	}
 	
+	// Advance the text
 	@Override
 	public void advanceText()
 	{

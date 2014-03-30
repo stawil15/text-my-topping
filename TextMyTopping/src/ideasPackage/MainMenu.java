@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import processing.core.PImage;
 
+// This class generates a main menu that the user can select
+// items from. Choices are handled in the selectChoice method.
 public class MainMenu extends BranchingDialog
 {
 	private PImage image;
@@ -13,7 +15,6 @@ public class MainMenu extends BranchingDialog
 		super(new String[] {""}, choices, null);
 		this.image = image;
 		atSelection=true;
-		// TODO Auto-generated constructor stub
 	}
 	
 	
