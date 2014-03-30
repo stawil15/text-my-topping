@@ -223,6 +223,7 @@ public class LevelCreator
 		{
 			sceneryGrid.addSceneryObject(position, grass);
 			collisionGrid.addEntity(position, sign);
+			sign.setDialog(new Dialog(new String[] { "GNOMES MOVE THE ROCKS BACK WHEN \nYOU AREN'T LOOKING" }));
 		}
 		else if (id == 34)
 		{
