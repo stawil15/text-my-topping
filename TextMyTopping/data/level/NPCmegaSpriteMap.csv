@@ -1,3 +1,4 @@
-npc ,8 ,9 ,noMovement ,NPC1_Line1 ,
-npc ,11 ,7 ,noMovement ,NPC2_Line1 ,
+npc ,8 ,9 ,noMovement ,NPC1_Line1
+npc ,11 ,7 ,noMovement ,NPC2_Line1
 npc2 ,12 ,7 ,noMovement ,NPC5_Line1
+npc2 ,7 ,2 ,noMovement ,NPC3_Line1
