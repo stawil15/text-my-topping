@@ -83,7 +83,7 @@ public class Main extends PApplet
 		choices.add("Exit");
 		MainMenu menu = new MainMenu(loadImage("/data/sprites/MainMenu.png"),choices);
 		
-		enterName = new Dialog(new String[] {"Hello good sir or madam! \n(Press spacebar to continue)", "Wait a lovely day to be on a butterfly \ncatching expedition!", "What is your name?"});
+		enterName = new Dialog(new String[] {"Hello good sir or madam! \n(Press spacebar to continue)", "What a lovely day to be on a butterfly \ncatching expedition!", "What is your name?"});
 		
 		ValueSetStringDialog namePrompt = new ValueSetStringDialog("yourName", "What is your name?", "Enter a name.");
 		enterName.setNextDialog(namePrompt);
